@@ -397,4 +397,28 @@
       objects.forEach((el, i) => {
         const w = el.offsetWidth;
         const h = el.offsetHeight;
-        positions[i].x = Math.min(positi
+        positions[i].x = Math.min(positions[i].x, window.innerWidth - w - marginX);
+        positions[i].y = Math.min(positions[i].y, window.innerHeight - h);
+      });
+    };
+
+    document.addEventListener("contextmenu", (e) => e.preventDefault());
+    document.addEventListener("selectstart", (e) => e.preventDefault());
+  </script>
+  <script>
+    document.fonts.ready.then(() => {
+    const h1 = document.querySelector("h1");
+    const history = document.querySelector(".history");
+
+    if (h1 && history) {
+      const h1Top = h1.getBoundingClientRect().top + window.scrollY;
+      history.style.top = `${h1Top}px`;
+    }
+  });
+  </script>
+
+
+</script>
+</body>
+</html>
+

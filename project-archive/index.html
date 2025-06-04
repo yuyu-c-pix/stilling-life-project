@@ -399,4 +399,34 @@
 
         // 이전 버튼
         prevBtn.addEventListener("click", () => {
-        clearInterval(slid
+        clearInterval(slideInterval);
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        wrapper.style.transition = "transform 0.5s ease";
+        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        slideInterval = setInterval(moveSlide, 4500);
+        });
+
+      });
+    });
+  </script>
+  <script>
+let inactivityTimer;
+
+function resetInactivityTimer() {
+  clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(() => {
+    window.location.href = "../index.html"; // 랜딩 복귀
+  }, 2 * 60 * 1000); // 2분
+}
+
+["mousemove", "keydown", "scroll", "click"].forEach(event =>
+  document.addEventListener(event, resetInactivityTimer)
+);
+
+resetInactivityTimer();
+</script>
+<div id="floating-images"></div>
+
+
+</body>
+</html>
