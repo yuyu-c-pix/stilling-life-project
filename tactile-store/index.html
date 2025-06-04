@@ -247,4 +247,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function switchBackground() {
     const nextImage = images[index];
-    index = (index + 1) % images.
+    index = (index + 1) % images.length;
+
+    if (showingTop) {
+      bgBottom.style.backgroundImage = `url('${nextImage}')`;
+      bgBottom.style.opacity = '1';
+      bgTop.style.opacity = '0';
+    } else {
+      bgTop.style.backgroundImage = `url('${nextImage}')`;
+      bgTop.style.opacity = '1';
+      bgBottom.style.opacity = '0';
+    }
+
+    showingTop = !showingTop;
+  }
+
+  switchBackground(); // 첫 이미지 적용
+  setInterval(switchBackground, 3000); // 2.5초마다 전환
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".add-to-cart-button");
+
+  buttons.forEach(button => {
+    const originalText = "ADD TO CART";
+    const toggledText = "COMING SOON<br>DM FOR EARLY PURCHASE";
+
+    button.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isMessage = button.innerHTML.includes("COMING SOON");
+
+      if (isMessage) {
+        button.innerHTML = originalText;
+        button.classList.remove("message-active");
+      } else {
+        button.innerHTML = toggledText;
+        button.classList.add("message-active");
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+  
+</body>
+</html>
