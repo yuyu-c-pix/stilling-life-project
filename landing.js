@@ -10,4 +10,3 @@ function goToMain() {
 // 영상이 끝나거나 클릭하면 메인으로
 video.addEventListener("ended", goToMain);
 document.addEventListener("click", goToMain);
-
