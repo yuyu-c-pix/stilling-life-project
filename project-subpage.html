@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Text Wall</title>
+
+  <!-- Google Fonts: Noto Sans KR Variable -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- 연결된 style.css -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- 공통 head 부분에 -->
+  <script src="logo-color.js" defer></script>
+
+
+  <!-- Typekit Script -->
+  <script>
+    (function(d) {
+      var config = { kitId: 'ylt8fcr', scriptTimeout: 3000, async: true },
+          h = d.documentElement, t = setTimeout(function() {
+        h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+      }, config.scriptTimeout),
+          tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0];
+      h.className += " wf-loading";
+      tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+      tk.async = true;
+      tk.onload = tk.onreadystatechange = function() {
+        var a = this.readyState;
+        if (f || a && a != "complete" && a != "loaded") return;
+        f = true; clearTimeout(t);
+        try { Typekit.load(config) } catch (e) {}
+      };
+      s.parentNode.insertBefore(tk, s);
+    })(document);
+  </script>
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: clamp(8px, 2vw, 20px);
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      color: black;
+      font-family: "megascope-variable";
+      font-variation-settings: "wght" 450, "SCOP" 0;
+      overflow: auto;
+      position: relative;
+    }
+
+    .text-group {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: clamp(3.38rem, 4.5vw, 4.5rem);
+      letter-spacing: clamp(0.05rem, 0.3vw, 0.36rem); /* 약 8% 기준 */
+      text-align: center;
+      margin-top: clamp(32px, 7vh, 74px);
+      position: relative;
+      z-index: 10;
+    }
+
+    .subtitle {
+      font-size: clamp(1.12rem, 1.27vw, 1.27rem);
+      letter-spacing: clamp(0.03rem, 0.12vw, 0.12rem);
+      text-align: center;
+      color: black;
+      font-family: "helvetica-neue-lt-pro", sans-serif;
+      font-weight: 400;
+      margin-bottom: 0; /* 간격 제거 */
+    }
+
+    .subtitle-kr {
+      font-family: "Noto Sans KR", sans-serif;
+      font-weight: 400;
+      font-variation-settings: "wght" 490;
+      font-size: clamp(1.08rem, 1.2vw, 1.2rem);
+      letter-spacing: clamp(0.03rem, 0.12vw, 0.12rem);
+      text-align: center;
+      color: black;
+      margin-top: clamp(3.5px, 0.3vw, 4px);
+      margin-bottom: clamp(10px, 0.9vw, 8px);
+    }
+
+    .center-input {
+      text-align: center;
+      font-size: clamp(1.5rem, 2.25vw, 2.25rem);
+      letter-spacing: clamp(0.3rem, 0.5vw, 0.5rem);
+      background: transparent;
+      border: none;
+      color: black;
+      outline: none;
+      font-family: "megascope-variable";
+      font-variation-settings: "wght" 700, "SCOP" 0;
+      text-transform: uppercase;
+      margin-top: 0;
+    }
+
+    .history {
+      position: absolute;
+      left: 6px;
+      font-size: clamp(0.75rem, 1.12vw, 1.12rem);
+      letter-spacing: clamp(0.02rem, 0.08vw, 0.08rem);
+      line-height: clamp(0.9rem, 1.3vw, 1.2rem);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 10;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      font-weight: 420;
+    }
+
+    .history::-webkit-scrollbar { display: none; }
+
+    .history-entry {
+      white-space: nowrap;
+      font-family: "megascope-variable";
+      font-variation-settings: "wght" 430, "SCOP" 0;
+    }
+
+    .history-entry.ko .entry-text {
+      font-family: "Noto Sans KR", sans-serif;
+      font-variation-settings: "wght" 430;
+      word-spacing: -10%;
+    }
+
+    .floating-object {
+      position: fixed;
+      width: 250px;
+      height: auto;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 48px;
+        margin-top: 40px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        font-weight: 430;
+        margin-bottom: 4px;
+      }
+
+      .subtitle-kr {
+        font-size: 14px;
+        font-weight: 490;
+        font-variation-settings: "wght" 490;
+        margin-bottom: 0px;
+      }
+
+      .center-input {
+        font-size: 48px;
+        width: 90vw;
+        margin-top: 0;
+        font-variation-settings: "wght" 700, "SCOP" 0;
+      }
+
+      .text-group {
+        padding: 0 5vw;
+        width: 100%;
+      }
+
+      .history {
+        left: 5vw;
+        font-size: 14px;
+      }
+
+      .floating-object {
+        width: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ✅ 헤더 placeholder -->
+  <div id="header-placeholder"></div>
+  <script>
+  fetch("header.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("header-placeholder").innerHTML = data;
+
+      // ✅ 0.1초 지연 후 바인딩 (DOM 반영 기다림)
+      setTimeout(() => {
+        const toggleButton = document.getElementById("menu-toggle");
+        const navOverlay = document.getElementById("nav-overlay");
+        const headerLogo = document.querySelector(".header-logo");
+
+        if (toggleButton && navOverlay && headerLogo) {
+        toggleButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        navOverlay.classList.toggle("active");
+        headerLogo.classList.toggle("move-down");  // ← 추가된 부분
+        });
+    }
+  }, 100);
+ // 100ms 딜레이
+    });
+  </script>
+
+
+  <h1>WHAT YOU STILL</h1>
+  <div class="text-group">
+    <h2 class="subtitle">A SENTENCE THAT STILLS YOUR LIFE</h2>
+    <h3 class="subtitle-kr">삶의 중요한 태도를 적어보세요</h3>
+    <input class="center-input" id="centerInput" placeholder="TYPE HERE" />
+  </div>
+  <div class="history" id="history"></div>
+
+  <!-- Floating Objects -->
+  <img src="Artboard 1.png" class="floating-object" />
+  <img src="Artboard 2.png" class="floating-object" />
+  <img src="Artboard 3.png" class="floating-object" />
+  <img src="Artboard 4.png" class="floating-object" />
+  <img src="Artboard 5.png" class="floating-object" />
+  <img src="Artboard 6.png" class="floating-object" />
+  <img src="Artboard 7.png" class="floating-object" />
+
+  <!-- ✅ 헤더 include JS -->
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("header-placeholder").innerHTML = data; 
+
+        setTimeout(() => {
+        const searchIcon = document.querySelector(".header-icon"); // 또는 .search-trigger
+        const searchOverlay = document.getElementById("search-overlay");
+
+          if (searchIcon && searchOverlay) {
+              searchIcon.addEventListener("click", () => {
+              searchOverlay.classList.toggle("active");
+              });
+            }
+          }, 50);
+        const script = document.createElement("script");
+        script.src = "logo-color.js";
+        
+        document.body.appendChild(script);
+      });
+  </script>
+
+  <!-- ✅ 원래 JS 스크립트 전체 -->
+  <script>
+    const input = document.getElementById("centerInput");
+    const history = document.getElementById("history");
+    const objects = document.querySelectorAll(".floating-object");
+
+    const speeds = [], positions = [], angles = [];
+    const marginX = 10;
+
+    function containsKorean(text) {
+      return /[\u3131-\uD79D]/ugi.test(text);
+    }
+
+    function saveToLocalStorage(text) {
+      const existing = JSON.parse(localStorage.getItem("historyEntries") || "[]");
+      existing.push(text);
+      localStorage.setItem("historyEntries", JSON.stringify(existing));
+    }
+
+    function addHistoryEntry(text) {
+      const entry = document.createElement("div");
+      entry.className = "history-entry";
+
+      const city = text.split(",")[0];
+      const message = text.substring(text.indexOf(",") + 1).trim();
+
+      const spanCity = document.createElement("span");
+      spanCity.textContent = city + ", ";
+      const spanText = document.createElement("span");
+      spanText.className = "entry-text";
+      spanText.textContent = message;
+
+      if (containsKorean(message)) entry.classList.add("ko");
+
+      entry.appendChild(spanCity);
+      entry.appendChild(spanText);
+      history.appendChild(entry);
+    }
+
+    function loadFromLocalStorage() {
+      const saved = JSON.parse(localStorage.getItem("historyEntries") || "[]");
+      saved.forEach(addHistoryEntry);
+    }
+
+    async function getCityName() {
+      try {
+        const res = await fetch("https://ipapi.co/json/");
+        const data = await res.json();
+        return data.region.toUpperCase();
+      } catch {
+        return "UNKNOWN";
+      }
+    }
+
+    input.addEventListener("keydown", async function (e) {
+      if (e.key === "Enter" && input.value.trim() !== "") {
+        const location = await getCityName();
+        const userInput = input.value.trim();
+        const entryText = `${location}, ${userInput.toUpperCase()}`;
+
+        addHistoryEntry(entryText);
+        input.value = "";
+        saveToLocalStorage(entryText);
+      }
+    });
+
+    function initObjectPosition(el, i) {
+      const w = el.offsetWidth;
+      const h = el.offsetHeight;
+      const x = Math.random() * (window.innerWidth - w - 2 * marginX) + marginX;
+      const y = Math.random() * (window.innerHeight - h - 1);
+      const dx = (Math.random() * 1.2 + 0.6) * (Math.random() < 0.5 ? -1 : 1);
+      const dy = (Math.random() * 1.2 + 0.6) * (Math.random() < 0.5 ? -1 : 1);
+      const angle = Math.random() * 360;
+      const rotationSpeed = (Math.random() * 0.6 + 0.2) * (Math.random() < 0.5 ? -1 : 1);
+
+      positions[i] = { x, y };
+      speeds[i] = { dx, dy };
+      angles[i] = { angle, rotationSpeed };
+
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      el.style.transform = `rotate(${angle}deg)`;
+    }
+
+    function animate() {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+
+      objects.forEach((el, i) => {
+        const w = el.offsetWidth;
+        const h = el.offsetHeight;
+        const pos = positions[i];
+        const spd = speeds[i];
+        const angle = angles[i];
+
+        pos.x += spd.dx;
+        pos.y += spd.dy;
+
+        if (pos.x <= marginX || pos.x + w >= screenWidth - marginX) {
+          spd.dx *= -1;
+          pos.x = Math.max(marginX, Math.min(pos.x, screenWidth - w - marginX));
+        }
+
+        if (pos.y <= 0 || pos.y + h >= screenHeight) {
+          spd.dy *= -1;
+          pos.y = Math.max(0, Math.min(pos.y, screenHeight - h));
+        }
+
+        angle.angle += angle.rotationSpeed;
+        el.style.left = `${pos.x}px`;
+        el.style.top = `${pos.y}px`;
+        el.style.transform = `rotate(${angle.angle}deg)`;
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    window.onload = () => {
+      loadFromLocalStorage();
+
+      let loaded = 0;
+      objects.forEach((el, i) => {
+        if (el.complete) {
+          initObjectPosition(el, i);
+          loaded++;
+          if (loaded === objects.length) requestAnimationFrame(animate);
+        } else {
+          el.onload = () => {
+            initObjectPosition(el, i);
+            loaded++;
+            if (loaded === objects.length) requestAnimationFrame(animate);
+          };
+        }
+      });
+    };
+
+    window.onresize = () => {
+      objects.forEach((el, i) => {
+        const w = el.offsetWidth;
+        const h = el.offsetHeight;
+        positions[i].x = Math.min(positi

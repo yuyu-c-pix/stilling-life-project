@@ -1,0 +1,19 @@
+/* 랜딩 페이지 전용 스타일 */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: transparent; 
+}
+
+#landing-video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  transition: opacity 1s ease;
+}
+
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}

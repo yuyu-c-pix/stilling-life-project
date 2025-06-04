@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WHAT WE STILL</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="logo-theme.css" />
+
+  <!-- Noto Sans KR Variable -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
+  
+
+  <!-- Typekit: Megascope & Helvetica Neue -->
+  <script>
+    (function(d) {
+      var config = {
+        kitId: 'ylt8fcr',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h = d.documentElement, t = setTimeout(function(){
+        h.className = h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";
+      }, config.scriptTimeout),
+      tk = d.createElement("script"), f=false, s=d.getElementsByTagName("script")[0];
+      h.className += " wf-loading";
+      tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+      tk.async = true;
+      tk.onload = tk.onreadystatechange = function(){
+        var a = this.readyState;
+        if (f || a && a != "complete" && a != "loaded") return;
+        f = true; clearTimeout(t);
+        try { Typekit.load(config); } catch(e) {}
+      };
+      s.parentNode.insertBefore(tk, s);
+    })(document);
+  </script>
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: clamp(8px, 2vw, 20px);
+      font-family: "megascope-variable", sans-serif;
+      font-variation-settings: "wght" 450, "SCOP" 0;
+      color: black;
+      background-color: transparent;
+    }
+
+    .container {
+      max-width: 68%;
+      margin: 0 auto;
+      padding-bottom: 74px;
+      text-align: center;
+    }
+
+    h1.page-title-1 {
+      font-family: "megascope-variable", sans-serif;
+      font-variation-settings: "wght" 450, "SCOP" 0;
+      font-size: clamp(3.38rem, 4.5vw, 4.5rem);
+      letter-spacing: clamp(0.05rem, 0.3vw, 0.36rem);
+      margin-top: clamp(32px, 7vh, 74px);
+      margin-bottom: 178px;
+    }
+
+    .paragraph-en {
+      font-family: "helvetica-neue-lt-pro", sans-serif;
+      font-size: 2.1375rem;
+      font-weight: 430;
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    .paragraph-kr {
+      font-family: "Noto Sans KR", sans-serif;
+      font-size: 1.89375rem;
+      font-variation-settings: "wght" 430, "SCOP" 0;
+      line-height: 1.7;
+      text-align: left;
+      margin-top: 80px;
+    }
+
+    .button-8 {
+    background: none;
+    margin-top: 178px;
+    border: 2px dotted black;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    font-family: "megascope-variable", sans-serif;
+    font-size: clamp(1.12rem, 1.12vw, 1.12rem);
+    letter-spacing: clamp(0.03rem, 0.12vw, 0.12rem);
+    font-variation-settings: "wght" 550, "SCOP" 0;
+    color: black;
+    display: inline-block;
+    }
+
+    .button-label {
+    position: relative;
+    display: inline-block;
+    }
+
+    .button-label::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%; /* 텍스트 span 기준 */
+    height: 0;
+    border-bottom: 2px dotted black;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    }
+
+    .button-8:hover .button-label::after {
+    opacity: 1;
+    }
+
+
+    @media (max-width: 768px) {
+      .container {
+        max-width: 85%;
+      }
+
+      .paragraph-en,
+      .paragraph-kr,
+      .button-8 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="page-whatwestill">
+
+    <div id="header-container"></div>
+  
+    <div class="container">
+    <h1 class="page-title-1">WHAT WE STILL</h1>
+
+    <div class="paragraph-en">
+      STILLING LIFE PROJECT spreads small, meaningful messages through physical objects in public spaces.
+      We are based in Seoul, Zurich and work with simple phrases that express ways of thinking or being.
+      These phrases appear on posters, tags, or small items placed in the city.
+      Each message invites people not just to read, but to act.
+      By tearing off or carrying the object, the viewer becomes part of the message.
+      The name 'STILLING LIFE' comes from the term "still object".
+      But instead of just quiet objects, we focus on how those objects can thrive,
+      representing everyday attitudes and actions.
+    </div>
+
+    <div class="paragraph-kr">
+      STILLING LIFE PROJECT는 거리 곳곳에 놓인 오브제를 통해, 짧고 의미 있는 문장을 전파하는 프로젝트입니다.
+      서울을 기반으로 활동하며, 우리는 삶의 태도를 담은 문장을 포스터, 태그, 작은 물건들 위에 담아냅니다.
+      이 문장들은 단순히 읽히는 데서 멈추지 않습니다.
+      누군가 오브제를 뜯어가거나 들고 다니는 행동을 통해, 그 메시지는 자연스럽게 실천으로 이어집니다.
+      우리가 전하는 문장은 하나의 태도를 담고 있으며, 그 태도는 오브제를 통해 퍼져나가고,
+      전달자는 어느새 그것을 손에 든 사람 자신이 됩니다.
+      STILLING LIFE라는 이름은 '정물(still object)'에서 따왔지만,
+      움직이지 않는 사물들이 삶의 태도를 담는 순간, 그 정물은 정적이 아닌 ‘살아 있는 태도’가 됩니다.
+    </div>
+
+    <button class="button-8" onclick="location.href='mailto:Stillinglife@gmail.com'">
+  <span class="button-label">Contact Us</span>
+    </button>
+
+  </div>
+   <script>
+  fetch("../header.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("header-container").innerHTML = data;
+     const script = document.createElement("script");
+         script.src = "../script.js";
+
+    // script.js가 먼저 로드된 후 logo-color.js 실행되도록
+        script.onload = () => {
+        const logoScript = document.createElement("script");
+        logoScript.src = "../logo-color.js";
+        document.body.appendChild(logoScript);
+        
+      // 헤더 요소들 로딩 후 수동 실행 (DOMContentLoaded 대체)
+        const toggleButton = document.getElementById('menu-toggle');
+        const navOverlay = document.getElementById('nav-overlay');
+        const logo = document.querySelector('.header-logo');
+
+
+        if (toggleButton && navOverlay && logo) {
+          toggleButton.addEventListener('click', () => {
+     

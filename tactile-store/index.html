@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TACTILE STORE</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="logo-theme.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
+  <script>
+    (function(d) {
+      var config = {
+        kitId: 'ylt8fcr',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h = d.documentElement, t = setTimeout(function(){
+        h.className = h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";
+      }, config.scriptTimeout),
+      tk = d.createElement("script"), f=false, s=d.getElementsByTagName("script")[0];
+      h.className += " wf-loading";
+      tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+      tk.async = true;
+      tk.onload = tk.onreadystatechange = function(){
+        var a = this.readyState;
+        if (f || a && a != "complete" && a != "loaded") return;
+        f = true; clearTimeout(t);
+        try { Typekit.load(config); } catch(e) {}
+      };
+      s.parentNode.insertBefore(tk, s);
+    })(document);
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: clamp(8px, 2vw, 20px);
+      font-family: "megascope-variable", sans-serif;
+      font-variation-settings: "wght" 450, "SCOP" 0;
+      color: black;
+      background-color: transparent;
+    }
+
+    .container {
+      max-width: 68%;
+      margin: 0 auto;
+      padding-bottom: 74px;
+      text-align: center;
+      
+    }
+
+    h1.page-title-1 {
+      font-family: "megascope-variable", sans-serif;
+      font-variation-settings: "wght" 450, "SCOP" 0;
+      font-size: clamp(3.38rem, 4.5vw, 4.5rem);
+      letter-spacing: clamp(0.05rem, 0.3vw, 0.36rem);
+      margin-top: clamp(32px, 7vh, 74px);
+      margin-bottom: 178px;
+    }
+
+    .grid-wrapper {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px 60px;
+    }
+
+    .grid-item {
+      height: 320px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      padding:  8px 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+      position: relative;
+      border-radius: 16px;
+    }
+
+    .grid-item img {
+      max-height: 200px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+      margin-top: auto;
+      margin-bottom: auto;
+      
+    }
+    .grid-item.text-only {
+      background-color: transparent !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 320px;
+      text-align: center;
+      line-height: 1.6;
+     font-family: "helvetica-neue-lt-pro", sans-serif;
+      font-size: 2.1375rem;
+      word-spacing: -2%;
+      font-weight: 430;
+      line-height: 1.2; }
+
+    .add-to-cart-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 8px 16px;
+      font-family: "megascope-variable", sans-serif;
+      font-size: clamp(1.12rem, 1.12vw, 1.12rem);
+      letter-spacing: clamp(0.03rem, 0.12vw, 0.12rem);
+      font-variation-settings: "wght" 500, "SCOP" 0;
+      word-spacing: -2%;
+      border: 2px dotted black;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 4;
+      cursor: pointer;
+    }
+
+    .grid-item:hover .add-to-cart-button {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .grid-item:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    .caption {
+      margin-top: 2px;
+      font-family: "helvetica-neue-lt-pro", sans-serif;
+      font-size: 1.12rem;
+      font-weight: 400;
+      word-spacing: -2%;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        max-width: 85%;
+      }
+      .grid-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="header-container"></div>
+
+  <div class="container">
+    <h1 class="page-title-1">TACTILE STORE</h1>
+    <div class="grid-wrapper">
+      <div class="grid-item text-only"><img src="keyring.png" alt=""><div class="caption">KEYRING HOLDER FOR THE FLYERS</div>
+      <div class="add-to-cart-button">ADD TO CART</div>
+      </div>
+      <div class="grid-item"><img src="Asset 1.png" alt=""><div class="caption">LOGO TATTOO</div>
+      <div class="add-to-cart-button">ADD TO CART</div>
+      </div>
+      <div class="grid-item"><img src="Asset 2.png" alt=""><div class="caption">SS STICKER</div>
+      <div class="add-to-cart-button">ADD TO CART</div>
+    </div>
+      <div class="grid-item"><img src="Asset 3.png" alt=""><div class="caption">GREEN LOGO STICKER</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+      <div class="grid-item"><img src="Asset 4.png" alt=""><div class="caption">COMP STICKER</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+      <div class="grid-item"><img src="Asset 5.png" alt=""><div class="caption">RED LOGO STICKER</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+      <div class="grid-item"><img src="Asset 11.png" alt=""><div class="caption">COLOR LOGO STICKER</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+      <div class="grid-item"><img src="Asset 7.png" alt=""><div class="caption">TWO GRASS STICKER</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+      <div class="grid-item"><img src="Asset 8.png" alt=""><div class="caption">LEAVE BEHIND CARD</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+      <div class="grid-item"><img src="Asset 9.png" alt=""><div class="caption">CLARITY STICKER</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+      <div class="grid-item"><img src="Asset 10.png" alt=""><div class="caption">TRIO STICKER</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+      <div class="grid-item"><img src="Asset 6.png" alt=""><div class="caption">BEST FIRST STICKER</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+      <div class="grid-item"><img src="Asset 12.png" alt=""><div class="caption">SS UMBRELLA</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+      <div class="grid-item"><img src="Asset 13.png" alt=""><div class="caption">TYPOGRAPHY STICKER</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+      <div class="grid-item"><img src="Asset 14.png" alt=""><div class="caption">GREEN GRASS TSHIRT</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+      <div class="grid-item"><img src="Asset 15.png" alt=""><div class="caption">CLARITY GLASS CLOTH</div>
+      <div class="add-to-cart-button">ADD TO CART</div></div>
+    </div>
+  </div>
+
+  <script>
+    fetch("../header.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("header-container").innerHTML = data;
+        const script = document.createElement("script");
+         script.src = "../script.js";
+
+    // script.js가 먼저 로드된 후 logo-color.js 실행되도록
+        script.onload = () => {
+        const logoScript = document.createElement("script");
+        logoScript.src = "../logo-color.js";
+        document.body.appendChild(logoScript);
+        
+      // 헤더 요소들 로딩 후 수동 실행 (DOMContentLoaded 대체)
+        const toggleButton = document.getElementById('menu-toggle');
+        const navOverlay = document.getElementById('nav-overlay');
+        const logo = document.querySelector('.header-logo');
+
+          if (toggleButton && navOverlay && logo) {
+            toggleButton.addEventListener('click', () => {
+              const isActive = navOverlay.classList.contains('active');
+              navOverlay.classList.toggle('active');
+              logo.classList.toggle('move-down', !isActive);
+            });
+          }
+        };
+        document.body.appendChild(script);
+      });
+  </script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const images = [
+    'background1.png',
+    'background2.png',
+    'background3.png'
+  ];
+
+  let index = 0;
+  let showingTop = true;
+
+  // div 두 개 생성해서 body에 추가
+  const bgTop = document.createElement('div');
+  const bgBottom = document.createElement('div');
+  bgTop.className = 'background-fader bg-top';
+  bgBottom.className = 'background-fader bg-bottom';
+  document.body.appendChild(bgBottom);
+  document.body.appendChild(bgTop);
+
+  function switchBackground() {
+    const nextImage = images[index];
+    index = (index + 1) % images.

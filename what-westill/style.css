@@ -1,0 +1,50 @@
+.page-title-1 {
+  margin-bottom: 40px;
+  display: block;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+div[style*="text-align: left"]:nth-of-type(2) {
+  margin-top: 56px;
+}
+
+
+.button-8 {
+  display: inline-block;
+  color: black;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  border: 2px dotted black;
+  font-family: "megascope-variable", sans-serif;
+  font-size: clamp(1.12rem, 1.27vw, 1.27rem);
+  letter-spacing: clamp(0.03rem, 0.12vw, 0.12rem);
+  font-variation-settings: "wght" 500, "SCOP" 0;
+  position: relative;
+  text-decoration: none;
+}
+
+.button-8::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  width: 100%;
+  border-bottom: 2px dotted black;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1; /* 필요 시 */
+}
+
+.button-8:hover::after {
+  opacity: 1;
+}
+body {
+  background-image: url('what-westill/logobackground.png');  /* ← 너의 실제 경로에 맞게 수정 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;  /* 기본값이라 생략해도 됨 */
+}

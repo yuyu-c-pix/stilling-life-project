@@ -1,0 +1,293 @@
+/* 공통 헤더 스타일 */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* 모든 자식 요소를 상단 정렬 */
+  height: clamp(64px, 10vh, 128px); /* ✅ 반응형 height */
+  padding: 0 clamp(12px, 3vw, 20px); /* ✅ 반응형 padding */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 1000;
+}
+
+.header-left,
+.header-center,
+.header-right {
+  flex: 1;
+  display: flex;
+  align-items: flex-start; /* 개별 영역도 상단 정렬 */
+}
+
+.header-left {
+  justify-content: flex-start;
+}
+
+.header-center {
+  justify-content: center;
+}
+
+.header-right {
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+/* 햄버거 메뉴 (☰) */
+.icon-link {
+  font-size: clamp(1.2rem, 2.2vw, 2.22rem);
+  margin-top: clamp(8px, 2vh, 20px);
+  line-height: 1;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* 로고 이미지 */
+.header-logo {
+  height: clamp(44px, 8vh, 88px);
+  margin-top: clamp(8px, 2vh, 20px);     /* ← 로고 높이 88px로 반영 */
+  width: auto;
+  display: block;
+  object-fit: contain;
+  will-change: transform; 
+  transition: transform 0.55s ease, filter 0.55s ease, color 0.55s ease;;
+}
+
+
+
+/* 오른쪽 이모지들 */
+.header-icon {
+  font-size: 2.22rem;
+  line-height: 1;
+  margin-top: 20px;
+}
+
+/* 헤더 아래 공간 확보용 placeholder */
+#header-placeholder {
+   margin-top: clamp(8px, 2.5vh, 20px);
+}
+
+/* 텍스트 그룹 간격 */
+.text-group {
+  margin-top: 20px;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  #header-placeholder {
+    margin-top: 20px;
+  }
+
+  .text-group {
+    margin-top: 20px;
+  }
+}
+/* 오버레이창 */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+.nav-overlay {
+  position: fixed;
+  top: 0px;                          /* ← 여백 복원 */
+  left: 50%;
+  transform: translate(-50%, -100%);
+  width: 44vw;
+  background-color: #fff170;
+  transition: transform 0.6s ease;
+  will-change: transform;
+  padding: 2px 0;
+  z-index: 1000;
+}
+
+/* 오버레이가 열렸을 때 */
+
+.nav-overlay.active {
+  top: 12px;                              /* ✅ 열렸을 때만 12px 아래로 */
+  transform: translate(-50%, 0);  
+  width: 44vw;        /* ← 아래로 내려옴 */
+}
+
+/* 메뉴 항목 묶음 */
+.nav-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 36px;
+  height: 44px;
+  padding: 0 15px;
+  flex-wrap: nowrap;
+}
+
+/* 개별 메뉴 항목 */
+.nav-item {
+  font-size: clamp(0.8rem, 1.2vw, 1.35rem);
+
+   line-height: 1.2;
+  font-family: "megascope-variable";
+  font-variation-settings: "wght" 600, "SCOP" 0;
+  letter-spacing: clamp(0.02em, 0.4vw, 0.09em);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  border-bottom: 2px dotted transparent;  /* ← dotted 고정 */
+  transition: border-color 0.2s ease;
+}
+
+.nav-item:hover {
+  border-bottom: 2px dotted black;
+  text-decoration: none;                /* 🔁 기본 underline 제거 */
+  text-underline-offset: -3px;           /* ✅ 밑줄과 텍스트 사이 간격 */
+  text-decoration-thickness: 2px;       /* ✅ 점선 두께 조절도 가능 */
+  cursor: pointer;
+  transition: opacity 03s ease;
+}
+
+/* 오버레이 닫기 버튼 (필요시) */
+.close-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: black;
+}
+/* 로고 내려오는 애니메이션 */
+.header-logo.move-down {
+  transform: translateY(60px); /* 원하는 값으로 조정 */
+  transition: transform 0.55s ease;
+  will-change: transform;
+}
+
+/* 원래 위치 */
+.header-logo {
+  transition: transform 0.55s ease;
+}
+.background-fader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: -1;
+}
+
+.background-fader.bg-top {
+  z-index: -1;
+}
+
+.background-fader.bg-bottom {
+  z-index: -2;
+}
+/* 공통 ../style.css에는 body에 배경을 넣지 마 */
+
+.page-whatwestill {
+  background-image: url('what-westill/logobackground.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.header-icon {
+  position: relative;
+  font-size: 1.5rem;
+  z-index: 1;
+}
+
+.nav-item {
+  color: inherit;             /* 부모 컬러 상속 – 보통 black */
+  text-decoration: none;      /* 밑줄 제거 */
+}
+
+.nav-item:visited {
+  color: inherit;             /* 방문 후에도 검정 유지 */
+  text-decoration: none;
+}
+
+/* 초기 상태: 위에 숨겨짐 */
+.search-overlay {
+  position: fixed;
+  top: 0; /* 아래 active에서 top만 조절해도 충분 */
+  left: 50%;
+  transform: translate(-50%, -120%);
+  width: 55vw;
+  height: 44px;
+  background-color: transparent;
+  border-radius: 16px 16px 0 0;
+  transition: transform 0.6s ease; /* 메뉴와 동일한 속도 */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 내려올 때 */
+.search-overlay.active {
+  top: 12px;
+  transform: translate(-50%, 0);
+
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: #f1f5f9;
+  padding: 8px 12px;
+  border: 2px dotted #000000;
+  width: 44vw;
+}
+
+.search-icon-img {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  filter: grayscale(1) brightness(0.6);
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  margin-left: 4px;
+  color: #000;
+  flex: 1;
+  outline: none;
+ font-size: clamp(0.8rem, 1.2vw, 1.35rem);
+  line-height: 1.2;
+  font-family: "megascope-variable";
+  font-variation-settings: "wght" 600, "SCOP" 0;
+  letter-spacing: clamp(0.02em, 0.4vw, 0.09em);
+}
+.header-icon {
+  cursor: pointer; /* 손가락 모양 */
+  padding: 8px 12px; /* 클릭 영역 확장 */
+  display: inline-flex;
+  font-size: 2rem; 
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+
+}
+
+html, body {
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+}
+.floating-img {
+  position: fixed;
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.1s ease;
+  touch-action: none; 
+  pointer-events: all;
+}
+
+

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PROJECT ARCHIVE</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="logo-theme.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
+  <script>
+    (function(d) {
+      var config = { kitId: 'ylt8fcr', scriptTimeout: 3000, async: true },
+          h=d.documentElement, t=setTimeout(function(){ h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive"; }, config.scriptTimeout),
+          tk=d.createElement("script"), f=false, s=d.getElementsByTagName("script")[0];
+      h.className+=" wf-loading";
+      tk.src='https://use.typekit.net/'+config.kitId+'.js';
+      tk.async=true;
+      tk.onload=tk.onreadystatechange=function(){ var a=this.readyState; if(f||a&&a!="complete"&&a!="loaded")return; f=true; clearTimeout(t); try{Typekit.load(config)}catch(e){} };
+      s.parentNode.insertBefore(tk,s)
+    })(document);
+  </script>
+  <style>
+    :root {
+      --column-gap: 60px;
+      --row-gap: 60px;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: clamp(8px, 2vw, 20px);
+      font-family: "megascope-variable", sans-serif;
+      font-variation-settings: "wght" 450, "SCOP" 0;
+      color: black;
+      background-color: white;
+    }
+    .container {
+      max-width: 84%;
+      margin: 0 auto;
+      padding: 0 clamp(8px, 2vw, 20px);
+    }
+    .page-title-1 {
+      font-family: "megascope-variable", sans-serif;
+      font-variation-settings: "wght" 450, "SCOP" 0;
+      font-size: clamp(3.38rem, 4.5vw, 4.5rem);
+      letter-spacing: clamp(0.05rem, 0.3vw, 0.36rem);
+      margin-top: clamp(32px, 7vh, 74px);
+      margin-bottom: 178px;
+      text-align: center;
+    }
+    .grid-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--row-gap) var(--column-gap);
+      justify-content: center;
+      padding-bottom: 100px;
+    }
+    .text-block {
+        display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      column-gap: 20px;
+      text-align: left;
+      flex: 0 1 calc(50% - var(--column-gap) / 2);
+    }
+    .column-img, .column-text {
+      width: 50%;
+    }
+    .column-text {
+      margin-top: 4px;
+    }
+    .slider-container {
+      aspect-ratio: 9 / 16;
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      position: relative;
+      margin-top: 0;
+    }
+    .slider-wrapper {
+      display: flex;
+      height: 100%;
+    }
+    .slider-wrapper > div {
+      flex: 0 0 100%;
+      height: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      background-color: transparent;
+      border: 2px dotted black;
+      border-radius: 0px;
+      border-style: dotted;
+      border-width: 3px;
+      border-color: black;
+      border-spacing: 0;
+      height: fit-content;
+    }
+    .slider-wrapper video,
+    .slider-wrapper img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      background-color: transparent;
+      margin-top: 0;
+    }
+    .slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;           /* ✅ 배경 없애기 */
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+    }
+
+    .slider-button:hover {
+        opacity: 0.7;
+    }
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+    .column-text {
+      margin-top: 4px;
+      max-width: 200%;
+    }
+
+    .column-text .style-11 {
+      font-family: "helvetica-neue-lt-pro", sans-serif;
+      font-size: 2.1375rem;
+      word-spacing: -2%;
+      font-weight: 430;
+      line-height: 1.2;
+      margin-bottom: 4px;
+      text-align: left;
+    }
+    .column-text .style-13 {
+      font-family: "helvetica-neue-lt-pro", sans-serif;
+      font-size: 1.12rem;
+      font-weight: 420;
+      line-height: 1.4;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .column-text .style-12 {
+      font-family: "helvetica-neue-lt-pro", sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.12rem;
+      margin-bottom: 4px;
+      word-spacing: -2%;
+      max-width: 80%;
+      text-align: left;
+    }
+    .column-text .style-10 {
+      font-family: "Noto Sans KR", sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.12rem;
+      word-spacing: -2%;
+      max-width: 80%;
+      text-align: left;
+    }
+    @media (max-width: 768px) {
+      .text-block {
+        flex-direction: column;
+        flex: 1 1 100%;
+      }
+      .column-img, .column-text {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="header-container"></div>
+  <div class="container">
+    <h1 class="page-title-1">PROJECT ARCHIVE</h1>
+    <div class="grid-wrap">
+
+    <!-- 칼럼 6개 반복 구조 -->
+    <div class="text-block">
+      <div class="column-img">
+        <div class="slider-container">
+            <button class="slider-button prev-btn">&#10094;</button>
+            <button class="slider-button next-btn">&#10095;</button>
+          <div class="slider-wrapper">
+            <div><video src="Comp 2.mp4" autoplay muted loop playsinline></video></div>
+            <div><img src="3DM_SANDWICH.png" alt="3DM Sandwich"></div>
+          </div>
+        </div>
+      </div>
+      <div class="column-text">
+        <div class="style-11">DON’T SAVE THE BEST FOR LAST</div>
+        <div class="style-13">ZURICH, 2023</div>
+        <div class="style-12">Don’t save the best bite for later, enjoy it now. You might lose it before you even notice.</div>
+        <div class="style-10">무엇이든 미래를 위해 아껴두지 말고 지금 가장 맛있는 부분을 베어무세요. 모르는 새에 잃어버릴지도 몰라요.</div>
+      </div>
+    </div>
+
+    <div class="text-block">
+      <div class="column-img">
+        <div class="slider-container">
+            <button class="slider-button prev-btn">&#10094;</button>
+            <button class="slider-button next-btn">&#10095;</button>
+          <div class="slider-wrapper">
+            <div><video src="Comp 4.mp4" autoplay muted loop playsinline></video></div>
+            <div><img src="3DM_RIBBON.png" alt="3DM Ribbon"></div>
+          </div>
+        </div>
+      </div>
+      <div class="column-text">
+        <div class="style-11">IT IS NOT THAT COMPLICATED</div>
+        <div class="style-13">ZURICH, 2023</div>
+        <div class="style-12">What looks complicated might actually be simple. Instead of sitting with worry, try pulling the ribbon in front of you.</div>
+        <div class="style-10">겉보기에는 복잡해보여도 사실은 쉽게 풀리는 문제일지도 몰라요. 걱정으로 시간을 보내기보다는 눈앞의 매듭을 잡아당겨보세요.</div>
+      </div>
+    </div>
+
+    <div class="text-block">
+      <div class="column-img">
+        <div class="slider-container">
+            <button class="slider-button prev-btn">&#10094;</button>
+            <button class="slider-button next-btn">&#10095;</button>
+          <div class="slider-wrapper">
+            <div><video src="Comp 6.mp4" autoplay muted loop playsinline></video></div>
+            <div><img src="3DM_CLARITY.png" alt="3DM Clarity"></div>
+          </div>
+        </div>
+      </div>
+      <div class="column-text">
+        <div class="style-11">CLARITY TAKES TIME</div>
+        <div class="style-13">BERLIN, 2023</div>
+        <div class="style-12">Don’t rush. Take your time, and as you slowly clear the fog, the truth will come into view.</div>
+        <div class="style-10">삶은 언제나 물음표 투성이죠. 조급해 하지 마세요. 천천히 안개를 닦아나가다 보면, 숨겨져 있던 정체가 보일 거예요.</div>
+      </div>
+    </div>
+
+    <div class="text-block">
+      <div class="column-img">
+        <div class="slider-container">
+            <button class="slider-button prev-btn">&#10094;</button>
+            <button class="slider-button next-btn">&#10095;</button>
+          <div class="slider-wrapper">
+            <div><video src="Comp 1.mp4" autoplay muted loop playsinline></video></div>
+            <div><img src="3DM_APPLE.png" alt="3DM Apple"></div>
+          </div>
+        </div>
+      </div>
+      <div class="column-text">
+        <div class="style-11">SIMILAR ISN’T THE SAME</div>
+        <div class="style-13">ZURICH, 2023</div>
+        <div class="style-12">Just because things look alike doesn't mean they’re the same. Notice the small differences. They often lead to what truly matters.</div>
+        <div class="style-10">닮았지만 결코 똑같지는 않아요. 항상 신중하게 작은 차이를 포착해내며 중요한 지점들을 찾아내세요.</div>
+      </div>
+    </div>
+
+    <div class="text-block">
+      <div class="column-img">
+        <div class="slider-container">
+            <button class="slider-button prev-btn">&#10094;</button>
+            <button class="slider-button next-btn">&#10095;</button>
+          <div class="slider-wrapper">
+            <div><video src="Comp 3.mp4" autoplay muted loop playsinline></video></div>
+            <div><img src="3DM_CINDERLLA.png" alt="3DM Cinderella"></div>
+          </div>
+        </div>
+      </div>
+      <div class="column-text">
+        <div class="style-11">TIME TO LEAVE BEHIND</div>
+        <div class="style-13">SEOUL, 2024</div>
+        <div class="style-12">Some things need to be let go. Or you might lose everything you’ve stored up. The prince will come around again, so take off your shoes and run.</div>
+        <div class="style-10">어떤 것들은 놓아버려야 합니다. 쌓아뒀던 모든 걸 잃어버릴지도 모르니까요. 왕자의 기회는 다시 돌아올 테니, 구두를 벗고 달릴 때입니다.</div>
+      </div>
+    </div>
+
+    <div class="text-block">
+      <div class="column-img">
+        <div class="slider-container">
+            <button class="slider-button prev-btn">&#10094;</button>
+            <button class="slider-button next-btn">&#10095;</button>
+          <div class="slider-wrapper">
+            <div><video src="Comp 5.mp4" autoplay muted loop playsinline></video></div>
+            <div><img src="3DM_GRASS.png" alt="3DM Grass"></div>
+          </div>
+        </div>
+      </div>
+      <div class="column-text">
+        <div class="style-11">YOU ARE SOMEONE’S GREENER GRASS</div>
+        <div class="style-13">SEOUL, 2024</div>
+        <div class="style-12">Does everyone else's grass seem greener? But to someone else, yours is the color they long for. Take a moment to look back at your path.</div>
+        <div class="style-10">언제나 남의 정원이 더 푸르러 보이나요? 하지만 당신의 정원도 누군가에겐 푸르른 숲입니다. 걸어온 길을 한 번 뒤돌아보세요.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      fetch("../header.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("header-container").innerHTML = data;
+        
+
+          const script = document.createElement("script");
+         script.src = "../script.js";
+
+    // script.js가 먼저 로드된 후 logo-color.js 실행되도록
+        script.onload = () => {
+        const logoScript = document.createElement("script");
+        logoScript.src = "../logo-color.js";
+        document.body.appendChild(logoScript);
+        
+      // 헤더 요소들 로딩 후 수동 실행 (DOMContentLoaded 대체)
+        const toggleButton = document.getElementById('menu-toggle');
+        const navOverlay = document.getElementById('nav-overlay');
+        const logo = document.querySelector('.header-logo');
+
+        if (toggleButton && navOverlay && logo) {
+          toggleButton.addEventListener('click', () => {
+            const isActive = navOverlay.classList.contains('active');
+            navOverlay.classList.toggle('active');
+            logo.classList.toggle('move-down', !isActive);
+          });
+        }
+      };
+      document.body.appendChild(script);
+    });
+
+    window.addEventListener("load", () => {
+      document.querySelectorAll(".slider-wrapper").forEach(wrapper => {
+        const slides = wrapper.children;
+        const totalSlides = slides.length;
+        let currentIndex = 0;
+        const firstSlideClone = slides[0].cloneNode(true);
+        wrapper.appendChild(firstSlideClone);
+
+        function moveSlide() {
+          currentIndex++;
+          wrapper.style.transition = "transform 0.5s ease";
+          wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+          if (currentIndex === totalSlides) {
+            setTimeout(() => {
+              wrapper.style.transition = "none";
+              wrapper.style.transform = "translateX(0%)";
+              currentIndex = 0;
+            }, 500);
+          }
+            document.querySelectorAll(".slider-container").forEach(container => {
+                const media = container.querySelector("video, img");
+                const prevBtn = container.querySelector(".prev-btn");
+                const nextBtn = container.querySelector(".next-btn");
+
+                if (media && prevBtn && nextBtn) {
+                    const updateButtonPosition = () => {
+                        const buttonTop = media.offsetTop + media.clientHeight / 2;
+                        prevBtn.style.top = `${buttonTop}px`;
+                        nextBtn.style.top = `${buttonTop}px`;
+                 };
+
+                // 초기 위치 설정 + 리사이즈 대응
+                    updateButtonPosition();
+                    window.addEventListener("resize", updateButtonPosition);
+             }
+            });
+
+        }
+
+        //setInterval(moveSlide, 4500);
+        const prevBtn = wrapper.closest(".slider-container").querySelector(".prev-btn");
+        const nextBtn = wrapper.closest(".slider-container").querySelector(".next-btn");
+
+        let slideInterval = setInterval(moveSlide, 4500);
+
+        function goToSlide(index) {
+        currentIndex = index;
+        wrapper.style.transition = "transform 0.5s ease";
+        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // 다음 버튼
+        nextBtn.addEventListener("click", () => {
+        clearInterval(slideInterval);
+        moveSlide();
+        slideInterval = setInterval(moveSlide, 4500);
+        });
+
+        // 이전 버튼
+        prevBtn.addEventListener("click", () => {
+        clearInterval(slid
