@@ -1,4 +1,4 @@
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("centerInput");
   const history = document.getElementById("history");
   const objects = document.querySelectorAll(".floating-object");
@@ -143,7 +143,7 @@ window.onload = () => {
 
   document.addEventListener("contextmenu", (e) => e.preventDefault());
   document.addEventListener("selectstart", (e) => e.preventDefault());
-};
+});
 document.addEventListener("DOMContentLoaded", () => {
   const toggleButton = document.getElementById("menu-toggle");
   const navOverlay = document.getElementById("nav-overlay");
