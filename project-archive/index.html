@@ -385,6 +385,28 @@
 
         let slideInterval = setInterval(moveSlide, 4500);
 
+        const media = wrapper.querySelector("video, img");
+
+        if (media) {
+          media.addEventListener("mousedown", () => {
+            clearInterval(slideInterval);
+          });
+
+          media.addEventListener("mouseup", () => {
+            slideInterval = setInterval(moveSlide, 4500);
+          });
+
+          // 모바일 대응
+          media.addEventListener("touchstart", () => {
+            clearInterval(slideInterval);
+          });
+
+          media.addEventListener("touchend", () => {
+            slideInterval = setInterval(moveSlide, 4500);
+          });
+        }
+
+
         function goToSlide(index) {
         currentIndex = index;
         wrapper.style.transition = "transform 0.5s ease";
