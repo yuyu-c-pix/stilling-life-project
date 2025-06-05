@@ -79,12 +79,6 @@
   #header-placeholder {
     margin-top: 20px;
   }
-  .icon-link {
-    font-size: 1.5rem; /* 모바일에서 작게 */
-    margin-top: 10px; /* 위 여백 조정 */
-  }
-    transform: scale(0.8); /* 80%로 축소 */
-    transform-origin: top left;
 
   .text-group {
     margin-top: 20px;
