@@ -80,15 +80,15 @@
     margin-top: 20px;
   }
 
-  #text-group {
+  .text-group {
     margin-top: 20px;
   }
-  #header-icon {
+  .header-icon {
     font-size: 1.5rem; /* 모바일에서 더 작게 */
     padding: 4px 8px;  /* 클릭 영역도 조정 */
     margin-top: 6px; 
   }
-  #header-right {
+  .header-right {
     gap: 12px;}
 }
 /* 오버레이창 */
