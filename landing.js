@@ -27,6 +27,8 @@ window.addEventListener("DOMContentLoaded", () => {
   tryPlay();
 });
 
+video.addEventListener("canplaythrough", tryPlay);
+
 window.addEventListener("touchstart", () => {
   video.play().catch(() => {});
 }, { once: true });
