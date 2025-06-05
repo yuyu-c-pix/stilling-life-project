@@ -103,7 +103,7 @@ html, body {
   left: 50%;
   transform: translate(-50%, -100%);
   width: 44vw;
-  background-color: #fbe5cd;;
+  background-color: #fbe5cd;
   transition: transform 0.6s ease;
   will-change: transform;
   padding: 2px 0;
