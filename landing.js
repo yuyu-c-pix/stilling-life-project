@@ -11,3 +11,17 @@ function goToMain() {
 video.addEventListener("ended", goToMain);
 document.addEventListener("click", goToMain);
 
+window.addEventListener("DOMContentLoaded", () => {
+  const video = document.getElementById("landing-video");
+  const tryPlay = () => {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // 자동재생이 막혔을 경우 대체 동작 (예: 그냥 메인으로 넘어가기 등)
+        console.warn("Autoplay prevented:", error);
+        // window.location.href = 'project-archive/index.html'; // 선택적 fallback
+      });
+    }
+  };
+  tryPlay();
+});
