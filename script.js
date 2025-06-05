@@ -377,12 +377,12 @@ searchInput.addEventListener("keydown", function (e) {
 });
 
 const imageData = [
-  { src: "1.png", style: { zIndex: 3 } },
-  { src: "2.png", style: { zIndex: 10 } },
-  { src: "3.png", style: { zIndex: 9 } },
-  { src: "4.png", style: { zIndex: 9 } },
-  { src: "5.png", style: { zIndex: 9 } },
-  { src: "6.png", style: { zIndex: 8 } }
+  { src: "./1.png", style: { zIndex: 3 } },
+  { src: "./2.png", style: { zIndex: 10 } },
+  { src: "./3.png", style: { zIndex: 9 } },
+  { src: "./4.png", style: { zIndex: 9 } },
+  { src: "./5.png", style: { zIndex: 9 } },
+  { src: "./6.png", style: { zIndex: 8 } }
 ];
 
 const container = document.getElementById("floating-images");

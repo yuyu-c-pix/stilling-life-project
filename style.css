@@ -288,11 +288,4 @@ html, body {
   transition: transform 0.1s ease;
   touch-action: none;
   pointer-events: all;
-  z-index: 10;
-  width: auto; /* 💡 이거 하나로 크기 조절 가능 */
-  height: auto;
-}
-.slider-wrapper video,
-.slider-wrapper img {
-  cursor: grab; /* 기본 커서 */
-}
+  z-i
