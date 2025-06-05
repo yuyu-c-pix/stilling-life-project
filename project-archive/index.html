@@ -385,9 +385,9 @@
 
         let slideInterval = setInterval(moveSlide, 4500);
 
-        const media = wrapper.querySelector("video, img");
+        const mediaElements = wrapper.querySelectorAll("video, img");
 
-        if (media) {
+        mediaElements.forEach(media => {
           media.addEventListener("mousedown", () => {
             clearInterval(slideInterval);
           });
@@ -404,7 +404,8 @@
           media.addEventListener("touchend", () => {
             slideInterval = setInterval(moveSlide, 4500);
           });
-        }
+        });
+
 
 
         function goToSlide(index) {
