@@ -11,6 +11,7 @@ function goToMain() {
 video.addEventListener("ended", goToMain);
 document.addEventListener("click", goToMain);
 
+
 window.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById("landing-video");
   const tryPlay = () => {
@@ -25,3 +26,8 @@ window.addEventListener("DOMContentLoaded", () => {
   };
   tryPlay();
 });
+
+window.addEventListener("touchstart", () => {
+  video.play().catch(() => {});
+}, { once: true });
+

@@ -24,5 +24,17 @@
       });
     });
   </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const video = document.getElementById("landing-video");
+
+    video.addEventListener("canplaythrough", () => {
+      video.play().catch(e => {
+        console.warn("Autoplay prevented:", e);
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
