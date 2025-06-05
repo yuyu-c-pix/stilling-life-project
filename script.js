@@ -276,3 +276,19 @@ imageData.forEach(({ src, style }) => {
 // 예: 랜덤 좌표 범위 조정 (왼쪽/위로 너무 안가게)
 img.style.left = `${Math.random() * 70 + 5}vw`; // 5vw ~ 75vw
 img.style.top = `${Math.random() * 70 + 5}vh`;  // 5vh ~ 75vh
+
+// floating 이미지 자동 배치
+window.addEventListener('DOMContentLoaded', () => {
+  const floatingImages = document.querySelectorAll('.floating-img');
+
+  floatingImages.forEach(img => {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    const x = Math.random() * (vw - img.width); // 브라우저 가로 내 랜덤 위치
+    const y = Math.random() * (vh - img.height); // 브라우저 세로 내 랜덤 위치
+
+    img.style.left = `${x}px`;
+    img.style.top = `${y}px`;
+  });
+});
