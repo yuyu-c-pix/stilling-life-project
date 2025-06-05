@@ -399,7 +399,7 @@ imageData.forEach(({ src, style }) => {
 
   // 로드된 후 위치, 회전 설정
   img.onload = () => {
-  const randWidth = Math.random()  * 4 + 3; // 4~12vw
+  const randWidth = Math.random()  * 8 + 4; // 4~12vw
   img.style.setProperty("width", `${randWidth}vw`, "important"); // 확실히 덮어쓰기
 
   img.style.left = `${Math.random() * 70 + 5}vw`;
