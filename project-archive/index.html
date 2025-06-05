@@ -390,10 +390,12 @@
         mediaElements.forEach(media => {
           media.addEventListener("mousedown", () => {
             clearInterval(slideInterval);
+            media.style.cursor = "grabbing";
           });
 
           media.addEventListener("mouseup", () => {
             slideInterval = setInterval(moveSlide, 4500);
+            media.style.cursor = "grab";
           });
 
           // 모바일 대응
