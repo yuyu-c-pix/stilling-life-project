@@ -198,12 +198,12 @@ searchInput.addEventListener("keydown", function (e) {
 });
 
 const imageData = [
-  { src: "1.png", style: { top: "38vh", left: "9vw", width: "103px", zIndex: 3 } },
-  { src: "2.png", style: { top: "51vh", left: "28vw", width: "88px", zIndex: 10 } },
-  { src: "3.png", style: { top: "25vh", left: "13vw", width: "118px", zIndex: 9 } },
-  { src: "4.png", style: { top: "16vh", left: "19vw", width: "145px", zIndex: 9 } },
-  { src: "5.png", style: { top: "56vh", left: "36vw", width: "89px", zIndex: 9 } },
-  { src: "6.png", style: { top: "45vh", left: "26vw", width: "92px", zIndex: 8 } }
+  { src: "1.png", style: { zIndex: 3 } },
+  { src: "2.png", style: { zIndex: 10 } },
+  { src: "3.png", style: { zIndex: 9 } },
+  { src: "4.png", style: { zIndex: 9 } },
+  { src: "5.png", style: { zIndex: 9 } },
+  { src: "6.png", style: { zIndex: 8 } }
 ];
 
 const container = document.getElementById("floating-images");
@@ -213,8 +213,15 @@ imageData.forEach(({ src, style }) => {
   img.src = src;
   img.className = "floating-img";
   Object.assign(img.style, style);
-  const angle = (Math.random() * 60 - 30).toFixed(1); // -30 ~ +30도
+  const left = `${Math.random() * 70 + 5}vw`;
+  const top = `${Math.random() * 70 + 5}vh`;
+  img.style.left = left;
+  img.style.top = top;
+
+  // 랜덤 회전
+  const angle = (Math.random() * 60 - 30).toFixed(1);
   img.style.transform = `rotate(${angle}deg)`;
+
   container.appendChild(img);
 
   let isDragging = false;
