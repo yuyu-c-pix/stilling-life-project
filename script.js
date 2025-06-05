@@ -399,15 +399,13 @@ imageData.forEach(({ src, style }) => {
 
   // 로드된 후 위치, 회전 설정
   img.onload = () => {
-    // 랜덤 width (예: 4vw ~ 12vw)
-    const randWidth = Math.random() * 8 + 4; // 4 ~ 12
-    img.style.width = `${randWidth}vw`;
+  const randWidth = Math.random() * 8 + 4; // 4~12vw
+  img.style.setProperty("width", `${randWidth}vw`, "important"); // 확실히 덮어쓰기
 
-    img.style.left = `${Math.random() * 70 + 5}vw`;
-    img.style.top = `${Math.random() * 70 + 5}vh`;
-    img.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
+  img.style.left = `${Math.random() * 70 + 5}vw`;
+  img.style.top = `${Math.random() * 70 + 5}vh`;
+  img.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
   };
-
   // 드래그 가능하게 만들기
   let isDragging = false;
   let startX = 0;
