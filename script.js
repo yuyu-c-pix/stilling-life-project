@@ -213,17 +213,19 @@ imageData.forEach(({ src, style }) => {
   img.src = src;
   img.className = "floating-img";
   Object.assign(img.style, style);
-  const left = `${Math.random() * 70 + 5}vw`;
-  const top = `${Math.random() * 70 + 5}vh`;
-  img.style.left = left;
-  img.style.top = top;
+  img.style.cursor = "grab";
 
-  // 랜덤 회전
-  const angle = (Math.random() * 60 - 30).toFixed(1);
-  img.style.transform = `rotate(${angle}deg)`;
-
+  // append 먼저
   container.appendChild(img);
 
+  // 로드된 후 위치, 회전 설정
+  img.onload = () => {
+    img.style.left = `${Math.random() * 70 + 5}vw`;
+    img.style.top = `${Math.random() * 70 + 5}vh`;
+    img.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
+  };
+
+  // 드래그 가능하게 만들기
   let isDragging = false;
   let startX = 0;
   let startY = 0;
@@ -233,7 +235,6 @@ imageData.forEach(({ src, style }) => {
     startX = e.clientX - img.offsetLeft;
     startY = e.clientY - img.offsetTop;
     img.style.cursor = "grabbing";
-
     e.preventDefault();
 
     const onMouseMove = (e) => {
@@ -278,24 +279,8 @@ imageData.forEach(({ src, style }) => {
 
   img.addEventListener("mousedown", onMouseDown);
   img.addEventListener("touchstart", onTouchStart, { passive: false });
-  img.style.cursor = "grab";
 });
 // 예: 랜덤 좌표 범위 조정 (왼쪽/위로 너무 안가게)
-img.style.left = `${Math.random() * 70 + 5}vw`; // 5vw ~ 75vw
-img.style.top = `${Math.random() * 70 + 5}vh`;  // 5vh ~ 75vh
 
-// floating 이미지 자동 배치
-window.addEventListener('DOMContentLoaded', () => {
-  const floatingImages = document.querySelectorAll('.floating-img');
 
-  floatingImages.forEach(img => {
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
 
-    const x = Math.random() * (vw - img.width); // 브라우저 가로 내 랜덤 위치
-    const y = Math.random() * (vh - img.height); // 브라우저 세로 내 랜덤 위치
-
-    img.style.left = `${x}px`;
-    img.style.top = `${y}px`;
-  });
-});
