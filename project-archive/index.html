@@ -425,3 +425,14 @@
 
         // 이전 버튼
         prevBtn.addEventListener("click", () => {
+        clearInterval(slideInterval);
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        wrapper.style.transition = "transform 0.5s ease";
+        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        slideInterval = setInterval(moveSlide, 4500);
+        });
+
+      });
+    });
+  </script>
+  
