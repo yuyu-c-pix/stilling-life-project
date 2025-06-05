@@ -284,3 +284,13 @@ imageData.forEach(({ src, style }) => {
 
 
 
+img.onload = () => {
+  // 랜덤 width (예: 4vw ~ 12vw)
+  const randWidth = Math.random() * 8 + 4; // 4 ~ 12
+  img.style.width = `${randWidth}vw`;
+
+  // 랜덤 위치 및 회전
+  img.style.left = `${Math.random() * 70 + 5}vw`;
+  img.style.top = `${Math.random() * 70 + 5}vh`;
+  img.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
+};
