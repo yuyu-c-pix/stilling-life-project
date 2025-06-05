@@ -289,6 +289,6 @@ html, body {
   touch-action: none;
   pointer-events: all;
   z-index: 10;
-  width: clamp(40px, 10vw, 120px); /* 💡 이거 하나로 크기 조절 가능 */
+  width: auto; /* 💡 이거 하나로 크기 조절 가능 */
   height: auto;
 }
