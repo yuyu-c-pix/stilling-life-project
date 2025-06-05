@@ -18,26 +18,5 @@
   
 
   <script src="landing.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const video = document.getElementById("landing-video");
-      video.play().catch(e => {
-        // 자동재생 차단 시 fallback
-        console.warn("Autoplay prevented:", e);
-      });
-    });
-  </script>
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const video = document.getElementById("landing-video");
-
-    video.addEventListener("canplaythrough", () => {
-      video.play().catch(e => {
-        console.warn("Autoplay prevented:", e);
-      });
-    });
-  });
-</script>
-
-</body>
+  
 </html>
