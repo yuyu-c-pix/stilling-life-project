@@ -84,9 +84,8 @@
     margin-top: 20px;
   }
   .header-icon {
-    font-size: 1.5rem; /* 모바일에서 더 작게 */
-    padding: 4px 8px;  /* 클릭 영역도 조정 */
-    margin-top: 6px; 
+    transform: scale(0.8); /* 80%로 축소 */
+    transform-origin: top right; /* 기준점이 오른쪽 위 */
   }
   .header-right {
     gap: 12px;}
