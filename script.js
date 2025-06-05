@@ -176,6 +176,185 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("centerInput");
+  const history = document.getElementById("history");
+  const objects = document.querySelectorAll(".floating-object");
+
+  const speeds = [], positions = [], angles = [];
+  const marginX = 10;
+
+  function containsKorean(text) {
+    return /[\u3131-\uD79D]/ugi.test(text);
+  }
+
+  function saveToLocalStorage(text) {
+    const existing = JSON.parse(localStorage.getItem("historyEntries") || "[]");
+    existing.push(text);
+    localStorage.setItem("historyEntries", JSON.stringify(existing));
+  }
+
+  function addHistoryEntry(text) {
+    const entry = document.createElement("div");
+    entry.className = "history-entry";
+
+    const city = text.split(",")[0];
+    const message = text.substring(text.indexOf(",") + 1).trim();
+
+    const spanCity = document.createElement("span");
+    spanCity.textContent = city + ", ";
+    const spanText = document.createElement("span");
+    spanText.className = "entry-text";
+    spanText.textContent = message;
+
+    if (containsKorean(message)) entry.classList.add("ko");
+
+    entry.appendChild(spanCity);
+    entry.appendChild(spanText);
+    history.appendChild(entry);
+  }
+
+  function loadFromLocalStorage() {
+    const saved = JSON.parse(localStorage.getItem("historyEntries") || "[]");
+    saved.forEach(addHistoryEntry);
+  }
+
+  async function getCityName() {
+    try {
+      const res = await fetch("https://ipapi.co/json/");
+      const data = await res.json();
+      return data.region.toUpperCase();
+    } catch {
+      return "UNKNOWN";
+    }
+  }
+
+  input.addEventListener("keydown", async function (e) {
+    if (e.key === "Enter" && input.value.trim() !== "") {
+      const location = await getCityName();
+      const userInput = input.value.trim();
+      const entryText = `${location}, ${userInput.toUpperCase()}`;
+
+      addHistoryEntry(entryText);
+      input.value = "";
+      saveToLocalStorage(entryText);
+    }
+  });
+
+  function initObjectPosition(el, i) {
+    const w = el.offsetWidth;
+    const h = el.offsetHeight;
+    const x = Math.random() * (window.innerWidth - w - 2 * marginX) + marginX;
+    const y = Math.random() * (window.innerHeight - h - 1);
+    const dx = (Math.random() * 1.2 + 0.6) * (Math.random() < 0.5 ? -1 : 1);
+    const dy = (Math.random() * 1.2 + 0.6) * (Math.random() < 0.5 ? -1 : 1);
+    const angle = Math.random() * 360;
+    const rotationSpeed = (Math.random() * 0.6 + 0.2) * (Math.random() < 0.5 ? -1 : 1);
+
+    positions[i] = { x, y };
+    speeds[i] = { dx, dy };
+    angles[i] = { angle, rotationSpeed };
+
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+    el.style.transform = `rotate(${angle}deg)`;
+  }
+
+  function animate() {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    objects.forEach((el, i) => {
+      const w = el.offsetWidth;
+      const h = el.offsetHeight;
+      const pos = positions[i];
+      const spd = speeds[i];
+      const angle = angles[i];
+
+      pos.x += spd.dx;
+      pos.y += spd.dy;
+
+      if (pos.x <= marginX || pos.x + w >= screenWidth - marginX) {
+        spd.dx *= -1;
+        pos.x = Math.max(marginX, Math.min(pos.x, screenWidth - w - marginX));
+      }
+
+      if (pos.y <= 0 || pos.y + h >= screenHeight) {
+        spd.dy *= -1;
+        pos.y = Math.max(0, Math.min(pos.y, screenHeight - h));
+      }
+
+      angle.angle += angle.rotationSpeed;
+      el.style.left = `${pos.x}px`;
+      el.style.top = `${pos.y}px`;
+      el.style.transform = `rotate(${angle.angle}deg)`;
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  // floating object 초기화
+  loadFromLocalStorage();
+  let loaded = 0;
+  objects.forEach((el, i) => {
+    if (el.complete) {
+      initObjectPosition(el, i);
+      loaded++;
+      if (loaded === objects.length) requestAnimationFrame(animate);
+    } else {
+      el.onload = () => {
+        initObjectPosition(el, i);
+        loaded++;
+        if (loaded === objects.length) requestAnimationFrame(animate);
+      };
+    }
+  });
+
+  window.onresize = () => {
+    objects.forEach((el, i) => {
+      const w = el.offsetWidth;
+      const h = el.offsetHeight;
+      positions[i].x = Math.min(positions[i].x, window.innerWidth - w - marginX);
+      positions[i].y = Math.min(positions[i].y, window.innerHeight - h);
+    });
+  };
+
+  document.addEventListener("contextmenu", (e) => e.preventDefault());
+  document.addEventListener("selectstart", (e) => e.preventDefault());
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleButton = document.getElementById("menu-toggle");
+  const navOverlay = document.getElementById("nav-overlay");
+  const headerLogo = document.querySelector(".header-logo");
+  
+  if (toggleButton && navOverlay && headerLogo) {
+    toggleButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      navOverlay.classList.toggle("active");
+      headerLogo.classList.toggle("move-down");
+      if (navOverlay.classList.contains("active")) {
+      const randomClass = variantClasses[Math.floor(Math.random() * variantClasses.length)];
+  
+  } 
+
+    });
+  } else {
+    console.warn("⚠️ toggleButton/navOverlay/headerLogo 요소를 찾을 수 없습니다.");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const searchIcon = document.querySelectorAll(".header-icon")[0]; // 돋보기 아이콘
+  const searchOverlay = document.getElementById("search-overlay");
+
+  if (searchIcon && searchOverlay) {
+    searchIcon.addEventListener("click", () => {
+      searchOverlay.classList.toggle("active");
+    });
+  }
+});
+
 const pages = [
   { title: "WHAT WE STILL", url: "/what-westill/index.html" },
   { title: "PROJECT ARCHIVE", url: "/project-archive/index.html" },
@@ -220,6 +399,10 @@ imageData.forEach(({ src, style }) => {
 
   // 로드된 후 위치, 회전 설정
   img.onload = () => {
+    // 랜덤 width (예: 4vw ~ 12vw)
+    const randWidth = Math.random() * 8 + 4; // 4 ~ 12
+    img.style.width = `${randWidth}vw`;
+
     img.style.left = `${Math.random() * 70 + 5}vw`;
     img.style.top = `${Math.random() * 70 + 5}vh`;
     img.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
@@ -284,13 +467,3 @@ imageData.forEach(({ src, style }) => {
 
 
 
-img.onload = () => {
-  // 랜덤 width (예: 4vw ~ 12vw)
-  const randWidth = Math.random() * 8 + 4; // 4 ~ 12
-  img.style.width = `${randWidth}vw`;
-
-  // 랜덤 위치 및 회전
-  img.style.left = `${Math.random() * 70 + 5}vw`;
-  img.style.top = `${Math.random() * 70 + 5}vh`;
-  img.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
-};
