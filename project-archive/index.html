@@ -341,30 +341,7 @@
     });
 
     window.addEventListener("load", () => {
-      document.querySelectorAll("video").forEach(video => {
-          const tryPlay = () => {
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-              playPromise.catch(error => {
-                // 자동 재생 실패 시 사용자 상호작용 후 재생
-                const resume = () => {
-                  video.play().catch(() => {});
-                  document.body.removeEventListener("touchstart", resume);
-                  document.body.removeEventListener("click", resume);
-                };
-                document.body.addEventListener("touchstart", resume, { once: true });
-                document.body.addEventListener("click", resume, { once: true });
-              });
-            }
-          };
-
-          // 재생 가능한 상태가 되었을 때 시도
-          if (video.readyState >= 2) {
-            tryPlay();
-          } else {
-            video.addEventListener("canplay", tryPlay, { once: true });
-          }
-        });
+     
       document.querySelectorAll(".slider-wrapper").forEach(wrapper => {
         const slides = wrapper.children;
         const totalSlides = slides.length;
