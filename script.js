@@ -487,4 +487,19 @@ function saveToFirestore(city, text) {
     console.error("Firestore 저장 실패:", error);
   });
 }
+function loadFromFirestore() {
+  console.log("📥 Firestore에서 기록 불러오는 중...");
+  db.collection("entries")
+    .orderBy("timestamp", "asc")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const entryText = `${data.city}, ${data.text}`;
+        console.log("✅ 불러온 데이터:", entryText); // ← 콘솔에 출력되나 확인
+        addHistoryEntry(entryText);
+      });
+    })
+    .catch(err => console.error("❌ Firestore 불러오기 실패:", err));
+}
 
