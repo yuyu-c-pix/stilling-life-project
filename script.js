@@ -503,3 +503,6 @@ function loadFromFirestore() {
     .catch(err => console.error("❌ Firestore 불러오기 실패:", err));
 }
 
+window.onload = () => {
+  loadFromFirestore();  // 🔥 다른 이벤트와 분리해서 무조건 호출되도록
+};
