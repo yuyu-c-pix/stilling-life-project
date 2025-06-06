@@ -229,19 +229,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return "UNKNOWN";
     }
   }
-  function loadFromFirestore() {
-  db.collection("entries")
-    .orderBy("timestamp", "asc")
-    .get()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        const entryText = `${data.city}, ${data.text}`;
-        addHistoryEntry(entryText);
-      });
-    })
-    .catch(err => console.error("Firestore 불러오기 실패:", err));
-  }
 
   input.addEventListener("keydown", async function (e) {
     if (e.key === "Enter" && input.value.trim() !== "") {
@@ -249,10 +236,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const userInput = input.value.trim();
       const entryText = `${location}, ${userInput.toUpperCase()}`;
 
-      addHistoryEntry(entryText); 
+      addHistoryEntry(entryText);
       input.value = "";
       saveToLocalStorage(entryText);
-      saveToFirestore(location, userInput.toUpperCase());
     }
   });
 
@@ -309,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // floating object 초기화
-  loadFromFirestore();
+  loadFromLocalStorage();
   let loaded = 0;
   objects.forEach((el, i) => {
     if (el.complete) {
@@ -478,31 +464,4 @@ imageData.forEach(({ src, style }) => {
 // 예: 랜덤 좌표 범위 조정 (왼쪽/위로 너무 안가게)
 
 
-function saveToFirestore(city, text) {
-  db.collection("entries").add({
-    city: city,
-    text: text,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-  }).catch(error => {
-    console.error("Firestore 저장 실패:", error);
-  });
-}
-function loadFromFirestore() {
-  console.log("📥 Firestore에서 기록 불러오는 중...");
-  db.collection("entries")
-    .orderBy("timestamp", "asc")
-    .get()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        const entryText = `${data.city}, ${data.text}`;
-        console.log("✅ 불러온 데이터:", entryText); // ← 콘솔에 출력되나 확인
-        addHistoryEntry(entryText);
-      });
-    })
-    .catch(err => console.error("❌ Firestore 불러오기 실패:", err));
-}
 
-window.onload = () => {
-  loadFromFirestore();  // 🔥 다른 이벤트와 분리해서 무조건 호출되도록
-};
