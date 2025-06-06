@@ -420,6 +420,26 @@
 
 
 </script>
+<!-- Firebase App (필수) -->
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+<!-- Firestore SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBq-wn184zNGsQ7H6Rv_dlo6190Ft6N4VQ",
+    authDomain: "stilling-life-project.firebaseapp.com",
+    projectId: "stilling-life-project",
+    storageBucket: "stilling-life-project.appspot.com",
+    messagingSenderId: "818187745234",
+    appId: "1:818187745234:web:3b215b1e2d32ec88593a0b"
+  };
+
+  // Firebase 초기화
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+
 </body>
 </html>
 
