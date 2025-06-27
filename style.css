@@ -345,7 +345,7 @@ html, body {
   }
 
  .nav-overlay {
-    all: unset;  /* ← 아예 초기화하고 */
+    all: unset;
     position: fixed;
     top: 0;
     left: 0;
