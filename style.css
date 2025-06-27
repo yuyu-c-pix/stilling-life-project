@@ -375,7 +375,6 @@ html, body {
 
   .nav-item {
     color: black;
-    border: 2px dotted black;
     border-radius: 40px;
     padding: 12px 24px;
     width: auto;
@@ -388,6 +387,6 @@ html, body {
   }
 
   .nav-item:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    border-bottom: 2px dotted black;
   }
 }
