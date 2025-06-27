@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navOverlay.classList.toggle("active");
       headerLogo.classList.toggle("move-down");
       if (navOverlay.classList.contains("active")) {
-      const randomClass = variantClasses[Math.floor(Math.random() * variantClasses.length)];
+     
   
   } 
 
@@ -418,6 +418,7 @@ imageData.forEach(({ src, style }) => {
     img.style.cursor = "grabbing";
     e.preventDefault();
 
+  
     const onMouseMove = (e) => {
       if (!isDragging) return;
       img.style.left = `${e.clientX - startX}px`;
@@ -466,15 +467,13 @@ imageData.forEach(({ src, style }) => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.getElementById("menu-toggle");
-  const overlay = document.getElementById("nav-overlay");
+  const closeToggle = document.getElementById("nav-close-toggle");
+  const navOverlay = document.getElementById("nav-overlay");
 
-  if (!toggle || !overlay) return;
-
-  toggle.addEventListener("click", (e) => {
-    e.preventDefault();
-    const isActive = overlay.classList.toggle("active");
-    toggle.textContent = isActive ? "✕" : "🍔";
-  });
+  if (closeToggle && navOverlay) {
+    closeToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      navOverlay.classList.remove("active"); // 오버레이 닫기
+    });
+  }
 });
-
