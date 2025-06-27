@@ -388,4 +388,14 @@ html, body {
   .nav-item:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
+  .nav-close-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 10000; /* 오버레이보다 위 */
+    color: black;
+  }
 }

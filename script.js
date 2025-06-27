@@ -481,3 +481,13 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleButton.textContent = isActive ? "🍔" : "✕";
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const navOverlay = document.getElementById("nav-overlay");
+  const navCloseToggle = document.getElementById("nav-close-toggle");
+
+  if (navCloseToggle && navOverlay) {
+    navCloseToggle.addEventListener("click", () => {
+      navOverlay.classList.remove("active");
+    });
+  }
+});
