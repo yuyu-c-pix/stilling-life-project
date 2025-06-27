@@ -466,14 +466,12 @@ imageData.forEach(({ src, style }) => {
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const closeToggle = document.getElementById("nav-close-toggle");
-  const navOverlay = document.getElementById("nav-overlay");
-
-  if (closeToggle && navOverlay) {
-    closeToggle.addEventListener("click", (e) => {
-      e.preventDefault();
-      navOverlay.classList.remove("active"); // 오버레이 닫기
-    });
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.id === "nav-close-toggle") {
+    const navOverlay = document.getElementById("nav-overlay");
+    if (navOverlay) {
+      navOverlay.classList.remove("active");
+    }
   }
 });
+
