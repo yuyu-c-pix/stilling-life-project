@@ -334,22 +334,9 @@ html, body {
 .nav-item:hover {
   border-bottom: 2px dotted black;
 }
-.nav-close-toggle {
-  display: none;
-}
 
 /* ✅ 모바일 전용: 전체 화면, 중앙 정렬, 세로 나열 */
 @media screen and (max-width: 768px) {
-
-    .nav-close-toggle {
-    display: none !important;
-  }
-
-  .icon-link {
-    display: inline-flex !important;
-  }
-  
-
    .nav-overlay {
     /* 기존 desktop 스타일 완전 무효화 */
     position: fixed;
@@ -401,16 +388,4 @@ html, body {
   .nav-item:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
-
-  .nav-close-toggle {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 1.8rem;
-    cursor: pointer;
-    z-index: 10000; /* 오버레이보다 위 */
-    color: black;
-  }
-  .nav-overlay:not(.active) {
-  display: none !important;}
 }
