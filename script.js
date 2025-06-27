@@ -466,7 +466,6 @@ imageData.forEach(({ src, style }) => {
 
 
 
-
 document.addEventListener("click", (e) => {
   const toggleBtn = e.target.closest("#nav-close-toggle");
   if (toggleBtn) {
@@ -476,7 +475,4 @@ document.addEventListener("click", (e) => {
     }
   }
 });
-
-
-
 
