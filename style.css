@@ -335,9 +335,6 @@ html, body {
   border-bottom: 2px dotted black;
 }
 
-.nav-mobile-header {
-  display: none; /* 기본은 숨김 */
-}
 
 
 /* ✅ 모바일 전용: 전체 화면, 중앙 정렬, 세로 나열 */
