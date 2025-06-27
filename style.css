@@ -337,20 +337,22 @@ html, body {
 
 /* ✅ 모바일 전용: 전체 화면, 중앙 정렬, 세로 나열 */
 @media screen and (max-width: 768px) {
-  .nav-overlay {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    transform: translateY(-100%) !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background-color: #fbe5cd !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    transition: transform 0.4s ease !important;
-    z-index: 9999 !important;
+   .nav-overlay {
+    /* 기존 desktop 스타일 완전 무효화 */
+    position: fixed;
+    top: 0;
+    left: 0!important; 
+    width: 100vw;
+    height: 100vh;
+    background-color: #fbe5cd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* 🔥 이 세 줄이 핵심입니다 */
+    transform: none !important;
+    padding: 0 !important;
     border: none !important;
   }
 
