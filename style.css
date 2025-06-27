@@ -363,6 +363,7 @@ html, body {
 
   .nav-overlay.active {
     transform: translateY(0);
+    border: none;
   }
 
   .nav-wrap {
@@ -371,6 +372,7 @@ html, body {
     align-items: center;
     gap: 24px;
     z-index: 1;
+    border: none;
   }
 
   .nav-item {
