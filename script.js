@@ -469,6 +469,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleButton = document.getElementById("menu-toggle");
   const navOverlay = document.getElementById("nav-overlay");
   const headerLogo = document.querySelector(".header-logo");
+  const menuClose = document.getElementById("menu-close");
 
   if (!toggleButton || !navOverlay || !headerLogo) return;
 

@@ -335,6 +335,11 @@ html, body {
   border-bottom: 2px dotted black;
 }
 
+.nav-mobile-header {
+  display: none; /* 기본은 숨김 */
+}
+
+
 /* ✅ 모바일 전용: 전체 화면, 중앙 정렬, 세로 나열 */
 @media screen and (max-width: 768px) {
   html, body {
@@ -393,5 +398,26 @@ html, body {
 
   .nav-item:hover {
     background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-mobile-header {
+    display: flex;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    z-index: 10001;
+  }
+
+  .nav-logo img {
+    height: 28px;
+  }
+
+  .nav-close {
+    font-size: 24px;
+    cursor: pointer;
   }
 }
