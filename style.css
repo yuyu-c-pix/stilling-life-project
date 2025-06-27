@@ -338,12 +338,13 @@ html, body {
 /* ✅ 모바일 전용: 전체 화면, 중앙 정렬, 세로 나열 */
 @media screen and (max-width: 768px) {
   .nav-overlay {
-    background-color: #fbe5cd; 
+    background-color: #fbe5cd;      /* ✅ 밝은 배경색 유지 */
     top: 0;
     left: 0;
-    transform: translateY(-100%);
     width: 100vw;
     height: 100vh;
+    transform: translateY(-100%);
+    display: flex;                 /* ✅ 이거 안 넣으면 정렬 안 됨 */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -354,15 +355,15 @@ html, body {
   }
 
   .nav-wrap {
+    display: flex;                /* ✅ 이것도 명시 필요 */
     flex-direction: column;
+    align-items: center;          /* ✅ 메뉴 항목 가운데로 */
     gap: 24px;
-    align-items: center;   
-    justify-content: center;
   }
 
   .nav-item {
-    color: white;
-    border: 2px dotted white;
+    color: black;                /* ✅ 배경색이 밝으니 검정색 글씨로 변경 */
+    border: 2px dotted black;
     border-radius: 40px;
     padding: 12px 24px;
     width: 70vw;
@@ -371,6 +372,6 @@ html, body {
   }
 
   .nav-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.1); /* 검정색 기준으로 hover 효과 조정 */
   }
 }
