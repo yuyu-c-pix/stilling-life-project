@@ -471,20 +471,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.getElementById("close-menu");
   const headerLogo = document.querySelector(".header-logo");
 
-  // 모바일 환경에서만 실행
   function isMobile() {
     return window.innerWidth <= 768;
   }
 
-  menuToggle.addEventListener("click", () => {
-    if (isMobile()) {
-      navOverlay.classList.add("active");
-      headerLogo.classList.add("move-down"); // ← 색상 전환용 클래스
-    }
-  });
+  if (menuToggle && navOverlay && headerLogo) {
+    menuToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (isMobile()) {
+        navOverlay.classList.add("active");
+        headerLogo.classList.add("move-down");
+      }
+    });
 
-  closeBtn.addEventListener("click", () => {
-    navOverlay.classList.remove("active");
-    headerLogo.classList.remove("move-down");
-  });
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        navOverlay.classList.remove("active");
+        headerLogo.classList.remove("move-down");
+      });
+    }
+  } else {
+    console.warn("❗ navOverlay or headerLogo not found");
+  }
 });
