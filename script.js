@@ -465,3 +465,19 @@ imageData.forEach(({ src, style }) => {
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleButton = document.getElementById("menu-toggle");
+  const navOverlay = document.getElementById("nav-overlay");
+  const headerLogo = document.querySelector(".header-logo");
+
+  if (!toggleButton || !navOverlay || !headerLogo) return;
+
+  toggleButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const isActive = navOverlay.classList.contains("active");
+
+    navOverlay.classList.toggle("active");
+    headerLogo.classList.toggle("move-down");
+    toggleButton.textContent = isActive ? "🍔" : "✕";
+  });
+});
