@@ -341,7 +341,15 @@ html, body {
 /* ✅ 모바일 전용: 전체 화면, 중앙 정렬, 세로 나열 */
 @media screen and (max-width: 768px) {
 
+    .nav-close-toggle {
+    display: none !important;
+  }
+
+  .icon-link {
+    display: inline-flex !important;
+  }
   
+
    .nav-overlay {
     /* 기존 desktop 스타일 완전 무효화 */
     position: fixed;
