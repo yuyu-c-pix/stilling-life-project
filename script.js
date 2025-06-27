@@ -479,3 +479,21 @@ if (mobileToggle && navOverlay) {
   });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleButtons = [
+    document.getElementById("menu-toggle"),
+    document.querySelector(".menu-toggle-mobile")
+  ];
+  const navOverlay = document.getElementById("nav-overlay");
+  const headerLogo = document.querySelector(".header-logo");
+
+  toggleButtons.forEach((button) => {
+    if (button && navOverlay && headerLogo) {
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        navOverlay.classList.toggle("active");
+        headerLogo.classList.toggle("move-down");
+      });
+    }
+  });
+});
