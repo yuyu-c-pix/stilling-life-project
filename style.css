@@ -335,8 +335,23 @@ html, body {
   border-bottom: 2px dotted black;
 }
 
+.nav-close-toggle {
+  display: none;
+}
+
+
 /* ✅ 모바일 전용: 전체 화면, 중앙 정렬, 세로 나열 */
 @media screen and (max-width: 768px) {
+
+    .nav-close-toggle {
+    display: block !important;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 10001;
+    font-size: 2rem;
+    cursor: pointer;
+  }
     .nav-overlay {
     position: fixed !important;
     top: 0 !important;
