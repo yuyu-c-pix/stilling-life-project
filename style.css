@@ -363,7 +363,7 @@ html, body {
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
-    transform: translateY(-100%) !important;
+    transform: translateY(-100%);
     padding: 0 !important;
     border: none !important;
     z-index: 9999 !important;
