@@ -465,31 +465,17 @@ imageData.forEach(({ src, style }) => {
 
 
 // script.js 내 수정
-document.querySelector('.menu-toggle-mobile').addEventListener('click', function () {
-  document.getElementById("nav-overlay").classList.toggle("active");
-  document.querySelector(".header-logo").classList.toggle("move-down");
-});
+const mobileToggle = document.querySelector('.menu-toggle-mobile');
+const navOverlay = document.getElementById('nav-overlay');
+const headerLogo = document.querySelector('.header-logo');
 
-document.addEventListener('DOMContentLoaded', () => {
-  const mobileToggle = document.querySelector('.menu-toggle-mobile');
-  const navOverlay = document.querySelector('.nav-overlay');
+if (mobileToggle && navOverlay) {
+  mobileToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    navOverlay.classList.toggle("active");
+    if (headerLogo) {
+      headerLogo.classList.toggle("move-down");
+    }
+  });
+}
 
-  if (mobileToggle && navOverlay) {
-    mobileToggle.addEventListener('click', (e) => {
-      e.preventDefault(); // ← 🔥 <a>의 기본 동작 방지
-      navOverlay.classList.toggle('active');
-    });
-  }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const mobileMenuToggle = document.querySelector('.menu-toggle-mobile');
-  const navOverlay = document.querySelector('.nav-overlay');
-
-  if (mobileMenuToggle && navOverlay) {
-    mobileMenuToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      navOverlay.classList.toggle('active');
-    });
-  }
-});
