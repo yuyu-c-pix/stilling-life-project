@@ -464,36 +464,4 @@ imageData.forEach(({ src, style }) => {
 // 예: 랜덤 좌표 범위 조정 (왼쪽/위로 너무 안가게)
 
 
-// script.js 내 수정
-const mobileToggle = document.querySelector('.menu-toggle-mobile');
-const navOverlay = document.getElementById('nav-overlay');
-const headerLogo = document.querySelector('.header-logo');
 
-if (mobileToggle && navOverlay) {
-  mobileToggle.addEventListener("click", (e) => {
-    e.preventDefault();
-    navOverlay.classList.toggle("active");
-    if (headerLogo) {
-      headerLogo.classList.toggle("move-down");
-    }
-  });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const toggleButtons = [
-    document.getElementById("menu-toggle"),
-    document.querySelector(".menu-toggle-mobile")
-  ];
-  const navOverlay = document.getElementById("nav-overlay");
-  const headerLogo = document.querySelector(".header-logo");
-
-  toggleButtons.forEach((button) => {
-    if (button && navOverlay && headerLogo) {
-      button.addEventListener("click", (e) => {
-        e.preventDefault();
-        navOverlay.classList.toggle("active");
-        headerLogo.classList.toggle("move-down");
-      });
-    }
-  });
-});
