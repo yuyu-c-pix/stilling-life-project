@@ -304,3 +304,49 @@ html, body {
 .slider-wrapper img {
   cursor: grab; /* 기본 커서 */
 }
+
+
+@media screen and (max-width: 768px) {
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    transform: translateY(-100%);
+    transition: transform 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+  }
+
+  .nav-overlay.active {
+    transform: translateY(0);
+  }
+
+  .nav-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .nav-item {
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 2px dotted white;
+    border-radius: 40px;
+    width: 70vw;
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: "megascope-variable";
+  }
+
+  .nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
