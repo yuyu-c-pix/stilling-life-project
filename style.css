@@ -338,27 +338,32 @@ html, body {
 /* ✅ 모바일 전용: 전체 화면, 중앙 정렬, 세로 나열 */
 @media screen and (max-width: 768px) {
   .nav-overlay {
-    background-color: #fbe5cd;      /* ✅ 밝은 배경색 유지 */
+    position: fixed;
+    background-color: #fbe5cd;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    transform: translateY(-100%);
-    display: flex;                 /* ✅ 이거 안 넣으면 정렬 안 됨 */
+    display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    transform: translateY(-100%);
+    transition: transform 0.4s ease;
+    z-index: 9999;
   }
 
   .nav-overlay.active {
     transform: translateY(0);
   }
 
+
   .nav-wrap {
-    display: flex;                /* ✅ 이것도 명시 필요 */
+    display: flex;
     flex-direction: column;
-    align-items: center;          /* ✅ 메뉴 항목 가운데로 */
+    align-items: center;
     gap: 24px;
+    z-index: 1;
   }
 
   .nav-item {
