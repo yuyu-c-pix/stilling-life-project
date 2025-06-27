@@ -465,3 +465,26 @@ imageData.forEach(({ src, style }) => {
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menu-toggle");
+  const navOverlay = document.getElementById("nav-overlay");
+  const closeBtn = document.getElementById("close-menu");
+  const headerLogo = document.querySelector(".header-logo");
+
+  // 모바일 환경에서만 실행
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+  menuToggle.addEventListener("click", () => {
+    if (isMobile()) {
+      navOverlay.classList.add("active");
+      headerLogo.classList.add("move-down"); // ← 색상 전환용 클래스
+    }
+  });
+
+  closeBtn.addEventListener("click", () => {
+    navOverlay.classList.remove("active");
+    headerLogo.classList.remove("move-down");
+  });
+});
