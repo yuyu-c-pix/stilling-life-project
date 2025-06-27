@@ -334,6 +334,9 @@ html, body {
 .nav-item:hover {
   border-bottom: 2px dotted black;
 }
+.nav-close-toggle {
+  display: none;
+}
 
 /* ✅ 모바일 전용: 전체 화면, 중앙 정렬, 세로 나열 */
 @media screen and (max-width: 768px) {
@@ -398,4 +401,6 @@ html, body {
     z-index: 10000; /* 오버레이보다 위 */
     color: black;
   }
+  .nav-overlay:not(.active) {
+  display: none !important;}
 }
