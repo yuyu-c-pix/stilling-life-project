@@ -209,10 +209,16 @@
         navOverlay.classList.toggle("active");
         headerLogo.classList.toggle("move-down");  // ← 추가된 부분
         });
-    }
-  }, 100);
+        }
+        if (closeBtn && navOverlay && headerLogo) {
+        closeBtn.addEventListener("click", () => {
+          navOverlay.classList.remove("active");
+          headerLogo.classList.remove("move-down");
+        });
+      }
+    }, 100);
  // 100ms 딜레이
-    });
+  });
   </script>
 
 
