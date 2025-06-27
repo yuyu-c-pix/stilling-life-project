@@ -480,25 +480,3 @@ document.addEventListener("click", (e) => {
 
 
 
-function waitForHeaderAndBindMenu() {
-  const tryBind = () => {
-    const toggleButton = document.getElementById("menu-toggle");
-    const navOverlay = document.getElementById("nav-overlay");
-    const headerLogo = document.querySelector(".header-logo");
-
-    if (toggleButton && navOverlay && headerLogo) {
-      toggleButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        navOverlay.classList.toggle("active");
-        headerLogo.classList.toggle("move-down");
-      });
-    } else {
-      // 요소가 아직 없다면 다시 시도
-      setTimeout(tryBind, 200); // 최대한 영향 덜 주면서 반복
-    }
-  };
-
-  tryBind();
-}
-
-waitForHeaderAndBindMenu();
