@@ -31,7 +31,7 @@
 
 .header-right {
   justify-content: flex-end;
-  gap: clamp(12px, 3vw, 24px);
+  gap: clamp(8px, 3vw, 24px);
 }
 
 /* 햄버거 메뉴 (☰) */
