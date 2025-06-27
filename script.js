@@ -466,28 +466,15 @@ imageData.forEach(({ src, style }) => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  const toggleButton = document.getElementById("menu-toggle");
-  const navOverlay = document.getElementById("nav-overlay");
-  const headerLogo = document.querySelector(".header-logo");
+  const toggle = document.getElementById("menu-toggle");
+  const overlay = document.getElementById("nav-overlay");
 
-  if (!toggleButton || !navOverlay || !headerLogo) return;
+  if (!toggle || !overlay) return;
 
-  toggleButton.addEventListener("click", (e) => {
+  toggle.addEventListener("click", (e) => {
     e.preventDefault();
-    const isActive = navOverlay.classList.contains("active");
-
-    navOverlay.classList.toggle("active");
-    headerLogo.classList.toggle("move-down");
-    toggleButton.textContent = isActive ? "🍔" : "✕";
+    const isActive = overlay.classList.toggle("active");
+    toggle.textContent = isActive ? "✕" : "🍔";
   });
 });
-document.addEventListener("DOMContentLoaded", () => {
-  const navOverlay = document.getElementById("nav-overlay");
-  const navCloseToggle = document.getElementById("nav-close-toggle");
 
-  if (navCloseToggle && navOverlay) {
-    navCloseToggle.addEventListener("click", () => {
-      navOverlay.classList.remove("active");
-    });
-  }
-});
