@@ -464,4 +464,9 @@ imageData.forEach(({ src, style }) => {
 // 예: 랜덤 좌표 범위 조정 (왼쪽/위로 너무 안가게)
 
 
+// script.js 내 수정
+document.querySelector('.menu-toggle-mobile').addEventListener('click', function () {
+  document.getElementById("nav-overlay").classList.toggle("active");
+  document.querySelector(".header-logo").classList.toggle("move-down");
+});
 
