@@ -304,25 +304,3 @@ html, body {
 .slider-wrapper img {
   cursor: grab; /* 기본 커서 */
 }
-
-.mobile-header-wrap {
-  display: flex;
-  justify-content: center;     /* 중앙 정렬 */
-  align-items: center;         /* 수직 정렬 */
-  gap: 20px;
-  height: 64px;
-  background-color: white;
-  z-index: 1001;
-  position: relative;
-}
-
-/* 햄버거 버튼 */
-.menu-toggle-mobile,
-.header-icon {
-  font-size: 1.8rem;
-  cursor: pointer;
-  padding: 10px;
-  margin: 0;         /* 🔥 기존 margin-top 제거 */
-  line-height: 1;
-}
-
