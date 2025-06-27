@@ -304,3 +304,72 @@ html, body {
 .slider-wrapper img {
   cursor: grab; /* 기본 커서 */
 }
+
+@media (max-width: 768px) {
+  .nav-overlay {
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: translateY(-100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transition: transform 0.6s ease;
+    background-color: #fbe5cd;
+    z-index: 1000;
+  }
+
+  .nav-overlay.active {
+    transform: translateY(0);
+  }
+
+  .mobile-nav-header {
+    position: relative;
+    width: 100%;
+    padding: 16px 20px 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-logo.move-down {
+    filter: invert(100%);
+  }
+
+  .close-btn {
+    position: absolute;
+    left: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  .nav-wrap {
+    margin-top: 60px;
+    flex-direction: column !important;
+    align-items: center;
+    width: 100%;
+    gap: 24px;
+    height: auto;
+    padding: 0 20px;
+  }
+
+  .nav-item {
+    font-size: 1.25rem;
+    font-family: "megascope-variable";
+    padding: 14px 28px;
+    border: 2px dotted black;
+    border-radius: 28px;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    display: block;
+    line-height: 1.4;
+  }
+
+  .nav-item:active {
+    opacity: 0.6;
+  }
+}
