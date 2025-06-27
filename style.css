@@ -74,22 +74,7 @@
   margin-top: 20px;
 }
 
-/* 모바일 대응 */
-@media (max-width: 768px) {
-  #header-placeholder {
-    margin-top: 20px;
-  }
 
-  .text-group {
-    margin-top: 20px;
-  }
-  .header-icon {
-    transform: scale(0.8); /* 80%로 축소 */
-    transform-origin: top right; /* 기준점이 오른쪽 위 */
-  }
-  .header-right {
-    gap: 12px;}
-}
 /* 오버레이창 */
 html, body {
   margin: 0;
@@ -152,7 +137,7 @@ html, body {
   text-underline-offset: -3px;           /* ✅ 밑줄과 텍스트 사이 간격 */
   text-decoration-thickness: 2px;       /* ✅ 점선 두께 조절도 가능 */
   cursor: pointer;
-  transition: opacity 03s ease;
+  transition: opacity 0.3s ease;
 }
 
 /* 오버레이 닫기 버튼 (필요시) */
@@ -305,48 +290,19 @@ html, body {
   cursor: grab; /* 기본 커서 */
 }
 
-
-@media screen and (max-width: 768px) {
-  .nav-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.85);
-    transform: translateY(-100%);
-    transition: transform 0.5s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-  }
-
-  .nav-overlay.active {
-    transform: translateY(0);
-  }
-
-  .nav-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    align-items: center;
-  }
-
-  .nav-item {
-    color: white;
-    text-decoration: none;
-    padding: 12px 24px;
-    border: 2px dotted white;
-    border-radius: 40px;
-    width: 70vw;
-    text-align: center;
-    font-size: 1.2rem;
-    font-family: "megascope-variable";
-  }
-
-  .nav-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+/* 기본 데스크탑용 오버레이 */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  width: 44vw;
+  background-color: #fbe5cd;
+  border: 2px dotted #000000;
+  transition: transform 0.6s ease;
+  will-change: transform;
+  padding: 2px 0;
+  z-index: 1000;
 }
+
+/
