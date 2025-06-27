@@ -337,13 +337,6 @@ html, body {
 
 /* ✅ 모바일 전용: 전체 화면, 중앙 정렬, 세로 나열 */
 @media screen and (max-width: 768px) {
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow-x: hidden;
-  }
-
  .nav-overlay {
   /* all: unset; ← 삭제하거나 주석 처리 */
   position: fixed;
