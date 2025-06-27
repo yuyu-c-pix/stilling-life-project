@@ -18,15 +18,3 @@ body, html {
   pointer-events: none;
 }
 
-@media screen and (max-width: 768px) {
-  #landing-video {
-    position: absolute;
-    top: 50%;
-    left: 35%; /* ← 기본 50%보다 왼쪽으로 */
-    transform: translate(-50%, -50%);
-    width: 100vw;
-    height: auto;
-    max-height: 100vh;
-    object-fit: contain;
-  }
-}
