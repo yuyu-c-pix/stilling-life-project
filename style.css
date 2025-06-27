@@ -339,29 +339,38 @@ html, body {
 @media screen and (max-width: 768px) {
   .nav-overlay {
     background-color: #fbe5cd; 
-    display: flex;
+    top: 0;
+    left: 0;
+    transform: translateY(-100%);
+    width: 100vw;
+    height: 100vh;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* ✅ 이게 핵심: 전체 콘텐츠를 중앙에 */
+    align-items: center;
+  }
+
+  .nav-overlay.active {
+    transform: translateY(0);
   }
 
   .nav-wrap {
-    display: flex;
     flex-direction: column;
-    align-items: center;    /* ✅ 각 항목을 중앙 정렬 */
-    justify-content: center;
     gap: 24px;
-    width: 100%;
+    align-items: center;   
+    justify-content: center;
   }
 
   .nav-item {
-    color: black;
-    border: 2px dotted black;
+    color: white;
+    border: 2px dotted white;
     border-radius: 40px;
     padding: 12px 24px;
     width: 70vw;
     text-align: center;
     font-size: 1.2rem;
-    margin: 0 auto;       /* ✅ 혹시나 중앙 안 올 때 강제로 가운데로 */
+  }
+
+  .nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }
