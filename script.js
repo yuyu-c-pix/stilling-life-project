@@ -470,3 +470,26 @@ document.querySelector('.menu-toggle-mobile').addEventListener('click', function
   document.querySelector(".header-logo").classList.toggle("move-down");
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileToggle = document.querySelector('.menu-toggle-mobile');
+  const navOverlay = document.querySelector('.nav-overlay');
+
+  if (mobileToggle && navOverlay) {
+    mobileToggle.addEventListener('click', (e) => {
+      e.preventDefault(); // ← 🔥 <a>의 기본 동작 방지
+      navOverlay.classList.toggle('active');
+    });
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileMenuToggle = document.querySelector('.menu-toggle-mobile');
+  const navOverlay = document.querySelector('.nav-overlay');
+
+  if (mobileMenuToggle && navOverlay) {
+    mobileMenuToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      navOverlay.classList.toggle('active');
+    });
+  }
+});

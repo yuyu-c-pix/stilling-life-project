@@ -305,40 +305,41 @@ html, body {
   cursor: grab; /* 기본 커서 */
 }
 
+.mobile-header-wrap {
+  display: flex;
+  justify-content: center;     /* 중앙 정렬 */
+  align-items: center;         /* 수직 정렬 */
+  gap: 20px;
+  height: 64px;
+  background-color: white;
+  z-index: 1001;
+  position: relative;
+}
+
+/* 햄버거 버튼 */
+.menu-toggle-mobile,
+.header-icon {
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 10px;
+  margin: 0;         /* 🔥 기존 margin-top 제거 */
+  line-height: 1;
+}
+
 @media (max-width: 768px) {
-  /* 데스크톱 헤더 숨기기 */
-  .header-left,
-  .header-center,
-  .header-right {
-    display: none;
-  }
-
-  /* 모바일 헤더 보이기 */
-  .mobile-header-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    height: 64px;
-    background-color: white;
-    z-index: 1001;
-  }
-
-  /* nav-overlay 아래로 슬라이드, 왼쪽 정렬 */
   .nav-overlay {
-    width: 100vw;
+    top: 64px;
     left: 0;
+    width: 100vw;
     transform: translateY(-100%);
     padding: 24px;
     background-color: #fbe5cd;
     border: 2px dotted black;
-    transition: transform 0.6s ease;
     text-align: left;
   }
 
   .nav-overlay.active {
     transform: translateY(0);
-    top: 64px; /* 모바일 헤더 높이에 맞게 */
   }
 
   .nav-wrap {
