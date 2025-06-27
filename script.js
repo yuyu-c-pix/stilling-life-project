@@ -467,7 +467,8 @@ imageData.forEach(({ src, style }) => {
 
 
 document.addEventListener("click", (e) => {
-  if (e.target && e.target.id === "nav-close-toggle") {
+  const toggleBtn = e.target.closest("#nav-close-toggle");
+  if (toggleBtn) {
     const navOverlay = document.getElementById("nav-overlay");
     if (navOverlay) {
       navOverlay.classList.remove("active");
