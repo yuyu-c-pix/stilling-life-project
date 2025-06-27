@@ -345,6 +345,7 @@ html, body {
   }
 
   .nav-overlay {
+    all: unset;  /* ← 아예 초기화하고 */
     position: fixed;
     top: 0;
     left: 0;
@@ -353,12 +354,12 @@ html, body {
     background-color: #fbe5cd;
     display: flex;
     flex-direction: column;
-    justify-content: center;     /* ✅ 세로 중앙 정렬 추가 */
+    justify-content: center;
     align-items: center;
     transform: translateY(-100%);
     transition: transform 0.4s ease;
     z-index: 9999;
-    border: none;                /* ❗ 그대로 유지 */
+    border: none;
   }
 
   .nav-overlay.active {
