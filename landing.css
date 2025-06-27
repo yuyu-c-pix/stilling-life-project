@@ -22,8 +22,8 @@ body, html {
   #landing-video {
     position: absolute;
     top: 50%;
-    left: 40%; /* ← 왼쪽으로 좀 더 이동 */
-    transform: translate(-45%, -50%); /* ← 기준점도 살짝 왼쪽으로 이동 */
+    left: 35%; /* ← 기본 50%보다 왼쪽으로 */
+    transform: translate(-50%, -50%);
     width: 100vw;
     height: auto;
     max-height: 100vh;
