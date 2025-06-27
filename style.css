@@ -372,9 +372,10 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100%;        /* ✅ 반드시 필요! */
+    width: 100%;
     gap: 24px;
-    height: auto; /* ✅ 문제 없음 */
-    width: 100%;  /* ✅ 너비 확보 */
+    z-index: 1; /* ✅ 너비 확보 */
   }
 
   .nav-item {
