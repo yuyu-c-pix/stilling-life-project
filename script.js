@@ -521,4 +521,15 @@ document.addEventListener("click", (e) => {
       }, 1100);
     });
   });
+  // 👇 기존 cart animation 관련 코드 끝난 직후에 추가하면 좋아
+document.addEventListener("click", function (e) {
+  const cartOverlay = document.getElementById("cart-overlay");
+  const cartToggle = document.getElementById("cart-toggle");
+
+  if (!cartOverlay.classList.contains("active")) return;
+  if (cartOverlay.contains(e.target) || cartToggle.contains(e.target)) return;
+
+  cartOverlay.classList.remove("active");
+});
+
 
