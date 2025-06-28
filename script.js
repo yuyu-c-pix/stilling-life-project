@@ -168,28 +168,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.addEventListener("click", (e) => {
-    if (
-      cartOverlay?.classList.contains("active") &&
-      !cartOverlay.contains(e.target) &&
-      e.target !== cartButton &&
-      !cartButton?.contains(e.target)
-    ) cartOverlay.classList.remove("active");
+  if (
+    cartOverlay?.classList.contains("active") &&
+    !cartOverlay.contains(e.target) &&
+    !cartButton?.contains(e.target)
+  ) {
+    cartOverlay.classList.remove("active");
+  }
 
-    if (
-      navOverlay?.classList.contains("active") &&
-      !navOverlay.contains(e.target)
-    ) {
-      navOverlay.classList.remove("active");
-      headerLogo?.classList.remove("move-down");
-    }
+  if (
+    navOverlay?.classList.contains("active") &&
+    !navOverlay.contains(e.target) &&
+    !navButton?.contains(e.target)
+  ) {
+    navOverlay.classList.remove("active");
+    headerLogo?.classList.remove("move-down");
+  }
 
-    if (
-      searchOverlay?.classList.contains("active") &&
-      !searchOverlay.contains(e.target)
-    ) {
-      searchOverlay.classList.remove("active");
-    }
+  if (
+    searchOverlay?.classList.contains("active") &&
+    !searchOverlay.contains(e.target)
+  ) {
+    searchOverlay.classList.remove("active");
+  }
   });
+
 
   // ----------- floating-img 생성 및 드래그 -----------
   const imageData = [
@@ -211,6 +214,7 @@ if (!container) {
     img.src = src;
     img.className = "floating-img floating-object";
     Object.assign(img.style, style);
+    img.style.position = "absolute"; 
     img.style.cursor = "grab";
     container.appendChild(img);
 
@@ -298,36 +302,6 @@ if (!container) {
   });
 
   // ----------- 카트 이미지 저장 및 렌더링 -----------
-  const cartList = document.getElementById("cart-items");
-  const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
-
-  addToCartButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      const img = e.target.closest(".product-item").querySelector("img");
-      const imgClone = img.cloneNode();
-      imgClone.classList.add("floating-img");
-      document.body.appendChild(imgClone);
-
-      const { left, top, width, height } = img.getBoundingClientRect();
-      imgClone.style.position = "fixed";
-      imgClone.style.left = `${left}px`;
-      imgClone.style.top = `${top}px`;
-      imgClone.style.width = `${width}px`;
-      imgClone.style.height = `${height}px`;
-      imgClone.style.transition = "transform 0.5s ease, opacity 0.5s ease";
-      imgClone.style.transform = "translate(0, 0)";
-      imgClone.style.opacity = "0";
-
-      const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
-      items.push(img.src);
-      localStorage.setItem("cartItems", JSON.stringify(items));
-
-      setTimeout(() => {
-        imgClone.remove();
-        renderCartItems();
-      }, 500);
-    });
-  });
 
   function renderCartItems() {
     if (!cartList) return;
