@@ -154,11 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       navOverlay.classList.toggle("active");
       headerLogo.classList.toggle("move-down");
-      if (navOverlay.classList.contains("active")) {
-      
   
-  } 
-
     });
   } else {
     console.warn("⚠️ toggleButton/navOverlay/headerLogo 요소를 찾을 수 없습니다.");
