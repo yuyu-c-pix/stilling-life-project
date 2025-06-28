@@ -471,10 +471,75 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartList = document.getElementById("cart-items");
   const buttons = document.querySelectorAll(".add-to-cart-button");
 
+  document.addEventListener("click", (e) => {
+  const cartOverlay = document.getElementById("cart-overlay");
+  const navOverlay = document.getElementById("nav-overlay");
+  const searchOverlay = document.getElementById("search-overlay");
+
+  const cartButton = document.getElementById("cart-toggle");
+  const navButton = document.getElementById("menu-toggle");
+  const searchButton = document.querySelector(".header-icon"); // 검색 아이콘 (돋보기)
+
+  // ✅ 카트 오버레이: 카트 버튼은 예외
+  if (
+    cartOverlay.classList.contains("active") &&
+    !cartOverlay.contains(e.target) &&
+    e.target !== cartButton &&
+    !cartButton.contains(e.target)
+  ) {
+    cartOverlay.classList.remove("active");
+  }
+
+  // ✅ 메뉴 오버레이: 햄버거 버튼은 예외 아님 (눌러도 닫힘)
+  if (
+    navOverlay.classList.contains("active") &&
+    !navOverlay.contains(e.target)
+  ) {
+    navOverlay.classList.remove("active");
+    document.querySelector(".header-logo")?.classList.remove("move-down");
+  }
+
+  // ✅ 검색 오버레이: 검색 버튼은 예외 아님 (눌러도 닫힘)
+  if (
+    searchOverlay.classList.contains("active") &&
+    !searchOverlay.contains(e.target)
+  ) {
+    searchOverlay.classList.remove("active");
+  }
+});
 
 
   // 상품 추가 버튼 클릭 시 이미지 저장 및 애니메이션
-  
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const img = e.target.closest(".product-item").querySelector("img");
+      const imgClone = img.cloneNode();
+      imgClone.classList.add("floating-img");
+      document.body.appendChild(imgClone);
+
+      // 애니메이션 설정
+      const { left, top, width, height } = img.getBoundingClientRect();
+      imgClone.style.position = "fixed";
+      imgClone.style.left = `${left}px`;
+      imgClone.style.top = `${top}px`;
+      imgClone.style.width = `${width}px`;
+      imgClone.style.height = `${height}px`;
+      imgClone.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+      imgClone.style.transform = "translate(0, 0)";
+      imgClone.style.opacity = "0";
+
+      // 장바구니에 추가
+      const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      items.push(img.src);
+      localStorage.setItem("cartItems", JSON.stringify(items));
+
+      // 클론 이미지 제거
+      setTimeout(() => {
+        imgClone.remove();
+        renderCartItems();
+      }, 500);
+    });
+  });
 
   // 장바구니 항목 렌더링
   function renderCartItems() {
