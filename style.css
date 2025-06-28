@@ -192,7 +192,6 @@ html, body {
 }
 .header-icon {
   position: relative;
-  font-size: 1.5rem;
   z-index: 1;
 }
 
@@ -262,7 +261,6 @@ html, body {
   cursor: pointer; /* 손가락 모양 */
   padding: 8px 12px; /* 클릭 영역 확장 */
   display: inline-flex;
-  font-size: 2rem; 
   align-items: center;
   justify-content: center;
   margin-top: 10px;
