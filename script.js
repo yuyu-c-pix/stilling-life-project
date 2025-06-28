@@ -480,29 +480,32 @@ document.addEventListener("click", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".add-to-cart-button");
   const cartToggle = document.getElementById("cart-toggle");
   const cartOverlay = document.getElementById("cart-overlay");
+  const buttons = document.querySelectorAll(".add-to-cart-button");
 
-  // 카트 버튼 클릭 시 오버레이 열기
+  // 카트 버튼 클릭 시 오버레이 토글
   if (cartToggle && cartOverlay) {
     cartToggle.addEventListener("click", () => {
       cartOverlay.classList.toggle("active");
     });
   }
 
+  // 상품 이미지 클릭 시 카트로 애니메이션 및 저장
   buttons.forEach(button => {
     button.addEventListener("click", () => {
       const gridItem = button.closest(".grid-item");
-      const img = gridItem.querySelector("img");
+      const img = gridItem?.querySelector("img");
+      if (!img) return;
+
       const imgSrc = img.src;
 
-      // 로컬스토리지 저장
+      // 로컬스토리지에 이미지 저장
       const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
       stored.push(imgSrc);
       localStorage.setItem("cartItems", JSON.stringify(stored));
 
-      // 이미지 복제 후 이동
+      // 이미지 복제 후 애니메이션
       const clone = img.cloneNode();
       const rect = img.getBoundingClientRect();
 
@@ -520,7 +523,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       document.body.appendChild(clone);
 
-      // 카트 위치로 이동
+      // 카트 아이콘 위치로 이동
       setTimeout(() => {
         clone.style.left = "calc(100vw - 48px)";
         clone.style.top = "12px";
@@ -529,6 +532,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clone.style.opacity = "0";
       }, 10);
 
+      // 애니메이션 끝나면 제거
       setTimeout(() => {
         clone.remove();
       }, 1100);
@@ -536,13 +540,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const cartToggle = document.getElementById("cart-toggle");
-  const cartOverlay = document.getElementById("cart-overlay");
-
-  if (cartToggle && cartOverlay) {
-    cartToggle.addEventListener("click", () => {
-      cartOverlay.classList.toggle("active");
-    });
-  }
-});
