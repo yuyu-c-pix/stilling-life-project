@@ -480,45 +480,58 @@ document.addEventListener("click", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const cartOverlay = document.getElementById("cart-overlay");
-  const cartItemsContainer = document.getElementById("cart-items");
-
-  const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
-
-  addToCartButtons.forEach(button => {
-    button.addEventListener("click", (e) => {
-      e.preventDefault();
-      const gridItem = button.closest(".grid-item");
-      const imgEl = gridItem.querySelector("img");
-      const caption = gridItem.querySelector(".caption").innerText;
-
-      // 오버레이 열기
-      cartOverlay.classList.add("active");
-
-      // 카트 아이템 추가
-      const cartItem = document.createElement("div");
-      cartItem.className = "cart-item";
-
-      cartItem.innerHTML = `
-        <span>1</span>
-        <img src="${imgEl.src}" alt="${caption}" />
-        <span>1개</span>
-        <span>총액</span>
-      `;
-
-      cartItemsContainer.appendChild(cartItem);
-    });
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".add-to-cart-button");
   const cartToggle = document.getElementById("cart-toggle");
-  const cartOverlay = document.querySelector(".cart-overlay");
+  const cartOverlay = document.getElementById("cart-overlay");
 
+  // 카트 버튼 클릭 시 오버레이 열기
   if (cartToggle && cartOverlay) {
     cartToggle.addEventListener("click", () => {
       cartOverlay.classList.toggle("active");
     });
   }
-});
 
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const gridItem = button.closest(".grid-item");
+      const img = gridItem.querySelector("img");
+      const imgSrc = img.src;
+
+      // 로컬스토리지 저장
+      const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      stored.push(imgSrc);
+      localStorage.setItem("cartItems", JSON.stringify(stored));
+
+      // 이미지 복제 후 이동
+      const clone = img.cloneNode();
+      const rect = img.getBoundingClientRect();
+
+      Object.assign(clone.style, {
+        position: "fixed",
+        left: `${rect.left}px`,
+        top: `${rect.top}px`,
+        width: `${img.offsetWidth}px`,
+        height: `${img.offsetHeight}px`,
+        opacity: "0.7",
+        transition: "all 1s ease-in-out",
+        zIndex: "9999",
+        pointerEvents: "none"
+      });
+
+      document.body.appendChild(clone);
+
+      // 카트 위치로 이동
+      setTimeout(() => {
+        clone.style.left = "calc(100vw - 48px)";
+        clone.style.top = "12px";
+        clone.style.width = "40px";
+        clone.style.height = "40px";
+        clone.style.opacity = "0";
+      }, 10);
+
+      setTimeout(() => {
+        clone.remove();
+      }, 1100);
+    });
+  });
+});
