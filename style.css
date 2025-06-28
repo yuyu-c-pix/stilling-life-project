@@ -434,6 +434,7 @@ html, body {
   border-bottom: 2px dotted black;
   z-index: 9999;
   transition: transform 0.6s ease;
+  will-change: transform;
 }
 
 .cart-overlay.active {
