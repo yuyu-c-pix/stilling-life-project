@@ -468,7 +468,7 @@ imageData.forEach(({ src, style }) => {
 // ✅ 카트 열고 닫기 및 외부 클릭 시 닫기
 document.addEventListener("DOMContentLoaded", () => {
   const cartOverlay = document.getElementById("cart-overlay");
-  const cartList = document.getElementById("cart-item-list");
+  const cartList = document.getElementById("cart-items");
   const buttons = document.querySelectorAll(".add-to-cart-button");
 
 
@@ -507,5 +507,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
       cartList.appendChild(wrapper);
     });
-  }
+  } renderCartItems();
 });
