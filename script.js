@@ -468,24 +468,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartToggle = document.getElementById("cart-toggle");
   const cartOverlay = document.getElementById("cart-overlay");
 
-  // 카트 열기 버튼
-  if (cartToggle && cartOverlay) {
-    cartToggle.addEventListener("click", (e) => {
-      e.preventDefault();
-      cartOverlay.classList.toggle("active");
-    });
+  if (!cartToggle || !cartOverlay) return;
 
-    // 오버레이 외부 클릭 시 닫기
-    document.addEventListener("click", (e) => {
-      const isOverlayActive = cartOverlay.classList.contains("active");
-      const clickedInsideOverlay = cartOverlay.contains(e.target);
-      const clickedCartToggle = cartToggle.contains(e.target);
+  // 토글 기능
+  cartToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation(); // 중요!
+    cartOverlay.classList.toggle("active");
+  });
 
-      if (isOverlayActive && !clickedInsideOverlay && !clickedCartToggle) {
-        cartOverlay.classList.remove("active");
-      }
-    });
-  } else {
-    console.warn("❗ 'cart-toggle' 또는 'cart-overlay' 요소가 없음.");
-  }
+  // cartOverlay 내부 클릭은 이벤트 전파 막기
+  cartOverlay.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  // 바깥 클릭 시 닫기
+  document.addEventListener("click", () => {
+    if (cartOverlay.classList.contains("active")) {
+      cartOverlay.classList.remove("active");
+    }
+  });
 });
