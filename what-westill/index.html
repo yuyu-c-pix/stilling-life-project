@@ -212,6 +212,13 @@
             logo.classList.toggle('move-down', !isActive);
           });
         }
+        const closeBtn = document.getElementById("nav-close-toggle");
+        if (closeBtn && navOverlay && logo) {
+        closeBtn.addEventListener("click", () => {
+          navOverlay.classList.remove("active");
+          logo.classList.remove("move-down");
+        });
+      }
       };
       document.body.appendChild(script);
     });
