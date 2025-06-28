@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     entry.appendChild(spanCity);
     entry.appendChild(spanText);
-    history.appendChild(entry);
+    history.prepend(entry);
   }
 
   function loadFromLocalStorage() {
