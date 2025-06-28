@@ -423,7 +423,7 @@ html, body {
 
 .cart-overlay {
   position: fixed;
-  bottom: 12px;
+  bottom: 0px;
   left: 50%;
   width: clamp(320px, 100%, 720px);
   transform: translate(-50%, 100%); /* ✅ 하나로 통합 */
@@ -436,6 +436,7 @@ html, body {
 }
 
 .cart-overlay.active {
+  bottom: 12px;
   transform: translateY(0);
 }
 
