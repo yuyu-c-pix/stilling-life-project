@@ -144,7 +144,26 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("contextmenu", (e) => e.preventDefault());
   document.addEventListener("selectstart", (e) => e.preventDefault());
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleButton = document.getElementById("menu-toggle");
+  const navOverlay = document.getElementById("nav-overlay");
+  const headerLogo = document.querySelector(".header-logo");
+  
+  if (toggleButton && navOverlay && headerLogo) {
+    toggleButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      navOverlay.classList.toggle("active");
+      headerLogo.classList.toggle("move-down");
+      if (navOverlay.classList.contains("active")) {
+      
+  
+  } 
 
+    });
+  } else {
+    console.warn("⚠️ toggleButton/navOverlay/headerLogo 요소를 찾을 수 없습니다.");
+  }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const searchIcon = document.querySelectorAll(".header-icon")[0]; // 돋보기 아이콘
@@ -447,52 +466,16 @@ imageData.forEach(({ src, style }) => {
 
 
 // ✅ 카트 열고 닫기 및 외부 클릭 시 닫기
-document.addEventListener("click", (e) => {
-  const cartToggle = e.target.closest("#cart-toggle");
-  const menuToggle = e.target.closest("#menu-toggle");
+document.addEventListener("DOMContentLoaded", () => {
   const cartOverlay = document.getElementById("cart-overlay");
-  const navOverlay = document.getElementById("nav-overlay");
-  const headerLogo = document.querySelector(".header-logo");
-
-  if (!cartOverlay || !navOverlay || !headerLogo) return;
-
-  // 🛒 카트 버튼 클릭
-  if (cartToggle) {
-    cartOverlay.classList.toggle("active");
-    if (cartOverlay.classList.contains("active")) {
-      renderCartItems();
-      navOverlay.classList.remove("active");
-      headerLogo.classList.remove("move-down");
-    }
-    return;
-  }
-
-  // ☰ 햄버거 메뉴 클릭
-  if (menuToggle) {
-    navOverlay.classList.toggle("active");
-    if (navOverlay.classList.contains("active")) {
-      headerLogo.classList.add("move-down");
-      cartOverlay.classList.remove("active");
-    } else {
-      headerLogo.classList.remove("move-down");
-    }
-    return;
-  }
-
-  // 외부 클릭 시 둘 다 닫기
-  const clickedInsideCart = cartOverlay.contains(e.target);
-  const clickedInsideNav = navOverlay.contains(e.target);
-
-  if (!clickedInsideCart) cartOverlay.classList.remove("active");
-  if (!clickedInsideNav) {
-    navOverlay.classList.remove("active");
-    headerLogo.classList.remove("move-down");
-  }
-  });
+  const cartList = document.getElementById("cart-item-list");
+  const buttons = document.querySelectorAll(".add-to-cart-button");
 
 
 
   // 상품 추가 버튼 클릭 시 이미지 저장 및 애니메이션
+  
+
   // 장바구니 항목 렌더링
   function renderCartItems() {
     if (!cartList) return;
@@ -525,4 +508,4 @@ document.addEventListener("click", (e) => {
       cartList.appendChild(wrapper);
     });
   }
-
+});

@@ -450,12 +450,15 @@ html, body {
 }
 
 .cart-item {
-  border: 2px dotted black;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 8px;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
 }
+
+
 
 .cart-item img {
   width: 48px;
