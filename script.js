@@ -535,3 +535,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const cartToggle = document.getElementById("cart-toggle");
+  const cartOverlay = document.getElementById("cart-overlay");
+
+  if (cartToggle && cartOverlay) {
+    cartToggle.addEventListener("click", () => {
+      cartOverlay.classList.toggle("active");
+    });
+  }
+});
