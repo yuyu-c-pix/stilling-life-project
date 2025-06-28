@@ -475,17 +475,18 @@ document.addEventListener("click", (e) => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   const cartToggle = document.getElementById("cart-toggle");
   const cartOverlay = document.getElementById("cart-overlay");
-  const buttons = document.querySelectorAll(".add-to-cart-button");
 
-  // 카트 버튼 클릭 시 오버레이 토글
   if (cartToggle && cartOverlay) {
     cartToggle.addEventListener("click", () => {
       cartOverlay.classList.toggle("active");
     });
+  } else {
+    console.warn("❗ cart-toggle 또는 cart-overlay 요소가 없습니다.");
   }
+  });
 
   // 상품 이미지 클릭 시 카트로 애니메이션 및 저장
   buttons.forEach(button => {
