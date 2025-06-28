@@ -475,6 +475,11 @@ document.addEventListener("click", (e) => {
   // 카트 버튼 클릭 시 toggle
   if (cartToggle) {
     cartOverlay.classList.toggle("active");
+
+    if (cartOverlay.classList.contains("active")) {
+      renderCartItems(); // ← 여기에 추가
+    }
+
     return;
   }
 
@@ -483,7 +488,7 @@ document.addEventListener("click", (e) => {
   if (cartOverlay.classList.contains("active") && !clickedInsideCart) {
     cartOverlay.classList.remove("active");
   }
-});
+  });
 
 // ✅ 상품 이미지 클릭 시 카트로 애니메이션 및 저장
 buttons.forEach(button => {
@@ -534,4 +539,37 @@ buttons.forEach(button => {
 });
 
 
+function renderCartItems() {
+  const cartList = document.getElementById("cart-item-list");
+  if (!cartList) return;
+
+  cartList.innerHTML = ""; // 기존 내용 비우기
+
+  const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+
+  items.forEach((imgSrc, index) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "cart-item";
+    wrapper.style.marginBottom = "16px";
+
+    const img = document.createElement("img");
+    img.src = imgSrc;
+    img.alt = `Item ${index + 1}`;
+    img.className = "cart-thumb";
+
+    const quantity = document.createElement("span");
+    quantity.textContent = `Qty: 1`;
+    quantity.className = "cart-qty";
+
+    const price = document.createElement("span");
+    price.textContent = `28.00 EUR`;
+    price.className = "cart-price";
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(quantity);
+    wrapper.appendChild(price);
+
+    cartList.appendChild(wrapper);
+  });
+}
 
