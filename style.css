@@ -396,6 +396,7 @@ html, body {
     width: 100% !important;
     height: 100% !important;
     gap: 24px !important;
+    padding-top: 60px !important;
   }
 
   .nav-item {
