@@ -144,26 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("contextmenu", (e) => e.preventDefault());
   document.addEventListener("selectstart", (e) => e.preventDefault());
 });
-document.addEventListener("DOMContentLoaded", () => {
-  const toggleButton = document.getElementById("menu-toggle");
-  const navOverlay = document.getElementById("nav-overlay");
-  const headerLogo = document.querySelector(".header-logo");
-  
-  if (toggleButton && navOverlay && headerLogo) {
-    toggleButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      navOverlay.classList.toggle("active");
-      headerLogo.classList.toggle("move-down");
-      if (navOverlay.classList.contains("active")) {
-      
-  
-  } 
 
-    });
-  } else {
-    console.warn("⚠️ toggleButton/navOverlay/headerLogo 요소를 찾을 수 없습니다.");
-  }
-});
 
 document.addEventListener("DOMContentLoaded", () => {
   const searchIcon = document.querySelectorAll(".header-icon")[0]; // 돋보기 아이콘
@@ -466,75 +447,52 @@ imageData.forEach(({ src, style }) => {
 
 
 // ✅ 카트 열고 닫기 및 외부 클릭 시 닫기
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("click", (e) => {
+  const cartToggle = e.target.closest("#cart-toggle");
+  const menuToggle = e.target.closest("#menu-toggle");
   const cartOverlay = document.getElementById("cart-overlay");
-  const cartList = document.getElementById("cart-item-list");
-  const buttons = document.querySelectorAll(".add-to-cart-button");
+  const navOverlay = document.getElementById("nav-overlay");
+  const headerLogo = document.querySelector(".header-logo");
 
-  // 카트 오버레이 토글 및 외부 클릭 시 닫기
-  document.addEventListener("click", (e) => {
-    const cartToggle = e.target.closest("#cart-toggle");
+  if (!cartOverlay || !navOverlay || !headerLogo) return;
 
-    if (!cartOverlay) return;
-
-    if (cartToggle) {
-      cartOverlay.classList.toggle("active");
-      if (cartOverlay.classList.contains("active")) {
-        renderCartItems();
-      }
-      return;
+  // 🛒 카트 버튼 클릭
+  if (cartToggle) {
+    cartOverlay.classList.toggle("active");
+    if (cartOverlay.classList.contains("active")) {
+      renderCartItems();
+      navOverlay.classList.remove("active");
+      headerLogo.classList.remove("move-down");
     }
+    return;
+  }
 
-    const clickedInsideCart = cartOverlay.contains(e.target);
-    if (cartOverlay.classList.contains("active") && !clickedInsideCart) {
+  // ☰ 햄버거 메뉴 클릭
+  if (menuToggle) {
+    navOverlay.classList.toggle("active");
+    if (navOverlay.classList.contains("active")) {
+      headerLogo.classList.add("move-down");
       cartOverlay.classList.remove("active");
+    } else {
+      headerLogo.classList.remove("move-down");
     }
+    return;
+  }
+
+  // 외부 클릭 시 둘 다 닫기
+  const clickedInsideCart = cartOverlay.contains(e.target);
+  const clickedInsideNav = navOverlay.contains(e.target);
+
+  if (!clickedInsideCart) cartOverlay.classList.remove("active");
+  if (!clickedInsideNav) {
+    navOverlay.classList.remove("active");
+    headerLogo.classList.remove("move-down");
+  }
   });
+
+
 
   // 상품 추가 버튼 클릭 시 이미지 저장 및 애니메이션
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const gridItem = button.closest(".grid-item");
-      const img = gridItem?.querySelector("img");
-      if (!img) return;
-
-      const imgSrc = img.src;
-      const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
-      stored.push(imgSrc);
-      localStorage.setItem("cartItems", JSON.stringify(stored));
-
-      // 이미지 애니메이션
-      const clone = img.cloneNode();
-      const rect = img.getBoundingClientRect();
-
-      Object.assign(clone.style, {
-        position: "fixed",
-        left: `${rect.left}px`,
-        top: `${rect.top}px`,
-        width: `${img.offsetWidth}px`,
-        height: `${img.offsetHeight}px`,
-        opacity: "0.7",
-        transition: "all 1s ease-in-out",
-        zIndex: "9999",
-        pointerEvents: "none",
-      });
-
-      document.body.appendChild(clone);
-
-      setTimeout(() => {
-        clone.style.left = "calc(100vw - 48px)";
-        clone.style.top = "12px";
-        clone.style.width = "40px";
-        clone.style.height = "40px";
-        clone.style.opacity = "0";
-      }, 10);
-
-      setTimeout(() => {
-        clone.remove();
-      }, 1100);
-    });
-  });
-
   // 장바구니 항목 렌더링
   function renderCartItems() {
     if (!cartList) return;
@@ -567,4 +525,4 @@ document.addEventListener("DOMContentLoaded", () => {
       cartList.appendChild(wrapper);
     });
   }
-});
+
