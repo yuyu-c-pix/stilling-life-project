@@ -464,3 +464,6 @@ imageData.forEach(({ src, style }) => {
 // 예: 랜덤 좌표 범위 조정 (왼쪽/위로 너무 안가게)
 
 
+
+
+
