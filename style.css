@@ -337,6 +337,9 @@ html, body {
   display: none;
 }
 
+.nav-logo {
+  display: none;
+}
 
 /* ✅ 모바일 전용: 전체 화면, 중앙 정렬, 세로 나열 */
 @media screen and (max-width: 768px) {
@@ -349,7 +352,7 @@ html, body {
   width: 100%;
   }
 
-.nav-logo-svg {
+  .nav-logo-svg {
   height: clamp(44px, 8vh, 88px);
   width: auto;
   display: block;
