@@ -273,7 +273,7 @@ html, body {
   overscroll-behavior-x: none;
 }
 .floating-img {
-  position: fixed;
+  position: absolute;
   cursor: grab;
   user-select: none;
   transition: transform 0.1s ease;
