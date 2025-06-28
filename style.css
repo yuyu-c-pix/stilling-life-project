@@ -431,6 +431,7 @@ html, body {
   border-top: 2px dotted black;
   border-left: 2px dotted black;
   border-right: 2px dotted black;
+  border-bottom: 2px dotted black;
   z-index: 9999;
   transition: transform 0.6s ease;
 }
