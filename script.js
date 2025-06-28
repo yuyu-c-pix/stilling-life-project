@@ -464,3 +464,28 @@ imageData.forEach(({ src, style }) => {
 // 예: 랜덤 좌표 범위 조정 (왼쪽/위로 너무 안가게)
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const cartToggle = document.getElementById("cart-toggle");
+  const cartOverlay = document.getElementById("cart-overlay");
+
+  // 카트 열기 버튼
+  if (cartToggle && cartOverlay) {
+    cartToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      cartOverlay.classList.toggle("active");
+    });
+
+    // 오버레이 외부 클릭 시 닫기
+    document.addEventListener("click", (e) => {
+      const isOverlayActive = cartOverlay.classList.contains("active");
+      const clickedInsideOverlay = cartOverlay.contains(e.target);
+      const clickedCartToggle = cartToggle.contains(e.target);
+
+      if (isOverlayActive && !clickedInsideOverlay && !clickedCartToggle) {
+        cartOverlay.classList.remove("active");
+      }
+    });
+  } else {
+    console.warn("❗ 'cart-toggle' 또는 'cart-overlay' 요소가 없음.");
+  }
+});
