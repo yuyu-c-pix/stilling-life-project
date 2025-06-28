@@ -200,10 +200,11 @@
         document.body.appendChild(logoScript);
         
       // 헤더 요소들 로딩 후 수동 실행 (DOMContentLoaded 대체)
+        setTimeout(() => {
         const toggleButton = document.getElementById('menu-toggle');
         const navOverlay = document.getElementById('nav-overlay');
         const logo = document.querySelector('.header-logo');
-
+        const closeBtn = document.getElementById("nav-close-toggle");
 
         if (toggleButton && navOverlay && logo) {
           toggleButton.addEventListener('click', () => {
@@ -212,14 +213,15 @@
             logo.classList.toggle('move-down', !isActive);
           });
         }
-        const closeBtn = document.getElementById("nav-close-toggle");
-        if (closeBtn && navOverlay && logo) {
-        closeBtn.addEventListener("click", () => {
-          navOverlay.classList.remove("active");
-          logo.classList.remove("move-down");
-        });
-      }
-      };
+         if (closeBtn && navOverlay && logo) {
+          closeBtn.addEventListener("click", () => {
+            navOverlay.classList.remove("active");
+            logo.classList.remove("move-down");
+          });
+        }
+      }, 100); // DOM 삽입 후 안정 시간
+    };
+
       document.body.appendChild(script);
     });
     </script>
