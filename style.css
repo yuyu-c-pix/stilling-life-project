@@ -423,9 +423,10 @@ html, body {
 
 .cart-overlay {
   position: fixed;
-  bottom: 0;
-  left: 50;
-  width: clamp(320px, 100%, 720px); /* header 너비와 맞춤 */
+  bottom: 12px; /* 화면 하단에서 12px 위 */
+  left: 50%;
+  width: clamp(320px, 100%, 720px); 
+  transform: translate(-50%, 100%);/* header 너비와 맞춤 */
   background-color: #fbe5cd;
   border-top: 2px dotted black;
   border-left: 2px dotted black;
@@ -465,14 +466,20 @@ html, body {
   padding: 24px 16px;
 }
 .cart-action-text {
-  border: 1px dotted black;
+ border: 1px dotted black;
   padding: 8px 16px;
   margin-top: 12px;
-  font-size: 0.9rem;
-  text-align: center;
-  cursor: default;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
+  cursor: default;
+
+  /* nav-item과 동일한 타이포그래피 수치 적용 */
+  font-family: "megascope-variable";
+  font-variation-settings: "wght" 600, "SCOP" 0;
+  font-size: clamp(0.8rem, 1.2vw, 1.35rem);
+  letter-spacing: clamp(0.02em, 0.4vw, 0.09em);
+  line-height: 1.2;
 }
 
