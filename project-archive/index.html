@@ -343,6 +343,15 @@
           });
         }
 
+        const cartToggle = document.getElementById("cart-toggle");
+        const cartOverlay = document.getElementById("cart-overlay");
+
+        if (cartToggle && cartOverlay) {
+          cartToggle.addEventListener("click", () => {
+            cartOverlay.classList.toggle("active");
+          });
+        }
+
         const closeBtn = document.getElementById("nav-close-toggle");
         if (closeBtn && navOverlay && logo) {
         closeBtn.addEventListener("click", () => {
