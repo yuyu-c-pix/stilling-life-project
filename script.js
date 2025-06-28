@@ -535,5 +535,4 @@ window.addEventListener("load", () => {
       }, 1100);
     });
   });
-});
 
