@@ -438,7 +438,7 @@ html, body {
 
 .cart-overlay.active {
   bottom: 12px;
-  transform: translateY(0);
+  transform: translate(-50%, 0); 
 }
 
 .cart-items {
