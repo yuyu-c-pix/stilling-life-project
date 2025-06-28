@@ -466,25 +466,11 @@ imageData.forEach(({ src, style }) => {
 
 
 document.addEventListener("click", (e) => {
-  const toggleBtn = e.target.closest("#nav-close-toggle");
-  if (toggleBtn) {
-    const navOverlay = document.getElementById("nav-overlay");
-    if (navOverlay) {
-      navOverlay.classList.remove("active");
-    }
-  }
-});
-
-window.addEventListener("load", () => {
-  const cartToggle = document.getElementById("cart-toggle");
+  const cartToggle = e.target.closest("#cart-toggle");
   const cartOverlay = document.getElementById("cart-overlay");
 
   if (cartToggle && cartOverlay) {
-    cartToggle.addEventListener("click", () => {
-      cartOverlay.classList.toggle("active");
-    });
-  } else {
-    console.warn("❗ cart-toggle 또는 cart-overlay 요소가 없습니다.");
+    cartOverlay.classList.toggle("active");
   }
   });
 
