@@ -72,10 +72,7 @@
       position: relative;
       z-index: 10;
     }
-    @media (max-width: 768px) {
-      .h1 {
-      margin-top: clamp(52px, 9vh, 86px); /* 기존보다 약 12px 증가 */
-      }}
+  
 
     .subtitle {
       font-size: clamp(1.12rem, 1.27vw, 1.27rem);
@@ -153,7 +150,7 @@
     @media (max-width: 768px) {
       h1 {
         font-size: 48px;
-        margin-top: 40px;
+        margin-top:clamp(52px, 9vh, 86px);
       }
 
       .subtitle {
