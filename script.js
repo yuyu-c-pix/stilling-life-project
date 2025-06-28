@@ -193,20 +193,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ----------- floating-img 생성 및 드래그 -----------
   const imageData = [
-    { src: "./1.png", style: { zIndex: 3 } },
-    { src: "./2.png", style: { zIndex: 10 } },
-    { src: "./3.png", style: { zIndex: 9 } },
-    { src: "./4.png", style: { zIndex: 9 } },
-    { src: "./5.png", style: { zIndex: 9 } },
-    { src: "./6.png", style: { zIndex: 8 } }
-  ];
+  { src: "./1.png", style: { zIndex: 3 } },
+  { src: "./2.png", style: { zIndex: 10 } },
+  { src: "./3.png", style: { zIndex: 9 } },
+  { src: "./4.png", style: { zIndex: 9 } },
+  { src: "./5.png", style: { zIndex: 9 } },
+  { src: "./6.png", style: { zIndex: 8 } }
+];
 
-  const container = document.getElementById("floating-images");
+const container = document.getElementById("floating-images");
 
+if (!container) {
+  console.warn("⚠️ <div id='floating-images'> 요소를 찾을 수 없습니다.");
+} else {
   imageData.forEach(({ src, style }) => {
     const img = document.createElement("img");
     img.src = src;
-    img.className = "floating-img";
+    img.className = "floating-img floating-object";
     Object.assign(img.style, style);
     img.style.cursor = "grab";
     container.appendChild(img);
@@ -217,9 +220,10 @@ document.addEventListener("DOMContentLoaded", () => {
       img.style.setProperty("width", `${randWidth}vw`, "important");
       img.style.left = `${Math.random() * 70 + 5}vw`;
       img.style.top = `${Math.random() * 70 + 5}vh`;
-      img.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
+      img.style.transform = `rotate(${Math.random() * 60 - 30}deg)`; // ✅ 고친 부분
     };
 
+    // 드래그 이벤트
     let isDragging = false, startX = 0, startY = 0;
 
     img.addEventListener("mousedown", (e) => {
@@ -269,6 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.addEventListener("touchend", onTouchEnd);
     }, { passive: false });
   });
+}
 
   // ----------- 검색 입력 → 페이지 이동 기능 -----------
   const pages = [
