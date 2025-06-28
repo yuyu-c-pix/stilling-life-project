@@ -308,13 +308,13 @@ document.addEventListener("click", (e) => {
   const navOverlay = document.getElementById("nav-overlay");
   const navToggle = document.getElementById("menu-toggle");
   const cartOverlay = document.getElementById("cart-overlay");
-  const cartIcon = document.getElementById("cart-toggle"); // 실제 ID/클래스 확인 필요
+  const cartIcon = document.getElementById("cart-toggle");
 
   // Search
   if (
     searchOverlay?.classList.contains("active") &&
-    !searchOverlay.contains(e.target) &&
-    !searchIcon.contains(e.target)
+    !e.target.closest("#search-overlay") &&
+    !e.target.closest(".header-icon")
   ) {
     searchOverlay.classList.remove("active");
   }
@@ -322,8 +322,8 @@ document.addEventListener("click", (e) => {
   // Nav
   if (
     navOverlay?.classList.contains("active") &&
-    !navOverlay.contains(e.target) &&
-    !navToggle.contains(e.target)
+    !e.target.closest("#nav-overlay") &&
+    !e.target.closest("#menu-toggle")
   ) {
     navOverlay.classList.remove("active");
     document.querySelector(".header-logo")?.classList.remove("move-down");
@@ -332,9 +332,10 @@ document.addEventListener("click", (e) => {
   // Cart
   if (
     cartOverlay?.classList.contains("active") &&
-    !cartOverlay.contains(e.target) &&
-    !cartIcon?.contains(e.target)
+    !e.target.closest("#cart-overlay") &&
+    !e.target.closest("#cart-toggle")
   ) {
     cartOverlay.classList.remove("active");
   }
 });
+
