@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     entry.appendChild(spanCity);
     entry.appendChild(spanText);
-    history.appendChild(entry);
+    history.prepend(entry);
   }
 
   function loadFromLocalStorage() {
@@ -333,10 +333,6 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       navOverlay.classList.toggle("active");
       headerLogo.classList.toggle("move-down");
-      if (navOverlay.classList.contains("active")) {
-     
-  
-  } 
 
     });
   } else {
