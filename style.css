@@ -280,7 +280,7 @@ html, body {
   touch-action: none;
   pointer-events: all;
   z-index: 10;
-  width: auto; /* 💡 이거 하나로 크기 조절 가능 */
+  width: auto; 
   height: auto;
 }
 .slider-wrapper video,
@@ -426,7 +426,7 @@ html, body {
   bottom: 0;
   left: 50;
   width: clamp(320px, 100%, 720px); /* header 너비와 맞춤 */
-  background-color: white;
+  background-color: #fbe5cd;
   border-top: 2px dotted black;
   border-left: 2px dotted black;
   border-right: 2px dotted black;
