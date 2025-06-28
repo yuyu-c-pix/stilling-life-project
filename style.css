@@ -391,7 +391,7 @@ html, body {
   .nav-wrap {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     align-items: center !important;
     width: 100% !important;
     height: 100% !important;
