@@ -225,6 +225,15 @@
           headerLogo.classList.remove("move-down");
         });
       }
+        const cartToggle = document.getElementById("cart-toggle");
+        const cartOverlay = document.getElementById("cart-overlay");
+
+        if (cartToggle && cartOverlay) {
+          cartToggle.addEventListener("click", () => {
+            cartOverlay.classList.toggle("active");
+          });
+        }
+
       }, 100);
     };
 
