@@ -470,22 +470,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!cartToggle || !cartOverlay) return;
 
-  // 토글 기능
+  // 1. 토글 버튼 클릭 시 열고 닫기
   cartToggle.addEventListener("click", (e) => {
     e.preventDefault();
-    e.stopPropagation(); // 중요!
     cartOverlay.classList.toggle("active");
   });
 
-  // cartOverlay 내부 클릭은 이벤트 전파 막기
-  cartOverlay.addEventListener("click", (e) => {
-    e.stopPropagation();
-  });
+  // 2. 외부 클릭 감지 (한 프레임 뒤에 실행)
+  setTimeout(() => {
+    document.addEventListener("click", (e) => {
+      const isActive = cartOverlay.classList.contains("active");
 
-  // 바깥 클릭 시 닫기
-  document.addEventListener("click", () => {
-    if (cartOverlay.classList.contains("active")) {
-      cartOverlay.classList.remove("active");
-    }
-  });
+      const clickedInsideOverlay = cartOverlay.contains(e.target);
+      const clickedToggle = cartToggle.contains(e.target);
+
+      if (isActive && !clickedInsideOverlay && !clickedToggle) {
+        cartOverlay.classList.remove("active");
+      }
+    });
+  }, 0);
 });
