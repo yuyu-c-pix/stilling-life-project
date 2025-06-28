@@ -284,33 +284,57 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(switchBackground, 3000); // 2.5초마다 전환
 });
 </script>
+
+
+
+<script src="store.js"></script>
+  
+</body>
+</html>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll(".add-to-cart-button");
 
   buttons.forEach(button => {
-    const originalText = "ADD TO CART";
-    const toggledText = "COMING SOON<br>DM FOR EARLY PURCHASE";
+    button.addEventListener("click", () => {
+      const gridItem = button.closest(".grid-item");
+      const img = gridItem.querySelector("img");
+      const imgSrc = img.src;
 
-    button.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isMessage = button.innerHTML.includes("COMING SOON");
+      // 썸네일 정보 localStorage에 저장
+      const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      stored.push(imgSrc);
+      localStorage.setItem("cartItems", JSON.stringify(stored));
 
-      if (isMessage) {
-        button.innerHTML = originalText;
-        button.classList.remove("message-active");
-      } else {
-        button.innerHTML = toggledText;
-        button.classList.add("message-active");
-      }
+      // 이미지 복제 후 화면 우측 상단으로 애니메이션 이동
+      const clone = img.cloneNode();
+      const rect = img.getBoundingClientRect();
+
+      clone.style.position = "fixed";
+      clone.style.left = `${rect.left}px`;
+      clone.style.top = `${rect.top}px`;
+      clone.style.width = `${img.offsetWidth}px`;
+      clone.style.height = `${img.offsetHeight}px`;
+      clone.style.opacity = "0.7";
+      clone.style.transition = "all 1s ease-in-out";
+      clone.style.zIndex = "9999";
+      document.body.appendChild(clone);
+
+      // 카트 위치로 슬라이딩
+      setTimeout(() => {
+        clone.style.left = "calc(100vw - 48px)";
+        clone.style.top = "12px";
+        clone.style.width = "40px";
+        clone.style.height = "40px";
+        clone.style.opacity = "0";
+      }, 10);
+
+      // 이동 후 삭제
+      setTimeout(() => {
+        clone.remove();
+      }, 1100);
     });
   });
 });
 </script>
-
-
-
-
-  
-</body>
-</html>

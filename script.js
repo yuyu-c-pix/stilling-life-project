@@ -479,3 +479,34 @@ document.addEventListener("click", (e) => {
   }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const cartOverlay = document.getElementById("cart-overlay");
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
+
+  addToCartButtons.forEach(button => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      const gridItem = button.closest(".grid-item");
+      const imgEl = gridItem.querySelector("img");
+      const caption = gridItem.querySelector(".caption").innerText;
+
+      // 오버레이 열기
+      cartOverlay.classList.add("active");
+
+      // 카트 아이템 추가
+      const cartItem = document.createElement("div");
+      cartItem.className = "cart-item";
+
+      cartItem.innerHTML = `
+        <span>1</span>
+        <img src="${imgEl.src}" alt="${caption}" />
+        <span>1개</span>
+        <span>총액</span>
+      `;
+
+      cartItemsContainer.appendChild(cartItem);
+    });
+  });
+});
