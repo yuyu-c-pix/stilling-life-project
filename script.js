@@ -464,112 +464,107 @@ imageData.forEach(({ src, style }) => {
 // 예: 랜덤 좌표 범위 조정 (왼쪽/위로 너무 안가게)
 
 
-// ✅ 카트 열고 닫기 및 외부 클릭 시 닫기 기능
+
 // ✅ 카트 열고 닫기 및 외부 클릭 시 닫기
-document.addEventListener("click", (e) => {
+document.addEventListener("DOMContentLoaded", () => {
   const cartOverlay = document.getElementById("cart-overlay");
-  const cartToggle = e.target.closest("#cart-toggle");
+  const cartList = document.getElementById("cart-item-list");
+  const buttons = document.querySelectorAll(".add-to-cart-button");
 
-  if (!cartOverlay) return;
+  // 카트 오버레이 토글 및 외부 클릭 시 닫기
+  document.addEventListener("click", (e) => {
+    const cartToggle = e.target.closest("#cart-toggle");
 
-  // 카트 버튼 클릭 시 toggle
-  if (cartToggle) {
-    cartOverlay.classList.toggle("active");
+    if (!cartOverlay) return;
 
-    if (cartOverlay.classList.contains("active")) {
-      renderCartItems(); // ← 여기에 추가
+    if (cartToggle) {
+      cartOverlay.classList.toggle("active");
+      if (cartOverlay.classList.contains("active")) {
+        renderCartItems();
+      }
+      return;
     }
 
-    return;
-  }
-
-  // 오버레이 외부 클릭 시 닫기
-  const clickedInsideCart = cartOverlay.contains(e.target);
-  if (cartOverlay.classList.contains("active") && !clickedInsideCart) {
-    cartOverlay.classList.remove("active");
-  }
+    const clickedInsideCart = cartOverlay.contains(e.target);
+    if (cartOverlay.classList.contains("active") && !clickedInsideCart) {
+      cartOverlay.classList.remove("active");
+    }
   });
 
-// ✅ 상품 이미지 클릭 시 카트로 애니메이션 및 저장
-buttons.forEach(button => {
-  button.addEventListener("click", () => {
-    const gridItem = button.closest(".grid-item");
-    const img = gridItem?.querySelector("img");
-    if (!img) return;
+  // 상품 추가 버튼 클릭 시 이미지 저장 및 애니메이션
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const gridItem = button.closest(".grid-item");
+      const img = gridItem?.querySelector("img");
+      if (!img) return;
 
-    const imgSrc = img.src;
+      const imgSrc = img.src;
+      const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      stored.push(imgSrc);
+      localStorage.setItem("cartItems", JSON.stringify(stored));
 
-    // 로컬스토리지에 이미지 저장
-    const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    stored.push(imgSrc);
-    localStorage.setItem("cartItems", JSON.stringify(stored));
+      // 이미지 애니메이션
+      const clone = img.cloneNode();
+      const rect = img.getBoundingClientRect();
 
-    // 이미지 복제 후 애니메이션
-    const clone = img.cloneNode();
-    const rect = img.getBoundingClientRect();
+      Object.assign(clone.style, {
+        position: "fixed",
+        left: `${rect.left}px`,
+        top: `${rect.top}px`,
+        width: `${img.offsetWidth}px`,
+        height: `${img.offsetHeight}px`,
+        opacity: "0.7",
+        transition: "all 1s ease-in-out",
+        zIndex: "9999",
+        pointerEvents: "none",
+      });
 
-    Object.assign(clone.style, {
-      position: "fixed",
-      left: `${rect.left}px`,
-      top: `${rect.top}px`,
-      width: `${img.offsetWidth}px`,
-      height: `${img.offsetHeight}px`,
-      opacity: "0.7",
-      transition: "all 1s ease-in-out",
-      zIndex: "9999",
-      pointerEvents: "none"
+      document.body.appendChild(clone);
+
+      setTimeout(() => {
+        clone.style.left = "calc(100vw - 48px)";
+        clone.style.top = "12px";
+        clone.style.width = "40px";
+        clone.style.height = "40px";
+        clone.style.opacity = "0";
+      }, 10);
+
+      setTimeout(() => {
+        clone.remove();
+      }, 1100);
     });
-
-    document.body.appendChild(clone);
-
-    // 카트 아이콘 위치로 이동
-    setTimeout(() => {
-      clone.style.left = "calc(100vw - 48px)";
-      clone.style.top = "12px";
-      clone.style.width = "40px";
-      clone.style.height = "40px";
-      clone.style.opacity = "0";
-    }, 10);
-
-    // 애니메이션 끝나면 제거
-    setTimeout(() => {
-      clone.remove();
-    }, 1100);
   });
+
+  // 장바구니 항목 렌더링
+  function renderCartItems() {
+    if (!cartList) return;
+    cartList.innerHTML = "";
+
+    const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+
+    items.forEach((imgSrc, index) => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "cart-item";
+      wrapper.style.marginBottom = "16px";
+
+      const img = document.createElement("img");
+      img.src = imgSrc;
+      img.alt = `Item ${index + 1}`;
+      img.className = "cart-thumb";
+
+      const quantity = document.createElement("span");
+      quantity.textContent = "Qty: 1";
+      quantity.className = "cart-qty";
+
+      const price = document.createElement("span");
+      price.textContent = "28.00 EUR";
+      price.className = "cart-price";
+
+      wrapper.appendChild(img);
+      wrapper.appendChild(quantity);
+      wrapper.appendChild(price);
+
+      cartList.appendChild(wrapper);
+    });
+  }
 });
-
-
-function renderCartItems() {
-  const cartList = document.getElementById("cart-item-list");
-  if (!cartList) return;
-
-  cartList.innerHTML = ""; // 기존 내용 비우기
-
-  const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
-
-  items.forEach((imgSrc, index) => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "cart-item";
-    wrapper.style.marginBottom = "16px";
-
-    const img = document.createElement("img");
-    img.src = imgSrc;
-    img.alt = `Item ${index + 1}`;
-    img.className = "cart-thumb";
-
-    const quantity = document.createElement("span");
-    quantity.textContent = `Qty: 1`;
-    quantity.className = "cart-qty";
-
-    const price = document.createElement("span");
-    price.textContent = `28.00 EUR`;
-    price.className = "cart-price";
-
-    wrapper.appendChild(img);
-    wrapper.appendChild(quantity);
-    wrapper.appendChild(price);
-
-    cartList.appendChild(wrapper);
-  });
-}
-
