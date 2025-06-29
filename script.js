@@ -344,22 +344,21 @@ function updateCartPosition() {
 
   if (!overlay) return;
 
-  // 내용을 기준으로 실제 높이 측정
   const overlayHeight = overlay.scrollHeight;
   const viewportHeight = window.innerHeight;
 
   if (overlayHeight > viewportHeight - 120) {
-    // 너무 길어짐 → top 기준으로 위치 고정
     overlay.style.position = "absolute";
     overlay.style.top = "120px";
     overlay.style.bottom = "auto";
     overlay.style.transform = "translateX(-50%)";
+    document.body.style.overflow = ""; // 스크롤 허용
   } else {
-    // 평소처럼 fixed + bottom 기준
     overlay.style.position = "fixed";
     overlay.style.bottom = "12px";
     overlay.style.top = "auto";
     overlay.style.transform = "translate(-50%, 0)";
+    document.body.style.overflow = "hidden"; // 스크롤 잠금
   }
 }
 
@@ -369,17 +368,15 @@ const cartOverlay = document.getElementById("cart-overlay");
 cartToggle.addEventListener("click", () => {
   cartOverlay.classList.toggle("active");
 
-  // 열릴 때마다 위치 재계산
   if (cartOverlay.classList.contains("active")) {
     updateCartPosition();
-    document.body.style.overflow = "hidden"; // body 스크롤 잠금
   } else {
     document.body.style.overflow = "";
   }
 });
 
 window.addEventListener("resize", () => {
-  if (document.getElementById("cart-overlay").classList.contains("active")) {
+  if (cartOverlay.classList.contains("active")) {
     updateCartPosition();
   }
 });
