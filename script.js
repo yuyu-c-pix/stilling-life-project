@@ -382,16 +382,34 @@ function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
   const cartItemsContainer = document.getElementById("cart-items");
   if (!cartItemsContainer) return;
 
+  const existingItem = [...cartItemsContainer.children].find(item =>
+    item.dataset.name === name
+  );
+
+  if (existingItem) {
+    // 이미 있는 경우: 수량만 증가
+    const qtyElem = existingItem.querySelector(".qty-count");
+    qtyElem.textContent = "Qty:" + (parseInt(qtyElem.textContent.split(":")[1]) + 1);
+    saveCartToLocalStorage();
+    updateCartCount();
+    return;
+  }
+
   const itemCount = cartItemsContainer.querySelectorAll('.cart-item').length;
-  if (itemCount >= 5) return;
+  if (itemCount >= 5) {
+    alert("장바구니에는 최대 5개까지만 담을 수 있어요.");
+    return;
+  }
 
   const cartItem = document.createElement("div");
   cartItem.className = "cart-item";
+  cartItem.dataset.name = name;
+
   cartItem.innerHTML = `
     <img src="${imgSrc}" alt="${name}" />
     <div class="cart-item-details">
       <div>${name}</div>
-      <div>Qty: ${quantity}</div>
+      <div class="qty-count">Qty:${quantity}</div>
     </div>
     <div class="cart-item-meta">
       <div>${price}</div>
@@ -401,7 +419,30 @@ function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
 
   cartItem.querySelector(".cart-item-remove").addEventListener("click", () => {
     cartItem.remove();
+    updateCartCount();
+    saveCartToLocalStorage();
   });
 
   cartItemsContainer.appendChild(cartItem);
+  updateCartCount();
+  saveCartToLocalStorage();
+}
+function saveCartToLocalStorage() {
+  const items = [];
+  document.querySelectorAll(".cart-item").forEach(item => {
+    const imgSrc = item.querySelector("img")?.src;
+    const name = item.querySelector(".cart-item-details div:first-child")?.textContent;
+    const price = item.querySelector(".cart-item-meta div:first-child")?.textContent;
+    const qty = item.querySelector(".qty-count")?.textContent.replace("Qty:", "") || "1";
+    items.push({ imgSrc, name, price, quantity: parseInt(qty) });
+  });
+  localStorage.setItem("cartItems", JSON.stringify(items));
+}
+
+function updateCartCount() {
+  const count = document.querySelectorAll(".cart-item").length;
+  const countElement = document.querySelector(".cart-count");
+  if (countElement) {
+    countElement.textContent = `${count} Item${count !== 1 ? "s" : ""}`;
+  }
 }
