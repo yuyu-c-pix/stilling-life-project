@@ -437,8 +437,6 @@ html, body {
 
 
 .cart-overlay.active {
-  max-height: calc((48px + 24px) * 5); /* 아이템 높이 + 간격 × 5 */
-  overflow: hidden;
   bottom: 12px;
   transform: translate(-50%, 0); 
 }

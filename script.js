@@ -378,3 +378,30 @@ cartToggle.addEventListener("click", (e) => {
 });
 
 
+function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
+  const cartItemsContainer = document.getElementById("cart-items");
+  if (!cartItemsContainer) return;
+
+  // ✅ 5개 초과 시 추가 차단
+  if (cartItemsContainer.children.length >= 5) return;
+
+  const cartItem = document.createElement("div");
+  cartItem.className = "cart-item";
+  cartItem.innerHTML = `
+    <img src="${imgSrc}" alt="${name}" />
+    <div class="cart-item-details">
+      <div>${name}</div>
+      <div>Qty: ${quantity}</div>
+    </div>
+    <div class="cart-item-meta">
+      <div>${price}</div>
+      <button class="cart-item-remove">×</button>
+    </div>
+  `;
+
+  cartItem.querySelector(".cart-item-remove").addEventListener("click", () => {
+    cartItem.remove();
+  });
+
+  cartItemsContainer.appendChild(cartItem);
+}

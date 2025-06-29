@@ -1,19 +1,44 @@
 function initStore() {
-  console.log("🔥 initStore 실행됨");
+  console.log("initStore 실행됨");
   const buttons = document.querySelectorAll(".add-to-cart-button");
+
+  function saveCartToLocalStorage() {
+    const items = [];
+    document.querySelectorAll(".cart-item").forEach(item => {
+      const imgSrc = item.querySelector("img")?.src;
+      const name = item.querySelector(".cart-item-details div:first-child")?.textContent;
+      const price = item.querySelector(".cart-item-meta div:first-child")?.textContent;
+      const qty = item.querySelector(".qty-count")?.textContent.replace("Qty:", "") || "1";
+      items.push({ imgSrc, name, price, quantity: parseInt(qty) });
+    });
+    localStorage.setItem("cartItems", JSON.stringify(items));
+  }
 
   function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
     const cartItemsContainer = document.getElementById("cart-items");
     if (!cartItemsContainer) return;
 
+    const existingItem = [...cartItemsContainer.children].find(item =>
+      item.dataset.name === name
+    );
+
+    if (existingItem) {
+      const qtyElem = existingItem.querySelector(".qty-count");
+      qtyElem.textContent = "Qty:" + (parseInt(qtyElem.textContent.split(":")[1]) + 1);
+      saveCartToLocalStorage(); // 수량 업데이트 후 저장
+      updateCartCount();
+      return;
+    }
+
     const cartItem = document.createElement("div");
     cartItem.className = "cart-item";
+    cartItem.dataset.name = name;
 
     cartItem.innerHTML = `
       <img src="${imgSrc}" alt="${name}" />
       <div class="cart-item-details">
         <div>${name}</div>
-        <div>Qty: ${quantity}</div>
+        <div class="qty-count">Qty:${quantity}</div>
       </div>
       <div class="cart-item-meta">
         <div>${price}</div>
@@ -24,11 +49,12 @@ function initStore() {
     cartItem.querySelector(".cart-item-remove").addEventListener("click", () => {
       cartItem.remove();
       updateCartCount();
-      removeFromLocalStorage(imgSrc);
+      saveCartToLocalStorage(); // 삭제 후 저장
     });
 
     cartItemsContainer.appendChild(cartItem);
     updateCartCount();
+    saveCartToLocalStorage(); // 추가 후 저장
   }
 
   function updateCartCount() {
@@ -37,12 +63,6 @@ function initStore() {
     if (countElement) {
       countElement.textContent = `${count} Item${count !== 1 ? "s" : ""}`;
     }
-  }
-
-  function removeFromLocalStorage(src) {
-    const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    const filtered = stored.filter(item => item.imgSrc !== src);
-    localStorage.setItem("cartItems", JSON.stringify(filtered));
   }
 
   // 버튼 클릭 시 이벤트 처리
@@ -55,14 +75,7 @@ function initStore() {
       const name = gridItem.querySelector(".caption")?.textContent.trim() || "Item";
       const price = gridItem.querySelector(".item-price")?.textContent.trim() || "0 KRW";
 
-      // 중복 방지
-      const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
-      const exists = stored.some(item => item.imgSrc === imgSrc);
-      if (!exists) {
-        stored.push({ imgSrc, name, price });
-        localStorage.setItem("cartItems", JSON.stringify(stored));
-        addToCartItem(imgSrc, name, price);
-      }
+      addToCartItem(imgSrc, name, price, 1);
 
       // 썸네일 슬라이딩 애니메이션
       const clone = img.cloneNode();
@@ -91,11 +104,12 @@ function initStore() {
 
   // 저장된 항목을 초기 렌더링
   const savedItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-  savedItems.forEach(({ imgSrc, name, price }) => {
-    addToCartItem(imgSrc, name, price);
+  savedItems.forEach(({ imgSrc, name, price, quantity }) => {
+    addToCartItem(imgSrc, name, price, quantity || 1);
   });
 }
 
+// 페이지 로드 후 cart 영역이 생겼을 때 initStore 실행
 window.addEventListener("load", () => {
   const waitForCartReady = () => {
     const cart = document.getElementById("cart-items");
@@ -110,35 +124,3 @@ window.addEventListener("load", () => {
 
   waitForCartReady();
 });
-
-function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
-  const cartItemsContainer = document.getElementById("cart-items");
-  if (!cartItemsContainer) return;
-
-  const existingItem = [...cartItemsContainer.children].find(item =>
-    item.dataset.name === name
-  );
-
-  if (existingItem) {
-    const qtyElem = existingItem.querySelector(".qty-count");
-    qtyElem.textContent = "Qty:" + (parseInt(qtyElem.textContent.split(":")[1]) + 1);
-    return;
-  }
-
-  const cartItem = document.createElement("div");
-  cartItem.className = "cart-item";
-  cartItem.dataset.name = name;
-  // ...
-  cartItem.innerHTML = `
-    <img src="${imgSrc}" />
-    <div class="cart-item-details">
-      <div>${name}</div>
-      <div class="qty-count">Qty:${quantity}</div>
-    </div>
-    <div class="cart-item-meta">
-      <div>${price}</div>
-      <button class="cart-item-remove">×</button>
-    </div>
-  `;
-  // ...
-}
