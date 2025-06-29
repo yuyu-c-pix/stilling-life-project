@@ -421,6 +421,12 @@ html, body {
   }
 }
 
+.cart-overlay-wrapper {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  z-index: 9999;
+}
 .cart-overlay {
   position: fixed;
   bottom: 0;
