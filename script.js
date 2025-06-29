@@ -339,29 +339,29 @@ document.addEventListener("click", (e) => {
   }
 });
 
-function updateCartPosition() {
+function updateCartOverlayPosition() {
   const overlay = document.getElementById("cart-overlay");
-
-  if (!overlay) return;
-
   const overlayHeight = overlay.scrollHeight;
   const viewportHeight = window.innerHeight;
 
   if (overlayHeight > viewportHeight - 120) {
+    // 너무 길면: absolute + top: 120px → 문서 흐름 따라 감
     overlay.style.position = "absolute";
     overlay.style.top = "120px";
     overlay.style.bottom = "auto";
     overlay.style.transform = "translateX(-50%)";
-    document.body.style.overflow = ""; // 스크롤 허용
+    overlay.style.overflowY = "visible";
+    document.body.style.overflow = "hidden";
   } else {
+    // 짧으면: fixed + bottom: 12px → 슬라이드 업
     overlay.style.position = "fixed";
     overlay.style.bottom = "12px";
     overlay.style.top = "auto";
     overlay.style.transform = "translate(-50%, 0)";
-    document.body.style.overflow = "hidden"; // 스크롤 잠금
+    overlay.style.overflowY = "visible";
+    document.body.style.overflow = "hidden";
   }
 }
-
 const cartToggle = document.getElementById("cart-toggle");
 const cartOverlay = document.getElementById("cart-overlay");
 
@@ -369,14 +369,16 @@ cartToggle.addEventListener("click", () => {
   cartOverlay.classList.toggle("active");
 
   if (cartOverlay.classList.contains("active")) {
-    updateCartPosition();
+    updateCartOverlayPosition();
   } else {
-    document.body.style.overflow = "";
+    cartOverlay.style.display = "none";
+    document.body.style.overflow = ""; // 기존 페이지 스크롤 복구
   }
 });
 
+// 창 리사이즈 시 재계산
 window.addEventListener("resize", () => {
   if (cartOverlay.classList.contains("active")) {
-    updateCartPosition();
+    updateCartOverlayPosition();
   }
 });
