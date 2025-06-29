@@ -105,3 +105,11 @@ function setupLogoColor() {
 
 // DOM이 반영된 이후 실행 보장
 setTimeout(setupLogoColor, 0);
+
+function resetLogoStyle() {
+  headerLogo.classList.remove("move-down");
+  headerLogo.style.color = "";
+  headerLogo.style.filter = "";
+  document.body.classList.remove(...variantClasses);
+}
+window.resetLogoStyle = resetLogoStyle;
