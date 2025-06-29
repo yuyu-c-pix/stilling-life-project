@@ -97,13 +97,17 @@ function initStore() {
 }
 
 window.addEventListener("load", () => {
-  const waitForCartContainer = () => {
+  const waitForCartReady = () => {
     const cart = document.getElementById("cart-items");
     if (cart) {
+      console.log("🔥 cart ready → initStore 실행됨");
       initStore();
     } else {
-      setTimeout(waitForCartContainer, 50); // 계속 DOM 확인
+      console.log("⏳ cart 아직 준비 안 됨, 재시도 중...");
+      setTimeout(waitForCartReady, 50);
     }
   };
-  waitForCartContainer();
+
+  waitForCartReady();
 });
+
