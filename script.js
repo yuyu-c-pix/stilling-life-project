@@ -363,16 +363,19 @@ function updateCartOverlayPosition() {
 
 const cartToggle = document.getElementById("cart-toggle");
 const cartOverlay = document.getElementById("cart-overlay");
+const cartWrapper = document.getElementById("cart-overlay-wrapper");
 
 cartToggle.addEventListener("click", () => {
   const isActive = cartOverlay.classList.contains("active");
 
   if (isActive) {
     cartOverlay.classList.remove("active");
+     cartWrapper.classList.remove("active");
     cartOverlay.style.transform = "translate(-50%, 100%)"; // 닫힐 때 슬라이드 다운
     document.body.style.overflow = ""; // 스크롤 잠금 해제
   } else {
     cartOverlay.classList.add("active");
+     cartWrapper.classList.add("active"); 
     updateCartOverlayPosition(); // 열린 상태일 때 위치 갱신
     document.body.style.overflow = "hidden"; // body 스크롤 잠금
   }
@@ -386,3 +389,4 @@ window.addEventListener("resize", () => {
 
 document.body.style.overflow = "hidden"; // 오버레이 열릴 때
 document.body.style.overflow = "";       // 닫을 때 복구
+

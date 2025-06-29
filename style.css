@@ -426,6 +426,11 @@ html, body {
   inset: 0;
   overflow-y: auto;
   z-index: 9999;
+  display: none; 
+}
+
+.cart-overlay-wrapper.active {
+  display: block;
 }
 .cart-overlay {
   position: fixed;
