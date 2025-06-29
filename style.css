@@ -476,7 +476,7 @@ html, body {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 16px 0;
+  padding: 16px 12px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -484,7 +484,6 @@ html, body {
 }
 
 .cart-item {
-  margin: 0 20px; 
   display: flex;
   align-items: center;
   justify-content: space-between;
