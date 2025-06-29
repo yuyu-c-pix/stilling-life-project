@@ -241,7 +241,12 @@
               !e.target.closest(".header-icon")
             ) {
               searchOverlay.classList.remove("active");
+              headerLogo?.classList.remove("move-down");
+              headerLogo.style.color = "";
+              headerLogo.style.filter = "";
             }
+
+            
 
             if (
               navOverlay?.classList.contains("active") &&
@@ -250,6 +255,9 @@
             ) {
               navOverlay.classList.remove("active");
               headerLogo?.classList.remove("move-down");
+
+              headerLogo.style.color = "";
+              headerLogo.style.filter = "";
             }
 
             if (
