@@ -59,12 +59,19 @@ function initStore() {
   }
 
   function updateCartCount() {
-    const count = document.querySelectorAll(".cart-item").length;
-    const countElement = document.querySelector(".cart-count");
-    if (countElement) {
-      countElement.textContent = `${count} Item${count !== 1 ? "s" : ""}`;
-    }
+  const cartItems = document.querySelectorAll(".cart-item");
+  const count = cartItems.length;
+  const countElement = document.querySelector(".cart-count");
+  const emptyMessage = document.getElementById("cart-empty");
+
+  if (countElement) {
+    countElement.textContent = `${count} Item${count !== 1 ? "s" : ""}`;
   }
+
+  if (emptyMessage) {
+    emptyMessage.style.display = count === 0 ? "block" : "none";
+  }
+}
 
   // 버튼 클릭 시 이벤트 처리
   buttons.forEach(button => {
