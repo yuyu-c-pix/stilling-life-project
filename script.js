@@ -339,23 +339,47 @@ document.addEventListener("click", (e) => {
   }
 });
 
-function toggleCartOverlay() {
-  const wrapper = document.querySelector(".cart-wrapper");
-  const overlay = document.querySelector(".cart-overlay");
+function updateCartPosition() {
+  const overlay = document.getElementById("cart-overlay");
 
-  wrapper.classList.toggle("active");
+  if (!overlay) return;
 
-  if (wrapper.classList.contains("active")) {
-    document.body.style.overflow = "hidden";
+  // 내용을 기준으로 실제 높이 측정
+  const overlayHeight = overlay.scrollHeight;
+  const viewportHeight = window.innerHeight;
 
-    const needsScroll = overlay.scrollHeight > window.innerHeight - 120;
-    if (needsScroll) {
-      wrapper.style.overflowY = "auto";
-    } else {
-      wrapper.style.overflowY = "visible";
-    }
+  if (overlayHeight > viewportHeight - 120) {
+    // 너무 길어짐 → top 기준으로 위치 고정
+    overlay.style.position = "absolute";
+    overlay.style.top = "120px";
+    overlay.style.bottom = "auto";
+    overlay.style.transform = "translateX(-50%)";
   } else {
-    document.body.style.overflow = "";
-    wrapper.style.overflowY = "";
+    // 평소처럼 fixed + bottom 기준
+    overlay.style.position = "fixed";
+    overlay.style.bottom = "12px";
+    overlay.style.top = "auto";
+    overlay.style.transform = "translate(-50%, 0)";
   }
 }
+
+const cartToggle = document.getElementById("cart-toggle");
+const cartOverlay = document.getElementById("cart-overlay");
+
+cartToggle.addEventListener("click", () => {
+  cartOverlay.classList.toggle("active");
+
+  // 열릴 때마다 위치 재계산
+  if (cartOverlay.classList.contains("active")) {
+    updateCartPosition();
+    document.body.style.overflow = "hidden"; // body 스크롤 잠금
+  } else {
+    document.body.style.overflow = "";
+  }
+});
+
+window.addEventListener("resize", () => {
+  if (document.getElementById("cart-overlay").classList.contains("active")) {
+    updateCartPosition();
+  }
+});
