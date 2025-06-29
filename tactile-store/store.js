@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll(".add-to-cart-button");
 
-  // 카트에 아이템 추가
-  function addToCartItem(imgSrc, name = "Item", price = 0, quantity = 1) {
+  function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
     const cartItemsContainer = document.getElementById("cart-items");
 
     const cartItem = document.createElement("div");
@@ -15,12 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
         <div>Qty: ${quantity}</div>
       </div>
       <div class="cart-item-meta">
-        <div>${price} EUR</div>
+        <div>${price}</div>
         <button class="cart-item-remove">×</button>
       </div>
     `;
 
-    // 삭제 버튼 클릭 시
     cartItem.querySelector(".cart-item-remove").addEventListener("click", () => {
       cartItem.remove();
       updateCartCount();
@@ -31,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartCount();
   }
 
-  // 카운트 업데이트
   function updateCartCount() {
     const count = document.querySelectorAll(".cart-item").length;
     const countElement = document.querySelector(".cart-count");
@@ -40,32 +37,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // localStorage에서 제거
   function removeFromLocalStorage(src) {
     const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
     const filtered = stored.filter(item => item.imgSrc !== src);
     localStorage.setItem("cartItems", JSON.stringify(filtered));
   }
 
-  // "ADD TO CART" 클릭 시
   buttons.forEach(button => {
     button.addEventListener("click", () => {
       const gridItem = button.closest(".grid-item");
       const img = gridItem.querySelector("img");
       const imgSrc = img.src;
 
-      const name = gridItem.querySelector(".item-name")?.textContent || "Item";
-      const price = gridItem.querySelector(".item-price")?.textContent?.replace("EUR", "").trim() || "0";
+      const name = gridItem.querySelector(".caption")?.textContent.trim() || "Item";
+      const price = gridItem.querySelector(".item-price")?.textContent.trim() || "0 KRW";
 
-      // localStorage 저장
       const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
       stored.push({ imgSrc, name, price });
       localStorage.setItem("cartItems", JSON.stringify(stored));
 
-      // 카트에 렌더링
       addToCartItem(imgSrc, name, price);
 
-      // 애니메이션
       const clone = img.cloneNode();
       const rect = img.getBoundingClientRect();
       clone.style.position = "fixed";
@@ -86,13 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
         clone.style.opacity = "0";
       }, 10);
 
-      setTimeout(() => {
-        clone.remove();
-      }, 1100);
+      setTimeout(() => clone.remove(), 1100);
     });
   });
 
-  // 페이지 로드시 localStorage 복원
   const savedItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
   savedItems.forEach(({ imgSrc, name, price }) => {
     addToCartItem(imgSrc, name, price);
