@@ -198,43 +198,81 @@
   <!-- ✅ 헤더 placeholder -->
   <div id="header-placeholder"></div>
   <script>
-  fetch("/stilling-life-project/header.html")
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById("header-placeholder").innerHTML = data;
+  fetch("header.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("header-container").innerHTML = data;
 
-      // ✅ 0.1초 지연 후 바인딩 (DOM 반영 기다림)
+    // 공용 script.js만 로드
+    const script = document.createElement("script");
+    script.src = "script.js"; // ✅ 현재 HTML과 같은 폴더에 있을 때
+
+    script.onload = () => {
+      // header.html 내부 요소가 로드된 뒤 실행
       setTimeout(() => {
         const toggleButton = document.getElementById("menu-toggle");
         const closeBtn = document.getElementById("nav-close-toggle");
         const navOverlay = document.getElementById("nav-overlay");
         const headerLogo = document.querySelector(".header-logo");
-
-        if (toggleButton && navOverlay && headerLogo) {
-        toggleButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        navOverlay.classList.toggle("active");
-        headerLogo.classList.toggle("move-down");  // ← 추가된 부분
-        });
-        }
-        if (closeBtn && navOverlay && headerLogo) {
-        closeBtn.addEventListener("click", () => {
-          navOverlay.classList.remove("active");
-          headerLogo.classList.remove("move-down");
-        });
-      }
         const cartToggle = document.getElementById("cart-toggle");
         const cartOverlay = document.getElementById("cart-overlay");
+
+        if (toggleButton && navOverlay && headerLogo) {
+          toggleButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            navOverlay.classList.toggle("active");
+            headerLogo.classList.toggle("move-down");
+          });
+        }
+
+        if (closeBtn && navOverlay && headerLogo) {
+          closeBtn.addEventListener("click", () => {
+            navOverlay.classList.remove("active");
+            headerLogo.classList.remove("move-down");
+          });
+        }
 
         if (cartToggle && cartOverlay) {
           cartToggle.addEventListener("click", () => {
             cartOverlay.classList.toggle("active");
-        });
-      }
+          });
+        }
 
-    }, 100);
- // 100ms 딜레이
+        // 외부 클릭 시 오버레이 닫기
+        document.addEventListener("click", (e) => {
+          const searchOverlay = document.getElementById("search-overlay");
+
+          if (
+            searchOverlay?.classList.contains("active") &&
+            !e.target.closest("#search-overlay") &&
+            !e.target.closest(".header-icon")
+          ) {
+            searchOverlay.classList.remove("active");
+          }
+
+          if (
+            navOverlay?.classList.contains("active") &&
+            !e.target.closest("#nav-overlay") &&
+            !e.target.closest("#menu-toggle")
+          ) {
+            navOverlay.classList.remove("active");
+            headerLogo?.classList.remove("move-down");
+          }
+
+          if (
+            cartOverlay?.classList.contains("active") &&
+            !e.target.closest("#cart-overlay") &&
+            !e.target.closest("#cart-toggle")
+          ) {
+            cartOverlay.classList.remove("active");
+          }
+        });
+      }, 100); // DOM이 반영될 시간 확보
+    };
+
+    document.body.appendChild(script);
   });
+</script>
   </script>
 
 
