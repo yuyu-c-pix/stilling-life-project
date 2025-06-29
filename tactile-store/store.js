@@ -34,7 +34,7 @@ function initStore() {
     const count = document.querySelectorAll(".cart-item").length;
     const countElement = document.querySelector(".cart-count");
     if (countElement) {
-      countElement.textContent = `${count} Items`;
+      countElement.textContent = `${count} Item${count !== 1 ? "s" : ""}`;
     }
   }
 
@@ -44,6 +44,7 @@ function initStore() {
     localStorage.setItem("cartItems", JSON.stringify(filtered));
   }
 
+  // 버튼 클릭 시 이벤트 처리
   buttons.forEach(button => {
     button.addEventListener("click", () => {
       const gridItem = button.closest(".grid-item");
@@ -53,12 +54,16 @@ function initStore() {
       const name = gridItem.querySelector(".caption")?.textContent.trim() || "Item";
       const price = gridItem.querySelector(".item-price")?.textContent.trim() || "0 KRW";
 
+      // 중복 방지
       const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
-      stored.push({ imgSrc, name, price });
-      localStorage.setItem("cartItems", JSON.stringify(stored));
+      const exists = stored.some(item => item.imgSrc === imgSrc);
+      if (!exists) {
+        stored.push({ imgSrc, name, price });
+        localStorage.setItem("cartItems", JSON.stringify(stored));
+        addToCartItem(imgSrc, name, price);
+      }
 
-      addToCartItem(imgSrc, name, price);
-
+      // 썸네일 슬라이딩 애니메이션
       const clone = img.cloneNode();
       const rect = img.getBoundingClientRect();
       clone.style.position = "fixed";
@@ -83,11 +88,17 @@ function initStore() {
     });
   });
 
+  // 저장된 항목을 초기 렌더링
   const savedItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
   savedItems.forEach(({ imgSrc, name, price }) => {
     addToCartItem(imgSrc, name, price);
   });
 }
 
-// 기존 DOMContentLoaded 안에서만 실행되던 것을 직접 호출
-initStore();
+// ⛔ initStore() 직접 호출 ❌
+// ✅ 아래처럼 주입 완료 후에 한 번만 실행되게
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    initStore();
+  }, 150); // 필요시 200~250도 가능
+});
