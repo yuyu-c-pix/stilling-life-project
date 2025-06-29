@@ -95,10 +95,14 @@ function initStore() {
   });
 }
 
-// ⛔ initStore() 직접 호출 ❌
-// ✅ 아래처럼 주입 완료 후에 한 번만 실행되게
 window.addEventListener("load", () => {
-  setTimeout(() => {
-    initStore();
-  }, 150); // 필요시 200~250도 가능
+  const waitForCartContainer = () => {
+    const cart = document.getElementById("cart-items");
+    if (cart) {
+      initStore();
+    } else {
+      setTimeout(waitForCartContainer, 50); // 계속 DOM 확인
+    }
+  };
+  waitForCartContainer();
 });
