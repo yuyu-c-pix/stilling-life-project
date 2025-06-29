@@ -462,9 +462,16 @@ html, body {
   overflow: hidden;
 }
 
+.cart-header h2,
+.cart-header .cart-title {
+  margin: 0; /* 기본 h2 마진 제거 */
+}
+
+
 .cart-header {
   margin-top: 12px;
-  margin-bottom: 12px; 
+  margin-bottom: 12px;
+  gap: 12px; 
   text-align: center;
   font-family: "megascope-variable";
   font-variation-settings: "wght" 600, "SCOP" 0;
@@ -558,7 +565,7 @@ html, body {
 
 .cart-count {
   font-size: clamp(0.9rem, 1.4vw, 1.2rem);
-  margin-top: 12px; /* ✅ 간격 12px */
+
   color: #333;
   letter-spacing: clamp(0.02em, 0.4vw, 0.09em);
 }
