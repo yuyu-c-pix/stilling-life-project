@@ -422,22 +422,35 @@ html, body {
 }
 
 .cart-overlay {
-  position: absolute; /* ✅ relative로 변경 */
+  position: fixed;
   bottom: 0px;
   left: 50%;
   width: clamp(320px, 100%, 720px);
-  transform: translate(-50%, 100%);
+  transform: translate(-50%, 100%); /* ✅ 하나로 통합 */
   background-color: #fbe5cd;
-  border: 2px dotted black;
+  border-top: 2px dotted black;
+  border-left: 2px dotted black;
+  border-right: 2px dotted black;
+  border-bottom: 2px dotted black;
   z-index: 9999;
   transition: transform 0.6s ease;
   will-change: transform;
 }
 
+.cart-bottom-fixed {
+  margin-top: 32px;
+}
 
 .cart-overlay.active {
   bottom: 12px;
   transform: translate(-50%, 0); 
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
 }
 
 .cart-item {
@@ -451,6 +464,11 @@ html, body {
   gap: 12px;
 }
 
+.cart-items-scrollable {
+  max-height: 400px; /* or clamp 단위로 반응형 가능 */
+  overflow-y: auto;
+  padding-right: 8px;
+}
 
 
 .cart-item img {
@@ -523,13 +541,4 @@ html, body {
   font-size: clamp(0.9rem, 1.4vw, 1.2rem);
   margin-top: 4px;
   color: #333;
-}
-.cart-wrapper {
-  position: fixed;
-  top: 120px;          /* ✅ 조건 발생 시 여백 확보 */
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow-y: auto;    /* ✅ 이 안에서 스크롤 생기도록 */
-  z-index: 9998;       /* 오버레이보다 아래에 배치 */
 }
