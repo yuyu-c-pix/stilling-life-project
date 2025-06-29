@@ -422,6 +422,7 @@ html, body {
 }
 
 .cart-overlay {
+  max-height: 70vh; 
   position: fixed;
   bottom: 0px;
   left: 50%;
@@ -439,18 +440,12 @@ html, body {
 
 .cart-bottom-fixed {
   margin-top: 32px;
+  padding: 24px 16px;
 }
 
 .cart-overlay.active {
   bottom: 12px;
   transform: translate(-50%, 0); 
-}
-
-.cart-items {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 16px;
 }
 
 .cart-item {
@@ -465,6 +460,7 @@ html, body {
 }
 
 .cart-items-scrollable {
+  flex: 1;
   max-height: 400px; /* or clamp 단위로 반응형 가능 */
   overflow-y: auto;
   padding-right: 8px;
