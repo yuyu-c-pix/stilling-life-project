@@ -431,13 +431,9 @@ html, body {
   will-change: transform;
 }
 
-/* active일 때만 보여짐 */
+
 .cart-overlay.active {
   display: block;
-}
-
-
-.cart-overlay.active {
   bottom: 12px;
   transform: translate(-50%, 0); 
 }
