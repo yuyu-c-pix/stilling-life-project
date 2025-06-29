@@ -382,13 +382,20 @@ function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
   const cartItemsContainer = document.getElementById("cart-items");
   if (!cartItemsContainer) return;
 
-  // 정확히 동일한 name인지 판별
   const existingItem = [...cartItemsContainer.children].find(item =>
     item.dataset.name?.trim() === name.trim()
   );
 
+  if (!existingItem) {
+    const itemCount = cartItemsContainer.querySelectorAll(".cart-item").length;
+    if (itemCount >= 5) {
+      alert("장바구니에는 최대 5개의 상품만 담을 수 있어요.");
+      return;
+    }
+  }
+
+  // 기존 아이템이 있다면 수량 증가
   if (existingItem) {
-    // 이미 있는 경우: 수량만 증가
     const qtyElem = existingItem.querySelector(".qty-count");
     const currentQty = parseInt(qtyElem.textContent.split(":")[1]) || 1;
     qtyElem.textContent = `Qty:${currentQty + 1}`;
@@ -397,17 +404,10 @@ function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
     return;
   }
 
-  // 현재 cart-item 개수 체크 (중복 아닌 것만 카운트)
-  const itemCount = cartItemsContainer.querySelectorAll(".cart-item").length;
-  if (itemCount >= 5) {
-    alert("장바구니에는 최대 5개까지만 담을 수 있어요.");
-    return;
-  }
-
-  // 새 항목 생성
+  // 새로운 아이템 생성
   const cartItem = document.createElement("div");
   cartItem.className = "cart-item";
-  cartItem.dataset.name = name.trim(); // name 저장 시도 정확히
+  cartItem.dataset.name = name.trim();
 
   cartItem.innerHTML = `
     <img src="${imgSrc}" alt="${name}" />
@@ -430,24 +430,4 @@ function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
   cartItemsContainer.appendChild(cartItem);
   updateCartCount();
   saveCartToLocalStorage();
-}
-
-function saveCartToLocalStorage() {
-  const items = [];
-  document.querySelectorAll(".cart-item").forEach(item => {
-    const imgSrc = item.querySelector("img")?.src;
-    const name = item.querySelector(".cart-item-details div:first-child")?.textContent;
-    const price = item.querySelector(".cart-item-meta div:first-child")?.textContent;
-    const qty = item.querySelector(".qty-count")?.textContent.replace("Qty:", "") || "1";
-    items.push({ imgSrc, name, price, quantity: parseInt(qty) });
-  });
-  localStorage.setItem("cartItems", JSON.stringify(items));
-}
-
-function updateCartCount() {
-  const count = document.querySelectorAll(".cart-item").length;
-  const countElement = document.querySelector(".cart-count");
-  if (countElement) {
-    countElement.textContent = `${count} Item${count !== 1 ? "s" : ""}`;
-  }
 }
