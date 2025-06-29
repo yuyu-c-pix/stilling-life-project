@@ -339,54 +339,56 @@ document.addEventListener("click", (e) => {
   }
 });
 
-function updateCartOverlayPosition() {
-  const overlay = document.getElementById("cart-overlay");
-  const viewportHeight = window.innerHeight;
-  const overlayHeight = overlay.scrollHeight;
+const cartToggle = document.getElementById("cart-toggle");
+const cartWrapper = document.getElementById("cart-overlay-wrapper");
+const cartOverlay = document.getElementById("cart-overlay");
 
-  if (overlayHeight > viewportHeight - 120) {
-    // 길면: 문서 흐름 안에서 top 120px 부터 시작
-    overlay.style.position = "absolute";
-    overlay.style.top = "120px";
-    overlay.style.bottom = "auto";
-    overlay.style.left = "50%";
-    overlay.style.transform = "translateX(-50%)"; // X축만 중앙
+cartToggle.addEventListener("click", (e) => {
+  e.stopPropagation(); // 이벤트 전파 방지
+  const isOpen = cartWrapper.classList.contains("active");
+
+  if (isOpen) {
+    cartWrapper.classList.remove("active");
+    cartOverlay.classList.remove("active");
+    document.body.style.overflow = "";
   } else {
-    // 짧으면: fixed로 바닥에서 슬라이드 업
-    overlay.style.position = "fixed";
-    overlay.style.top = "auto";
-    overlay.style.bottom = "12px";
-    overlay.style.left = "50%";
-    overlay.style.transform = "translate(-50%, 0)"; // 슬라이드용
+    cartWrapper.classList.add("active");
+    cartOverlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+
+    // 위치 재계산
+    setTimeout(() => {
+      const overlayHeight = cartOverlay.scrollHeight;
+      const viewportHeight = window.innerHeight;
+
+      if (overlayHeight > viewportHeight - 120) {
+        cartOverlay.style.position = "absolute";
+        cartOverlay.style.top = "120px";
+        cartOverlay.style.bottom = "auto";
+        cartOverlay.style.transform = "translateX(-50%)";
+      } else {
+        cartOverlay.style.position = "fixed";
+        cartOverlay.style.bottom = "12px";
+        cartOverlay.style.top = "auto";
+        cartOverlay.style.transform = "translate(-50%, 0)";
+      }
+    }, 50);
+  }
+});
+
+function closeAllOverlaysExcept(except = null) {
+  if (except !== 'nav') {
+    document.getElementById("nav-overlay").classList.remove("active");
+    document.querySelector(".header-logo")?.classList.remove("move-down");
+  }
+
+  if (except !== 'cart') {
+    document.getElementById("cart-overlay-wrapper")?.classList.remove("active");
+    document.getElementById("cart-overlay")?.classList.remove("active");
+  }
+
+  if (except !== 'search') {
+    document.getElementById("search-overlay")?.classList.remove("active");
   }
 }
-
-const cartToggle = document.getElementById("cart-toggle");
-const cartOverlay = document.getElementById("cart-overlay");
-const cartWrapper = document.getElementById("cart-overlay-wrapper");
-
-cartToggle.addEventListener("click", () => {
-  const isActive = cartOverlay.classList.contains("active");
-
-  if (isActive) {
-    cartOverlay.classList.remove("active");
-     cartWrapper.classList.remove("active");
-    cartOverlay.style.transform = "translate(-50%, 100%)"; // 닫힐 때 슬라이드 다운
-    document.body.style.overflow = ""; // 스크롤 잠금 해제
-  } else {
-    cartOverlay.classList.add("active");
-     cartWrapper.classList.add("active"); 
-    updateCartOverlayPosition(); // 열린 상태일 때 위치 갱신
-    document.body.style.overflow = "hidden"; // body 스크롤 잠금
-  }
-});
-
-window.addEventListener("resize", () => {
-  if (cartOverlay.classList.contains("active")) {
-    updateCartOverlayPosition();
-  }
-});
-
-document.body.style.overflow = "hidden"; // 오버레이 열릴 때
-document.body.style.overflow = "";       // 닫을 때 복구
 
