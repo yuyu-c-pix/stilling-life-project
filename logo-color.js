@@ -1,118 +1,102 @@
-function setupLogoColor() {
-  const headerLogo = document.querySelector(".header-logo");
-  const toggleButton = document.getElementById("menu-toggle");
-  const navOverlay = document.getElementById("nav-overlay");
-  const searchIcon = document.querySelectorAll(".header-icon")[0];
-  const searchOverlay = document.getElementById("search-overlay");
+fetch("/stilling-life-project/header.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("header-container").innerHTML = data;
 
-  // 요소들이 아직 주입되지 않은 경우 재시도
-  if (!headerLogo || !toggleButton || !navOverlay) {
-    setTimeout(setupLogoColor, 50);
-    return;
-  }
+    const script = document.createElement("script");
+    script.src = "../script.js";
 
-  const variantClasses = [
-    "logo-variant-1",
-    "logo-variant-2",
-    "logo-variant-3",
-    "logo-variant-4",
-    "logo-variant-5"
-  ];
-  let currentIndex = 0;
+    script.onload = () => {
+      const logoScript = document.createElement("script");
+      logoScript.src = "../logo-color.js";
 
-  toggleButton.addEventListener("click", () => {
-    requestAnimationFrame(() => {
-      const isActive = navOverlay.classList.contains("active");
+      logoScript.onload = () => {
+        // 이벤트 바인딩
+        setTimeout(() => {
+          const toggleButton = document.getElementById("menu-toggle");
+          const closeBtn = document.getElementById("nav-close-toggle");
+          const navOverlay = document.getElementById("nav-overlay");
+          const headerLogo = document.querySelector(".header-logo");
+          const cartToggle = document.getElementById("cart-toggle");
+          const cartOverlay = document.getElementById("cart-overlay");
 
-      if (isActive) {
-        headerLogo.classList.add("move-down");
-        headerLogo.style.filter = `invert(1) sepia(1) saturate(5) hue-rotate(${Math.random() * 360}deg)`;
-        headerLogo.style.color = colors[currentColor];
-        currentColor = (currentColor + 1) % colors.length;
-      } else {
-        headerLogo.classList.remove("move-down");
-        headerLogo.style.color = "";
-        headerLogo.style.filter = "";
-      }
-    });
+          if (toggleButton && navOverlay && headerLogo) {
+            toggleButton.addEventListener("click", (e) => {
+              e.preventDefault();
+              // 오버레이 상태를 토글하면서 로고 스타일 변경
+              const isOpen = navOverlay.classList.contains("active");
+              navOverlay.classList.toggle("active");
+              headerLogo.classList.toggle("move-down");
+
+              // 오버레이가 열릴 때만 로고 색상 변경
+              if (!isOpen) {
+                headerLogo.style.filter = `invert(1) sepia(1) saturate(5) hue-rotate(${Math.random() * 360}deg)`;
+              } else {
+                // 오버레이가 닫힐 때 로고 색상 초기화
+                resetLogoStyle();
+              }
+            });
+          }
+
+          if (closeBtn && navOverlay && headerLogo) {
+            closeBtn.addEventListener("click", () => {
+              navOverlay.classList.remove("active");
+              headerLogo.classList.remove("move-down");
+              resetLogoStyle();  // 오버레이 닫을 때 로고 스타일 복원
+            });
+          }
+
+          if (cartToggle && cartOverlay) {
+            cartToggle.addEventListener("click", () => {
+              cartOverlay.classList.toggle("active");
+            });
+          }
+
+          // 오버레이 외부 클릭 시 로고 스타일 복원
+          document.addEventListener("click", (e) => {
+            const searchOverlay = document.getElementById("search-overlay");
+            if (
+              searchOverlay?.classList.contains("active") &&
+              !e.target.closest("#search-overlay") &&
+              !e.target.closest(".header-icon")
+            ) {
+              searchOverlay.classList.remove("active");
+            }
+
+            if (
+              navOverlay?.classList.contains("active") &&
+              !e.target.closest("#nav-overlay") &&
+              !e.target.closest("#menu-toggle")
+            ) {
+              navOverlay.classList.remove("active");
+              headerLogo?.classList.remove("move-down");
+              resetLogoStyle();  // 오버레이 외부 클릭 시 로고 스타일 복원
+            }
+
+            if (
+              cartOverlay?.classList.contains("active") &&
+              !e.target.closest("#cart-overlay") &&
+              !e.target.closest("#cart-toggle")
+            ) {
+              cartOverlay.classList.remove("active");
+              resetLogoStyle();  // 장바구니 외부 클릭 시 로고 스타일 복원
+            }
+          });
+        }, 100);
+      };
+
+      document.body.appendChild(logoScript);
+    };
+
+    document.body.appendChild(script);
   });
 
-  searchIcon.addEventListener("click", () => {
-    requestAnimationFrame(() => {
-      const isActive = searchOverlay.classList.contains("active");
-
-      if (isActive) {
-        headerLogo.classList.add("move-down");
-        headerLogo.style.filter = `invert(1) sepia(1) saturate(5) hue-rotate(${Math.random() * 360}deg)`;
-        headerLogo.style.color = colors[currentColor];
-        currentColor = (currentColor + 1) % colors.length;
-      } else {
-        headerLogo.classList.remove("move-down");
-        headerLogo.style.color = "";
-        headerLogo.style.filter = "";
-      }
-    });
-  });
-
-  // 햄버거 클릭
-  toggleButton.addEventListener("click", (e) => {
-    e.stopPropagation(); // 문서 클릭 이벤트 전파 막기
-    const isOpen = navOverlay.classList.contains("active");
-
-    searchOverlay.classList.remove("active");
-
-    navOverlay.classList.toggle("active");
-    headerLogo.classList.toggle("move-down");
-
-    document.body.classList.remove(...variantClasses);
-    if (!isOpen) {
-      const randomClass = variantClasses[Math.floor(Math.random() * variantClasses.length)];
-      document.body.classList.add(randomClass);
-    }
-  });
-
-  // 돋보기 클릭
-  searchIcon.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const isOpen = searchOverlay.classList.contains("active");
-
-    navOverlay.classList.remove("active");
-
-    searchOverlay.classList.toggle("active");
-    headerLogo.classList.toggle("move-down");
-
-    document.body.classList.remove(...variantClasses);
-    if (!isOpen) {
-      const randomClass = variantClasses[Math.floor(Math.random() * variantClasses.length)];
-      document.body.classList.add(randomClass);
-    }
-  });
-
-  // 아무 곳이나 클릭 → 둘 다 닫기 및 로고 원 상태로 복구
-  document.addEventListener("click", (e) => {
-    // 오버레이 영역을 제외한 곳 클릭 시
-    if (!e.target.closest("#nav-overlay") && !e.target.closest("#search-overlay")) {
-      navOverlay.classList.remove("active");
-      searchOverlay.classList.remove("active");
-      headerLogo.classList.remove("move-down");
-
-      // 오버레이 외의 곳을 클릭했을 때 로고 원 상태로 복구
-      resetLogoStyle();
-    }
-  });
-
-  document.querySelector(".search-box").addEventListener("click", (e) => {
-    e.stopPropagation();
-  });
-}
-
-// DOM이 반영된 이후 실행 보장
-setTimeout(setupLogoColor, 0);
-
+// resetLogoStyle() 함수는 여기에서 다시 정의되어야 합니다.
 function resetLogoStyle() {
   const headerLogo = document.querySelector(".header-logo");
-  headerLogo.classList.remove("move-down");
-  headerLogo.style.color = "black";  // 명시적으로 검정색으로 설정
-  headerLogo.style.filter = "";  // 필터 초기화
-  document.body.classList.remove(...variantClasses);  // 적용된 색상 클래스 제거
+  if (headerLogo) {
+    headerLogo.classList.remove("move-down");
+    headerLogo.style.color = "black";  // 로고 색상 초기화
+    headerLogo.style.filter = "";  // 필터 초기화
+  }
 }
