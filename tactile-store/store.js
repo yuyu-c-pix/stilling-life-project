@@ -1,4 +1,5 @@
 function initStore() {
+  console.log("🔥 initStore 실행됨");
   const buttons = document.querySelectorAll(".add-to-cart-button");
 
   function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
