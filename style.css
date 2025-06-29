@@ -512,6 +512,7 @@ html, body {
   gap: 4px;
   overflow: hidden;
   font-size: clamp(0.8rem, 1.4vw, 1rem);
+  letter-spacing: clamp(0.02em, 0.4vw, 0.09em);
 }
 
 .cart-item-meta {
