@@ -301,6 +301,9 @@
               cartOverlay.classList.remove("active");
             }
           });
+          const storeScript = document.createElement("script");
+      storeScript.src = "store.js";
+      document.body.appendChild(storeScript);
         }, 100);
       };
 
