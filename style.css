@@ -426,14 +426,14 @@ html, body {
   bottom: 0px;
   left: 50%;
   width: clamp(320px, 100%, 720px);
-  max-height: 70vh;
+  height: 100vh; /* ✅ 이거로 바꿔야 콘텐츠 높이 따라 스크롤 생김 */
   transform: translate(-50%, 100%);
   background-color: #fbe5cd;
   border: 2px dotted black;
   z-index: 9999;
   transition: transform 0.6s ease;
   will-change: transform;
-  overflow-y: auto; /* ✅ 전체 스크롤 가능하게 */
+  overflow-y: auto; /* ✅ 전체를 스크롤하게끔 유지 */
 }
 
 .cart-bottom-fixed {

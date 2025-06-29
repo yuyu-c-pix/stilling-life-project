@@ -339,12 +339,19 @@ document.addEventListener("click", (e) => {
   }
 });
 
-function openCartOverlay() {
-  document.getElementById("cart-overlay").classList.add("active");
-  document.body.style.overflow = "hidden"; // ✅ 바디 스크롤 방지
-}
+document.getElementById("cart-toggle").addEventListener("click", () => {
+  document.getElementById("cart-overlay").classList.toggle("active");
+  document.body.style.overflow = "hidden"; // ✅ body 스크롤 막기
+});
 
-function closeCartOverlay() {
-  document.getElementById("cart-overlay").classList.remove("active");
-  document.body.style.overflow = ""; // ✅ 원상 복구
-}
+document.addEventListener("click", (e) => {
+  const overlay = document.getElementById("cart-overlay");
+  if (
+    overlay.classList.contains("active") &&
+    !e.target.closest("#cart-overlay") &&
+    !e.target.closest("#cart-toggle")
+  ) {
+    overlay.classList.remove("active");
+    document.body.style.overflow = ""; // ✅ 스크롤 복구
+  }
+});
