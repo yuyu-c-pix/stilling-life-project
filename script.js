@@ -302,52 +302,40 @@ imageData.forEach(({ src, style }) => {
 
 
 
-script.onload = () => {
-  const logoScript = document.createElement("script");
-  logoScript.src = "../logo-color.js";
-  document.body.appendChild(logoScript);
+document.addEventListener("click", (e) => {
+  const searchOverlay = document.getElementById("search-overlay");
+  const searchIcon = document.querySelectorAll(".header-icon")[0];
+  const navOverlay = document.getElementById("nav-overlay");
+  const navToggle = document.getElementById("menu-toggle");
+  const cartOverlay = document.getElementById("cart-overlay");
+  const cartIcon = document.getElementById("cart-toggle");
 
-  // 안전하게 전체 바인딩은 load 이후에
-  window.addEventListener("load", () => {
-    const toggleButton = document.getElementById("menu-toggle");
-    const closeBtn = document.getElementById("nav-close-toggle");
-    const navOverlay = document.getElementById("nav-overlay");
-    const cartToggle = document.getElementById("cart-toggle");
-    const cartOverlay = document.getElementById("cart-overlay");
-    const searchOverlay = document.getElementById("search-overlay");
+  // Search
+  if (
+    searchOverlay?.classList.contains("active") &&
+    !e.target.closest("#search-overlay") &&
+    !e.target.closest(".header-icon")
+  ) {
+    searchOverlay.classList.remove("active");
+  }
 
-    if (toggleButton && navOverlay) {
-      toggleButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        navOverlay.classList.toggle("active");
-      });
-    }
+  // Nav
+  if (
+    navOverlay?.classList.contains("active") &&
+    !e.target.closest("#nav-overlay") &&
+    !e.target.closest("#menu-toggle")
+  ) {
+    navOverlay.classList.remove("active");
+    document.querySelector(".header-logo")?.classList.remove("move-down");
+  }
 
-    if (closeBtn && navOverlay) {
-      closeBtn.addEventListener("click", () => {
-        navOverlay.classList.remove("active");
-      });
-    }
-
-    if (cartToggle && cartOverlay) {
-      cartToggle.addEventListener("click", () => {
-        cartOverlay.classList.toggle("active");
-      });
-    }
-
-    // ✅ 바깥 클릭 시 닫히는 search 기능
-    document.addEventListener("click", (event) => {
-      const searchInput = document.getElementById("searchInput");
-      if (
-        searchOverlay &&
-        searchOverlay.classList.contains("active") &&
-        !searchOverlay.contains(event.target) &&
-        event.target.id !== "search-toggle" &&
-        event.target !== searchInput
-      ) {
-        searchOverlay.classList.remove("active");
-      }
-    });
-  });
-};
+  // Cart
+  if (
+    cartOverlay?.classList.contains("active") &&
+    !e.target.closest("#cart-overlay") &&
+    !e.target.closest("#cart-toggle")
+  ) {
+    cartOverlay.classList.remove("active");
+  }
+});
 
