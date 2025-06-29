@@ -567,3 +567,15 @@ html, body {
   color: #333;
   letter-spacing: clamp(0.02em, 0.4vw, 0.09em);
 }
+
+.cart-empty {
+  display: none;
+  text-align: center;
+  padding: 48px 16px;
+  color: #fcfcfc;
+  font-family: "megascope-variable";
+  font-variation-settings: "wght" 600, "SCOP" 0;
+  font-size: clamp(0.9rem, 1.4vw, 1.2rem);
+  letter-spacing: clamp(0.02em, 0.4vw, 0.09em);
+  line-height: 1.2;
+}

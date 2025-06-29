@@ -345,6 +345,21 @@ document.addEventListener("click", (e) => {
   }
 });
 
+function updateCartCount() {
+  const cartItems = document.querySelectorAll(".cart-item");
+  const count = cartItems.length;
+  const countElement = document.querySelector(".cart-count");
+  const emptyMessage = document.getElementById("cart-empty");
+
+  if (countElement) {
+    countElement.textContent = `${count} Item${count !== 1 ? "s" : ""}`;
+  }
+
+  if (emptyMessage) {
+    emptyMessage.style.display = count === 0 ? "block" : "none";
+  }
+}
+
 
 
 
