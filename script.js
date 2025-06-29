@@ -302,40 +302,49 @@ imageData.forEach(({ src, style }) => {
 
 
 
-document.addEventListener("click", (e) => {
-  const searchOverlay = document.getElementById("search-overlay");
-  const searchIcon = document.querySelectorAll(".header-icon")[0];
-  const navOverlay = document.getElementById("nav-overlay");
-  const navToggle = document.getElementById("menu-toggle");
-  const cartOverlay = document.getElementById("cart-overlay");
-  const cartIcon = document.getElementById("cart-toggle");
+function setupOverlayCloseEvents() {
+  document.addEventListener("click", (e) => {
+    const searchOverlay = document.getElementById("search-overlay");
+    const searchIcon = document.querySelectorAll(".header-icon")[0];
+    const navOverlay = document.getElementById("nav-overlay");
+    const navToggle = document.getElementById("menu-toggle");
+    const cartOverlay = document.getElementById("cart-overlay");
+    const cartIcon = document.getElementById("cart-toggle");
 
-  // Search
-  if (
-    searchOverlay?.classList.contains("active") &&
-    !e.target.closest("#search-overlay") &&
-    !e.target.closest(".header-icon")
-  ) {
-    searchOverlay.classList.remove("active");
-  }
+    // Search
+    if (
+      searchOverlay?.classList.contains("active") &&
+      !e.target.closest("#search-overlay") &&
+      !e.target.closest(".header-icon")
+    ) {
+      searchOverlay.classList.remove("active");
+    }
 
-  // Nav
-  if (
-    navOverlay?.classList.contains("active") &&
-    !e.target.closest("#nav-overlay") &&
-    !e.target.closest("#menu-toggle")
-  ) {
-    navOverlay.classList.remove("active");
-    document.querySelector(".header-logo")?.classList.remove("move-down");
-  }
+    // Nav
+    if (
+      navOverlay?.classList.contains("active") &&
+      !e.target.closest("#nav-overlay") &&
+      !e.target.closest("#menu-toggle")
+    ) {
+      navOverlay.classList.remove("active");
+      document.querySelector(".header-logo")?.classList.remove("move-down");
+    }
 
-  // Cart
-  if (
-    cartOverlay?.classList.contains("active") &&
-    !e.target.closest("#cart-overlay") &&
-    !e.target.closest("#cart-toggle")
-  ) {
-    cartOverlay.classList.remove("active");
-  }
-});
+    // Cart
+    if (
+      cartOverlay?.classList.contains("active") &&
+      !e.target.closest("#cart-overlay") &&
+      !e.target.closest("#cart-toggle")
+    ) {
+      cartOverlay.classList.remove("active");
+    }
+  });
+}
+
+// DOMContentLoaded 이후 또는 fetch 이후에 호출
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupOverlayCloseEvents);
+} else {
+  setupOverlayCloseEvents();
+}
 
