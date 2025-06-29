@@ -124,17 +124,3 @@ function renderCartItems() {
   });
 }
 
-button.addEventListener("click", () => {
-  const gridItem = button.closest(".grid-item");
-  const img = gridItem.querySelector("img");
-  const name = gridItem.querySelector(".caption")?.textContent || "Item";
-  const price = gridItem.querySelector(".item-price")?.textContent || "0";
-  const imgSrc = img?.src || "";
-
-  const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
-  stored.push({ img: imgSrc, name, price, quantity: 1 });
-  localStorage.setItem("cartItems", JSON.stringify(stored));
-
-  renderCartItems(); // 🔁 여기!
-});
-
