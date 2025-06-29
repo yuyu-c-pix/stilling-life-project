@@ -303,16 +303,16 @@
             }
           });
 
-            const storeScript = document.createElement("script");
-          storeScript.src = "store.js";
-          storeScript.onload = () => {
-            setTimeout(() => {
-              if (typeof initStore === "function") {
-                console.log("🔥 store.js 로드됨 → initStore 실행");
-                initStore();
-              }
-            }, 50);
-          };
+             const storeScript = document.createElement("script");
+              storeScript.src = "store.js";
+              storeScript.onload = () => {
+                setTimeout(() => {
+                  if (typeof initStore === "function") {
+                    console.log("🔥 store.js 로드됨 → initStore 실행");
+                    initStore();
+                  }
+                }, 50);
+              };
           document.body.appendChild(storeScript);
 
         }, 100);
