@@ -422,24 +422,18 @@ html, body {
 }
 
 .cart-overlay {
-  position: fixed;
+  position: absolute; /* ✅ relative로 변경 */
   bottom: 0px;
   left: 50%;
   width: clamp(320px, 100%, 720px);
-  height: 100vh; /* ✅ 이거로 바꿔야 콘텐츠 높이 따라 스크롤 생김 */
   transform: translate(-50%, 100%);
   background-color: #fbe5cd;
   border: 2px dotted black;
   z-index: 9999;
   transition: transform 0.6s ease;
   will-change: transform;
-  overflow-y: auto; /* ✅ 전체를 스크롤하게끔 유지 */
 }
 
-.cart-bottom-fixed {
-  margin-top: 32px;
-  padding: 24px 16px;
-}
 
 .cart-overlay.active {
   bottom: 12px;
@@ -529,4 +523,13 @@ html, body {
   font-size: clamp(0.9rem, 1.4vw, 1.2rem);
   margin-top: 4px;
   color: #333;
+}
+.cart-wrapper {
+  position: fixed;
+  top: 120px;          /* ✅ 조건 발생 시 여백 확보 */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;    /* ✅ 이 안에서 스크롤 생기도록 */
+  z-index: 9998;       /* 오버레이보다 아래에 배치 */
 }

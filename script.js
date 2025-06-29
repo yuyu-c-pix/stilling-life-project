@@ -339,19 +339,23 @@ document.addEventListener("click", (e) => {
   }
 });
 
-document.getElementById("cart-toggle").addEventListener("click", () => {
-  document.getElementById("cart-overlay").classList.toggle("active");
-  document.body.style.overflow = "hidden"; // ✅ body 스크롤 막기
-});
+function toggleCartOverlay() {
+  const wrapper = document.querySelector(".cart-wrapper");
+  const overlay = document.querySelector(".cart-overlay");
 
-document.addEventListener("click", (e) => {
-  const overlay = document.getElementById("cart-overlay");
-  if (
-    overlay.classList.contains("active") &&
-    !e.target.closest("#cart-overlay") &&
-    !e.target.closest("#cart-toggle")
-  ) {
-    overlay.classList.remove("active");
-    document.body.style.overflow = ""; // ✅ 스크롤 복구
+  wrapper.classList.toggle("active");
+
+  if (wrapper.classList.contains("active")) {
+    document.body.style.overflow = "hidden";
+
+    const needsScroll = overlay.scrollHeight > window.innerHeight - 120;
+    if (needsScroll) {
+      wrapper.style.overflowY = "auto";
+    } else {
+      wrapper.style.overflowY = "visible";
+    }
+  } else {
+    document.body.style.overflow = "";
+    wrapper.style.overflowY = "";
   }
-});
+}
