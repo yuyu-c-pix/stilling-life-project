@@ -23,16 +23,17 @@ fetch("/stilling-life-project/header.html")
           if (toggleButton && navOverlay && headerLogo) {
             toggleButton.addEventListener("click", (e) => {
               e.preventDefault();
-              // 오버레이 상태를 토글하면서 로고 스타일 변경
               const isOpen = navOverlay.classList.contains("active");
+
+              // 메뉴 오버레이를 토글
               navOverlay.classList.toggle("active");
               headerLogo.classList.toggle("move-down");
 
-              // 오버레이가 열릴 때만 로고 색상 변경
               if (!isOpen) {
+                // 메뉴 오버레이가 열릴 때 로고 색상 변경
                 headerLogo.style.filter = `invert(1) sepia(1) saturate(5) hue-rotate(${Math.random() * 360}deg)`;
               } else {
-                // 오버레이가 닫힐 때 로고 색상 초기화
+                // 메뉴 오버레이가 닫힐 때 로고 색상 복원
                 resetLogoStyle();
               }
             });
@@ -40,9 +41,10 @@ fetch("/stilling-life-project/header.html")
 
           if (closeBtn && navOverlay && headerLogo) {
             closeBtn.addEventListener("click", () => {
+              // 메뉴 오버레이가 닫힐 때 로고 색상 복원
               navOverlay.classList.remove("active");
               headerLogo.classList.remove("move-down");
-              resetLogoStyle();  // 오버레이 닫을 때 로고 스타일 복원
+              resetLogoStyle();
             });
           }
 
@@ -52,7 +54,7 @@ fetch("/stilling-life-project/header.html")
             });
           }
 
-          // 오버레이 외부 클릭 시 로고 스타일 복원
+          // 오버레이 외부 클릭 시 로고 색상 복원
           document.addEventListener("click", (e) => {
             const searchOverlay = document.getElementById("search-overlay");
             if (
@@ -68,9 +70,10 @@ fetch("/stilling-life-project/header.html")
               !e.target.closest("#nav-overlay") &&
               !e.target.closest("#menu-toggle")
             ) {
+              // 메뉴 오버레이 닫기
               navOverlay.classList.remove("active");
               headerLogo?.classList.remove("move-down");
-              resetLogoStyle();  // 오버레이 외부 클릭 시 로고 스타일 복원
+              resetLogoStyle();  // 로고 복원
             }
 
             if (
@@ -79,7 +82,7 @@ fetch("/stilling-life-project/header.html")
               !e.target.closest("#cart-toggle")
             ) {
               cartOverlay.classList.remove("active");
-              resetLogoStyle();  // 장바구니 외부 클릭 시 로고 스타일 복원
+              resetLogoStyle();  // 로고 복원
             }
           });
         }, 100);
