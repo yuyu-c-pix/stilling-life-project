@@ -1,0 +1,17 @@
+/* logo-theme.css */
+
+body.logo-variant-1 .header-logo {
+  color: #6ABD45; /* 빨강 */
+}
+body.logo-variant-2 .header-logo {
+  color: #7CCCBD; /* 파랑 */
+}
+body.logo-variant-3 .header-logo {
+  color: #E63B8F; /* 초록 */
+}
+body.logo-variant-4 .header-logo {
+  color: #F5DCC1; /* 주황 */
+}
+body.logo-variant-5 .header-logo {
+  color: #898B8D; /* 보라 */
+}
