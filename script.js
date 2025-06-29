@@ -339,56 +339,64 @@ document.addEventListener("click", (e) => {
   }
 });
 
-const cartToggle = document.getElementById("cart-toggle");
-const cartWrapper = document.getElementById("cart-overlay-wrapper");
-const cartOverlay = document.getElementById("cart-overlay");
 
-cartToggle.addEventListener("click", (e) => {
-  e.stopPropagation(); // 이벤트 전파 방지
-  const isOpen = cartWrapper.classList.contains("active");
 
-  if (isOpen) {
-    cartWrapper.classList.remove("active");
-    cartOverlay.classList.remove("active");
-    document.body.style.overflow = "";
-  } else {
-    cartWrapper.classList.add("active");
-    cartOverlay.classList.add("active");
-    document.body.style.overflow = "hidden";
+fetch("/path/to/header.html")
+  .then((res) => res.text())
+  .then((data) => {
+    document.getElementById("header-container").innerHTML = data;
 
-    // 위치 재계산
-    setTimeout(() => {
-      const overlayHeight = cartOverlay.scrollHeight;
-      const viewportHeight = window.innerHeight;
+    // ✅ fetch로 삽입된 후 DOM이 존재하므로 여기서 이벤트 연결
+    const cartToggle = document.getElementById("cart-toggle");
+    const cartWrapper = document.getElementById("cart-overlay-wrapper");
+    const cartOverlay = document.getElementById("cart-overlay");
 
-      if (overlayHeight > viewportHeight - 120) {
-        cartOverlay.style.position = "absolute";
-        cartOverlay.style.top = "120px";
-        cartOverlay.style.bottom = "auto";
-        cartOverlay.style.transform = "translateX(-50%)";
+    cartToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = cartWrapper.classList.contains("active");
+
+      if (isOpen) {
+        cartWrapper.classList.remove("active");
+        cartOverlay.classList.remove("active");
+        document.body.style.overflow = "";
       } else {
-        cartOverlay.style.position = "fixed";
-        cartOverlay.style.bottom = "12px";
-        cartOverlay.style.top = "auto";
-        cartOverlay.style.transform = "translate(-50%, 0)";
+        closeAllOverlaysExcept("cart");
+        cartWrapper.classList.add("active");
+        cartOverlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+
+        setTimeout(() => {
+          const overlayHeight = cartOverlay.scrollHeight;
+          const viewportHeight = window.innerHeight;
+
+          if (overlayHeight > viewportHeight - 120) {
+            cartOverlay.style.position = "absolute";
+            cartOverlay.style.top = "120px";
+            cartOverlay.style.bottom = "auto";
+            cartOverlay.style.transform = "translateX(-50%)";
+          } else {
+            cartOverlay.style.position = "fixed";
+            cartOverlay.style.bottom = "12px";
+            cartOverlay.style.top = "auto";
+            cartOverlay.style.transform = "translate(-50%, 0)";
+          }
+        }, 50);
       }
-    }, 50);
-  }
-});
+    });
 
-function closeAllOverlaysExcept(except = null) {
-  if (except !== 'nav') {
-    document.getElementById("nav-overlay").classList.remove("active");
-    document.querySelector(".header-logo")?.classList.remove("move-down");
-  }
+    function closeAllOverlaysExcept(except = null) {
+      if (except !== 'nav') {
+        document.getElementById("nav-overlay")?.classList.remove("active");
+        document.querySelector(".header-logo")?.classList.remove("move-down");
+      }
 
-  if (except !== 'cart') {
-    document.getElementById("cart-overlay-wrapper")?.classList.remove("active");
-    document.getElementById("cart-overlay")?.classList.remove("active");
-  }
+      if (except !== 'cart') {
+        document.getElementById("cart-overlay-wrapper")?.classList.remove("active");
+        document.getElementById("cart-overlay")?.classList.remove("active");
+      }
 
-  if (except !== 'search') {
-    document.getElementById("search-overlay")?.classList.remove("active");
-  }
-}
-
+      if (except !== 'search') {
+        document.getElementById("search-overlay")?.classList.remove("active");
+      }
+    }
+  });
