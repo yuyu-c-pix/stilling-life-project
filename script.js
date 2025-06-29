@@ -382,8 +382,8 @@ function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
   const cartItemsContainer = document.getElementById("cart-items");
   if (!cartItemsContainer) return;
 
-  // ✅ 5개 초과 시 추가 차단
-  if (cartItemsContainer.children.length >= 5) return;
+  const itemCount = cartItemsContainer.querySelectorAll('.cart-item').length;
+  if (itemCount >= 5) return;
 
   const cartItem = document.createElement("div");
   cartItem.className = "cart-item";
