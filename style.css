@@ -422,7 +422,10 @@ html, body {
 }
 
 .cart-overlay {
+  position: fixed;
+  bottom: 0;
   left: 50%;
+  transform: translate(-50%, 100%); /* 처음에 숨겨진 상태 */
   width: clamp(320px, 100%, 720px);
   background-color: #fbe5cd;
   border: 2px dotted black;

@@ -341,39 +341,43 @@ document.addEventListener("click", (e) => {
 
 function updateCartOverlayPosition() {
   const overlay = document.getElementById("cart-overlay");
-  if (!overlay) return;
-  const overlayHeight = overlay.scrollHeight;
   const viewportHeight = window.innerHeight;
+  const overlayHeight = overlay.scrollHeight;
 
   if (overlayHeight > viewportHeight - 120) {
-    // 너무 길면: absolute + top: 120px → 문서 흐름 따라 감
-   overlay.style.position = "absolute";
-    overlay.style.top = "240px";
+    // 길면: 문서 흐름 안에서 top 120px 부터 시작
+    overlay.style.position = "absolute";
+    overlay.style.top = "120px";
     overlay.style.bottom = "auto";
-    overlay.style.transform = "translateX(-50%,0)";
+    overlay.style.left = "50%";
+    overlay.style.transform = "translateX(-50%)"; // X축만 중앙
   } else {
-    // 짧으면: fixed + bottom: 12px → 슬라이드 업
+    // 짧으면: fixed로 바닥에서 슬라이드 업
     overlay.style.position = "fixed";
-    overlay.style.bottom = "12px";
     overlay.style.top = "auto";
-    overlay.style.transform = "translate(-50%, 100%)";
+    overlay.style.bottom = "12px";
+    overlay.style.left = "50%";
+    overlay.style.transform = "translate(-50%, 0)"; // 슬라이드용
   }
 }
+
 const cartToggle = document.getElementById("cart-toggle");
 const cartOverlay = document.getElementById("cart-overlay");
 
 cartToggle.addEventListener("click", () => {
-  cartOverlay.classList.toggle("active");
+  const isActive = cartOverlay.classList.contains("active");
 
-  if (cartOverlay.classList.contains("active")) {
-    updateCartOverlayPosition();
+  if (isActive) {
+    cartOverlay.classList.remove("active");
+    cartOverlay.style.transform = "translate(-50%, 100%)"; // 닫힐 때 슬라이드 다운
+    document.body.style.overflow = ""; // 스크롤 잠금 해제
   } else {
-    cartOverlay.style.display = "none";
-    document.body.style.overflow = ""; // 기존 페이지 스크롤 복구
+    cartOverlay.classList.add("active");
+    updateCartOverlayPosition(); // 열린 상태일 때 위치 갱신
+    document.body.style.overflow = "hidden"; // body 스크롤 잠금
   }
 });
 
-// 창 리사이즈 시 재계산
 window.addEventListener("resize", () => {
   if (cartOverlay.classList.contains("active")) {
     updateCartOverlayPosition();
