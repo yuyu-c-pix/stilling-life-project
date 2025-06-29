@@ -437,6 +437,8 @@ html, body {
 
 
 .cart-overlay.active {
+  max-height: calc((48px + 24px) * 5); /* 아이템 높이 + 간격 × 5 */
+  overflow: hidden;
   bottom: 12px;
   transform: translate(-50%, 0); 
 }
@@ -520,15 +522,21 @@ html, body {
   margin-top: 20px;
   text-align: center;
   font-family: "megascope-variable";
+  font-variation-settings: "wght" 600, "SCOP" 0;
+  font-size: clamp(0.8rem, 1.2vw, 2rem);
+  letter-spacing: clamp(0.02em, 0.4vw, 0.09em);
+
 }
 
 .cart-header h2 {
   font-size: clamp(1.2rem, 2vw, 1.6rem);
   margin: 0;
+  letter-spacing: clamp(0.02em, 0.4vw, 0.09em);
 }
 
 .cart-count {
   font-size: clamp(0.9rem, 1.4vw, 1.2rem);
   margin-top: 4px;
   color: #333;
+  letter-spacing: clamp(0.02em, 0.4vw, 0.09em);
 }

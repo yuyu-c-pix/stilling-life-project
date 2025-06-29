@@ -340,8 +340,6 @@ document.addEventListener("click", (e) => {
 });
 
 
-
-
 const cartToggle = document.getElementById("cart-toggle");
 const cartWrapper = document.getElementById("cart-overlay-wrapper");
 const cartOverlay = document.getElementById("cart-overlay");
@@ -379,19 +377,4 @@ cartToggle.addEventListener("click", (e) => {
   }
 });
 
-function closeAllOverlaysExcept(except = null) {
-  if (except !== 'nav') {
-    document.getElementById("nav-overlay").classList.remove("active");
-    document.querySelector(".header-logo")?.classList.remove("move-down");
-  }
-
-  if (except !== 'cart') {
-    document.getElementById("cart-overlay-wrapper")?.classList.remove("active");
-    document.getElementById("cart-overlay")?.classList.remove("active");
-  }
-
-  if (except !== 'search') {
-    document.getElementById("search-overlay")?.classList.remove("active");
-  }
-}
 
