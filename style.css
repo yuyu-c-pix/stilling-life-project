@@ -421,19 +421,7 @@ html, body {
   }
 }
 
-.cart-overlay-wrapper {
-  position: fixed;
-  inset: 0;
-  overflow-y: auto;
-  z-index: 9999;
-  display: none; 
-  pointer-events: none;
-}
 
-.cart-overlay-wrapper.active {
-  display: block;
-  pointer-events: auto;
-}
 .cart-overlay {
   position: fixed;
   bottom: 0;
