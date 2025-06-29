@@ -464,6 +464,7 @@ html, body {
 
 .cart-header {
   margin-top: 12px;
+  margin-bottom: 12px; 
   text-align: center;
   font-family: "megascope-variable";
   font-variation-settings: "wght" 600, "SCOP" 0;
