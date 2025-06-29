@@ -338,3 +338,13 @@ document.addEventListener("click", (e) => {
     cartOverlay.classList.remove("active");
   }
 });
+
+function openCartOverlay() {
+  document.getElementById("cart-overlay").classList.add("active");
+  document.body.style.overflow = "hidden"; // ✅ 바디 스크롤 방지
+}
+
+function closeCartOverlay() {
+  document.getElementById("cart-overlay").classList.remove("active");
+  document.body.style.overflow = ""; // ✅ 원상 복구
+}
