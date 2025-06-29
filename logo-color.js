@@ -3,8 +3,7 @@ function setupLogoColor() {
   const toggleButton = document.getElementById("menu-toggle");
   const navOverlay = document.getElementById("nav-overlay");
   const searchIcon = document.querySelectorAll(".header-icon")[0];
-    const searchOverlay = document.getElementById("search-overlay");
-
+  const searchOverlay = document.getElementById("search-overlay");
 
   // 요소들이 아직 주입되지 않은 경우 재시도
   if (!headerLogo || !toggleButton || !navOverlay) {
@@ -12,7 +11,7 @@ function setupLogoColor() {
     return;
   }
 
-    const variantClasses = [
+  const variantClasses = [
     "logo-variant-1",
     "logo-variant-2",
     "logo-variant-3",
@@ -27,7 +26,6 @@ function setupLogoColor() {
 
       if (isActive) {
         headerLogo.classList.add("move-down");
-        
         headerLogo.style.filter = `invert(1) sepia(1) saturate(5) hue-rotate(${Math.random() * 360}deg)`;
         headerLogo.style.color = colors[currentColor];
         currentColor = (currentColor + 1) % colors.length;
@@ -38,22 +36,25 @@ function setupLogoColor() {
       }
     });
   });
-  searchIcon.addEventListener("click", () => {
-  requestAnimationFrame(() => {
-    const isActive = searchOverlay.classList.contains("active");
 
-    if (isActive) {
-      headerLogo.classList.add("move-down");
-      headerLogo.style.filter = `invert(1) sepia(1) saturate(5) hue-rotate(${Math.random() * 360}deg)`;
-      headerLogo.style.color = colors[currentColor];
-      currentColor = (currentColor + 1) % colors.length;
-    } else {
-      headerLogo.classList.remove("move-down");
-      headerLogo.style.color = "";
-      headerLogo.style.filter = "";
-    }
+  searchIcon.addEventListener("click", () => {
+    requestAnimationFrame(() => {
+      const isActive = searchOverlay.classList.contains("active");
+
+      if (isActive) {
+        headerLogo.classList.add("move-down");
+        headerLogo.style.filter = `invert(1) sepia(1) saturate(5) hue-rotate(${Math.random() * 360}deg)`;
+        headerLogo.style.color = colors[currentColor];
+        currentColor = (currentColor + 1) % colors.length;
+      } else {
+        headerLogo.classList.remove("move-down");
+        headerLogo.style.color = "";
+        headerLogo.style.filter = "";
+      }
+    });
   });
-    // 햄버거 클릭
+
+  // 햄버거 클릭
   toggleButton.addEventListener("click", (e) => {
     e.stopPropagation(); // 문서 클릭 이벤트 전파 막기
     const isOpen = navOverlay.classList.contains("active");
@@ -87,20 +88,22 @@ function setupLogoColor() {
     }
   });
 
-  // 아무 곳이나 클릭 → 둘 다 닫기
-  document.addEventListener("click", () => {
-    navOverlay.classList.remove("active");
-    searchOverlay.classList.remove("active");
-    headerLogo.classList.remove("move-down");
-    document.body.classList.remove(...variantClasses);
+  // 아무 곳이나 클릭 → 둘 다 닫기 및 로고 원 상태로 복구
+  document.addEventListener("click", (e) => {
+    // 오버레이 영역을 제외한 곳 클릭 시
+    if (!e.target.closest("#nav-overlay") && !e.target.closest("#search-overlay")) {
+      navOverlay.classList.remove("active");
+      searchOverlay.classList.remove("active");
+      headerLogo.classList.remove("move-down");
+
+      // 오버레이 외의 곳을 클릭했을 때 로고 원 상태로 복구
+      resetLogoStyle();
+    }
   });
+
   document.querySelector(".search-box").addEventListener("click", (e) => {
-  e.stopPropagation();
-    });
-  
-
-});
-
+    e.stopPropagation();
+  });
 }
 
 // DOM이 반영된 이후 실행 보장
