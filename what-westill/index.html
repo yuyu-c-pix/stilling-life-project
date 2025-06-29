@@ -224,6 +224,7 @@
             closeBtn.addEventListener("click", () => {
               navOverlay.classList.remove("active");
               headerLogo.classList.remove("move-down");
+              resetLogoStyle(); 
             });
           }
 
@@ -270,6 +271,12 @@
 
     document.body.appendChild(script);
   });
+  function resetLogoStyle() {
+  headerLogo.classList.remove("move-down");
+  headerLogo.style.color = "";  // 색상 초기화
+  headerLogo.style.filter = "";  // 필터 초기화
+  document.body.classList.remove(...variantClasses);  // 적용된 색상 클래스 제거
+  }
     </script>
     <script>
       let inactivityTimer;
