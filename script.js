@@ -382,28 +382,32 @@ function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
   const cartItemsContainer = document.getElementById("cart-items");
   if (!cartItemsContainer) return;
 
+  // 정확히 동일한 name인지 판별
   const existingItem = [...cartItemsContainer.children].find(item =>
-    item.dataset.name === name
+    item.dataset.name?.trim() === name.trim()
   );
 
   if (existingItem) {
     // 이미 있는 경우: 수량만 증가
     const qtyElem = existingItem.querySelector(".qty-count");
-    qtyElem.textContent = "Qty:" + (parseInt(qtyElem.textContent.split(":")[1]) + 1);
+    const currentQty = parseInt(qtyElem.textContent.split(":")[1]) || 1;
+    qtyElem.textContent = `Qty:${currentQty + 1}`;
     saveCartToLocalStorage();
     updateCartCount();
     return;
   }
 
-  const itemCount = cartItemsContainer.querySelectorAll('.cart-item').length;
+  // 현재 cart-item 개수 체크 (중복 아닌 것만 카운트)
+  const itemCount = cartItemsContainer.querySelectorAll(".cart-item").length;
   if (itemCount >= 5) {
     alert("장바구니에는 최대 5개까지만 담을 수 있어요.");
     return;
   }
 
+  // 새 항목 생성
   const cartItem = document.createElement("div");
   cartItem.className = "cart-item";
-  cartItem.dataset.name = name;
+  cartItem.dataset.name = name.trim(); // name 저장 시도 정확히
 
   cartItem.innerHTML = `
     <img src="${imgSrc}" alt="${name}" />
@@ -427,6 +431,7 @@ function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
   updateCartCount();
   saveCartToLocalStorage();
 }
+
 function saveCartToLocalStorage() {
   const items = [];
   document.querySelectorAll(".cart-item").forEach(item => {
