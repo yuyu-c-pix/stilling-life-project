@@ -1,8 +1,9 @@
-document.addEventListener("DOMContentLoaded", () => {
+function initStore() {
   const buttons = document.querySelectorAll(".add-to-cart-button");
 
   function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
     const cartItemsContainer = document.getElementById("cart-items");
+    if (!cartItemsContainer) return;
 
     const cartItem = document.createElement("div");
     cartItem.className = "cart-item";
@@ -86,4 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
   savedItems.forEach(({ imgSrc, name, price }) => {
     addToCartItem(imgSrc, name, price);
   });
-});
+}
+
+// 기존 DOMContentLoaded 안에서만 실행되던 것을 직접 호출
+initStore();
