@@ -383,3 +383,6 @@ window.addEventListener("resize", () => {
     updateCartOverlayPosition();
   }
 });
+
+document.body.style.overflow = "hidden"; // 오버레이 열릴 때
+document.body.style.overflow = "";       // 닫을 때 복구
