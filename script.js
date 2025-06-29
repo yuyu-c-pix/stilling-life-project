@@ -166,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (toggleButton && navOverlay && headerLogo) {
     toggleButton.addEventListener("click", (e) => {
       e.preventDefault();
+      e.stopPropagation(); 
       navOverlay.classList.toggle("active");
       headerLogo.classList.toggle("move-down");
 
