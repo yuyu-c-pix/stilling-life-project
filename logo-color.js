@@ -107,8 +107,9 @@ function setupLogoColor() {
 setTimeout(setupLogoColor, 0);
 
 function resetLogoStyle() {
+  const headerLogo = document.querySelector(".header-logo");
   headerLogo.classList.remove("move-down");
-  headerLogo.style.color = "black";  // 검정색으로 명시적으로 설정
+  headerLogo.style.color = "black";  // 명시적으로 검정색으로 설정
   headerLogo.style.filter = "";  // 필터 초기화
   document.body.classList.remove(...variantClasses);  // 적용된 색상 클래스 제거
 }
