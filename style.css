@@ -572,7 +572,7 @@ html, body {
   display: none;
   text-align: center;
   padding: 48px 16px;
-  color: #fcfcfc;
+  color: #eb8181;
   font-family: "megascope-variable";
   font-variation-settings: "wght" 600, "SCOP" 0;
   font-size: clamp(0.9rem, 1.4vw, 1.2rem);
