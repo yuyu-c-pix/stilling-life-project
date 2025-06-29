@@ -108,7 +108,7 @@ setTimeout(setupLogoColor, 0);
 
 function resetLogoStyle() {
   headerLogo.classList.remove("move-down");
-  headerLogo.style.color = "";
-  headerLogo.style.filter = "";
-  document.body.classList.remove(...variantClasses);
+  headerLogo.style.color = "";  // 색상 초기화 (기본값인 검정색으로 돌아감)
+  headerLogo.style.filter = "";  // 필터 초기화
+  document.body.classList.remove(...variantClasses);  // 적용된 색상 클래스 제거
 }
