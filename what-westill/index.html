@@ -190,55 +190,83 @@
 
   </div>
    <script>
-  fetch("/stilling-life-project/header.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("header-container").innerHTML = data;
-     const script = document.createElement("script");
-         script.src = "../script.js";
+ fetch("/stilling-life-project/header.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("header-container").innerHTML = data;
 
-    // script.js가 먼저 로드된 후 logo-color.js 실행되도록
-        script.onload = () => {
-        const logoScript = document.createElement("script");
-        logoScript.src = "../logo-color.js";
-        document.body.appendChild(logoScript);
-        
-      // 헤더 요소들 로딩 후 수동 실행 (DOMContentLoaded 대체)
-         setTimeout(() => {
-      const toggleButton = document.getElementById("menu-toggle");
-      const closeBtn = document.getElementById("nav-close-toggle");
-      const navOverlay = document.getElementById("nav-overlay");
-      const headerLogo = document.querySelector(".header-logo");
+    const script = document.createElement("script");
+    script.src = "../script.js";
 
-      if (toggleButton && navOverlay && headerLogo) {
-        toggleButton.addEventListener("click", (e) => {
-          e.preventDefault();
-          navOverlay.classList.toggle("active");
-          headerLogo.classList.toggle("move-down");
-        });
-      }
+    script.onload = () => {
+      const logoScript = document.createElement("script");
+      logoScript.src = "../logo-color.js";
+      logoScript.onload = () => {
+        // header 요소 완전히 로딩된 뒤 이벤트 바인딩
+        setTimeout(() => {
+          const toggleButton = document.getElementById("menu-toggle");
+          const closeBtn = document.getElementById("nav-close-toggle");
+          const navOverlay = document.getElementById("nav-overlay");
+          const headerLogo = document.querySelector(".header-logo");
+          const cartToggle = document.getElementById("cart-toggle");
+          const cartOverlay = document.getElementById("cart-overlay");
 
-      // ❗닫기용 햄버거 바인딩
-      if (closeBtn && navOverlay && headerLogo) {
-        closeBtn.addEventListener("click", () => {
-          navOverlay.classList.remove("active");
-          headerLogo.classList.remove("move-down");
-        });
-      }
-        const cartToggle = document.getElementById("cart-toggle");
-        const cartOverlay = document.getElementById("cart-overlay");
+          if (toggleButton && navOverlay && headerLogo) {
+            toggleButton.addEventListener("click", (e) => {
+              e.preventDefault();
+              navOverlay.classList.toggle("active");
+              headerLogo.classList.toggle("move-down");
+            });
+          }
 
-        if (cartToggle && cartOverlay) {
-          cartToggle.addEventListener("click", () => {
-            cartOverlay.classList.toggle("active");
+          if (closeBtn && navOverlay && headerLogo) {
+            closeBtn.addEventListener("click", () => {
+              navOverlay.classList.remove("active");
+              headerLogo.classList.remove("move-down");
+            });
+          }
+
+          if (cartToggle && cartOverlay) {
+            cartToggle.addEventListener("click", () => {
+              cartOverlay.classList.toggle("active");
+            });
+          }
+
+          // 외부 클릭 감지
+          document.addEventListener("click", (e) => {
+            const searchOverlay = document.getElementById("search-overlay");
+            if (
+              searchOverlay?.classList.contains("active") &&
+              !e.target.closest("#search-overlay") &&
+              !e.target.closest(".header-icon")
+            ) {
+              searchOverlay.classList.remove("active");
+            }
+
+            if (
+              navOverlay?.classList.contains("active") &&
+              !e.target.closest("#nav-overlay") &&
+              !e.target.closest("#menu-toggle")
+            ) {
+              navOverlay.classList.remove("active");
+              headerLogo?.classList.remove("move-down");
+            }
+
+            if (
+              cartOverlay?.classList.contains("active") &&
+              !e.target.closest("#cart-overlay") &&
+              !e.target.closest("#cart-toggle")
+            ) {
+              cartOverlay.classList.remove("active");
+            }
           });
-        }
-
-      }, 100);
+        }, 100);
+      };
+      document.body.appendChild(logoScript);
     };
 
-      document.body.appendChild(script);
-    });
+    document.body.appendChild(script);
+  });
     </script>
     <script>
       let inactivityTimer;
