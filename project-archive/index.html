@@ -331,7 +331,7 @@
         document.body.appendChild(logoScript);
         
       // 헤더 요소들 로딩 후 수동 실행 (DOMContentLoaded 대체)
-      setTimeout(() => {
+         setTimeout(() => {
       const toggleButton = document.getElementById("menu-toggle");
       const closeBtn = document.getElementById("nav-close-toggle");
       const navOverlay = document.getElementById("nav-overlay");
@@ -360,10 +360,10 @@
             cartOverlay.classList.toggle("active");
           });
         }
-        
 
       }, 100);
     };
+
 
       document.body.appendChild(script);
     });
