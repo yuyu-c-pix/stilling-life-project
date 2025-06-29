@@ -310,6 +310,12 @@ document.addEventListener("click", (e) => {
   const cartOverlay = document.getElementById("cart-overlay");
   const cartIcon = document.getElementById("cart-toggle");
 
+  if (cartOverlay) {
+  cartOverlay.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+}
+
   // Search
   if (
     searchOverlay?.classList.contains("active") &&
