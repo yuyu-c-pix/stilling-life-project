@@ -437,6 +437,10 @@ html, body {
   will-change: transform;
 }
 
+.cart-bottom-fixed {
+  margin-top: 32px;
+}
+
 .cart-overlay.active {
   bottom: 12px;
   transform: translate(-50%, 0); 
@@ -455,12 +459,16 @@ html, body {
   align-items: center;
   justify-content: space-between;
   background: white;
-  padding: 12px;
+  padding: 16px;
   border-radius: 8px;
-  border: 1px solid #ccc;
   gap: 12px;
 }
 
+.cart-items-scrollable {
+  max-height: 400px; /* or clamp 단위로 반응형 가능 */
+  overflow-y: auto;
+  padding-right: 8px;
+}
 
 
 .cart-item img {

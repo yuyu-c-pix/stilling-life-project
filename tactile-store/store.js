@@ -110,3 +110,35 @@ window.addEventListener("load", () => {
 
   waitForCartReady();
 });
+
+function addToCartItem(imgSrc, name = "Item", price = "0", quantity = 1) {
+  const cartItemsContainer = document.getElementById("cart-items");
+  if (!cartItemsContainer) return;
+
+  const existingItem = [...cartItemsContainer.children].find(item =>
+    item.dataset.name === name
+  );
+
+  if (existingItem) {
+    const qtyElem = existingItem.querySelector(".qty-count");
+    qtyElem.textContent = "Qty:" + (parseInt(qtyElem.textContent.split(":")[1]) + 1);
+    return;
+  }
+
+  const cartItem = document.createElement("div");
+  cartItem.className = "cart-item";
+  cartItem.dataset.name = name;
+  // ...
+  cartItem.innerHTML = `
+    <img src="${imgSrc}" />
+    <div class="cart-item-details">
+      <div>${name}</div>
+      <div class="qty-count">Qty:${quantity}</div>
+    </div>
+    <div class="cart-item-meta">
+      <div>${price}</div>
+      <button class="cart-item-remove">×</button>
+    </div>
+  `;
+  // ...
+}
