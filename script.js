@@ -340,41 +340,5 @@ document.addEventListener("click", (e) => {
 });
 
 
-const cartToggle = document.getElementById("cart-toggle");
-const cartWrapper = document.getElementById("cart-overlay-wrapper");
-const cartOverlay = document.getElementById("cart-overlay");
-
-cartToggle.addEventListener("click", (e) => {
-  e.stopPropagation(); // 이벤트 전파 방지
-  const isOpen = cartWrapper.classList.contains("active");
-
-  if (isOpen) {
-    cartWrapper.classList.remove("active");
-    cartOverlay.classList.remove("active");
-    document.body.style.overflow = "";
-  } else {
-    cartWrapper.classList.add("active");
-    cartOverlay.classList.add("active");
-    document.body.style.overflow = "hidden";
-
-    // 위치 재계산
-    setTimeout(() => {
-      const overlayHeight = cartOverlay.scrollHeight;
-      const viewportHeight = window.innerHeight;
-
-      if (overlayHeight > viewportHeight - 120) {
-        cartOverlay.style.position = "absolute";
-        cartOverlay.style.top = "120px";
-        cartOverlay.style.bottom = "auto";
-        cartOverlay.style.transform = "translateX(-50%)";
-      } else {
-        cartOverlay.style.position = "fixed";
-        cartOverlay.style.bottom = "12px";
-        cartOverlay.style.top = "auto";
-        cartOverlay.style.transform = "translate(-50%, 0)";
-      }
-    }, 50);
-  }
-});
 
 
