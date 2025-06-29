@@ -324,25 +324,34 @@
           const script = document.createElement("script");
          script.src = "../script.js";
 
-    // script.js가 먼저 로드된 후 logo-color.js 실행되도록
+   // script.js가 먼저 로드된 후 logo-color.js 실행되도록
         script.onload = () => {
         const logoScript = document.createElement("script");
         logoScript.src = "../logo-color.js";
         document.body.appendChild(logoScript);
         
       // 헤더 요소들 로딩 후 수동 실행 (DOMContentLoaded 대체)
-        const toggleButton = document.getElementById('menu-toggle');
-        const navOverlay = document.getElementById('nav-overlay');
-        const logo = document.querySelector('.header-logo');
+      setTimeout(() => {
+      const toggleButton = document.getElementById("menu-toggle");
+      const closeBtn = document.getElementById("nav-close-toggle");
+      const navOverlay = document.getElementById("nav-overlay");
+      const headerLogo = document.querySelector(".header-logo");
 
-        if (toggleButton && navOverlay && logo) {
-          toggleButton.addEventListener('click', () => {
-            const isActive = navOverlay.classList.contains('active');
-            navOverlay.classList.toggle('active');
-            logo.classList.toggle('move-down', !isActive);
-          });
-        }
+      if (toggleButton && navOverlay && headerLogo) {
+        toggleButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          navOverlay.classList.toggle("active");
+          headerLogo.classList.toggle("move-down");
+        });
+      }
 
+      // ❗닫기용 햄버거 바인딩
+      if (closeBtn && navOverlay && headerLogo) {
+        closeBtn.addEventListener("click", () => {
+          navOverlay.classList.remove("active");
+          headerLogo.classList.remove("move-down");
+        });
+      }
         const cartToggle = document.getElementById("cart-toggle");
         const cartOverlay = document.getElementById("cart-overlay");
 
@@ -351,15 +360,11 @@
             cartOverlay.classList.toggle("active");
           });
         }
+        
 
-        const closeBtn = document.getElementById("nav-close-toggle");
-        if (closeBtn && navOverlay && logo) {
-        closeBtn.addEventListener("click", () => {
-          navOverlay.classList.remove("active");
-          logo.classList.remove("move-down");
-        });
-      }
-      };
+      }, 100);
+    };
+
       document.body.appendChild(script);
     });
 
