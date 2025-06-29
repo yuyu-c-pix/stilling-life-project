@@ -46,7 +46,8 @@ function initStore() {
       </div>
     `;
 
-    cartItem.querySelector(".cart-item-remove").addEventListener("click", () => {
+    cartItem.querySelector(".cart-item-remove").addEventListener("click", (e) => {
+      e.stopPropagation();
       cartItem.remove();
       updateCartCount();
       saveCartToLocalStorage(); // 삭제 후 저장
@@ -114,10 +115,10 @@ window.addEventListener("load", () => {
   const waitForCartReady = () => {
     const cart = document.getElementById("cart-items");
     if (cart) {
-      console.log("🔥 cart ready → initStore 실행됨");
+      console.log(" cart ready → initStore 실행됨");
       initStore();
     } else {
-      console.log("⏳ cart 아직 준비 안 됨, 재시도 중...");
+      console.log("cart 아직 준비 안 됨, 재시도 중...");
       setTimeout(waitForCartReady, 50);
     }
   };
