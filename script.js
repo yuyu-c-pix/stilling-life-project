@@ -341,25 +341,22 @@ document.addEventListener("click", (e) => {
 
 function updateCartOverlayPosition() {
   const overlay = document.getElementById("cart-overlay");
+  if (!overlay) return;
   const overlayHeight = overlay.scrollHeight;
   const viewportHeight = window.innerHeight;
 
   if (overlayHeight > viewportHeight - 120) {
     // 너무 길면: absolute + top: 120px → 문서 흐름 따라 감
-    overlay.style.position = "absolute";
-    overlay.style.top = "120px";
+   overlay.style.position = "absolute";
+    overlay.style.top = "240px";
     overlay.style.bottom = "auto";
-    overlay.style.transform = "translateX(-50%)";
-    overlay.style.overflowY = "visible";
-    document.body.style.overflow = "hidden";
+    overlay.style.transform = "translateX(-50%,0)";
   } else {
     // 짧으면: fixed + bottom: 12px → 슬라이드 업
     overlay.style.position = "fixed";
     overlay.style.bottom = "12px";
     overlay.style.top = "auto";
-    overlay.style.transform = "translate(-50%, 0)";
-    overlay.style.overflowY = "visible";
-    document.body.style.overflow = "hidden";
+    overlay.style.transform = "translate(-50%, 100%)";
   }
 }
 const cartToggle = document.getElementById("cart-toggle");
