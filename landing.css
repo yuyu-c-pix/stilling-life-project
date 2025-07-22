@@ -6,15 +6,34 @@ body, html {
   background-color: transparent; 
 }
 
-#landing-video {
+#landing-video-desktop,
+#landing-video-mobile {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
   transition: opacity 1s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
+/* 모바일용 영상은 기본적으로 숨김 */
+#landing-video-mobile {
+  display: none;
+}
+
+/* 모바일일 경우: 데스크탑 숨기고 모바일 보임 */
+@media screen and (max-width: 768px) {
+  #landing-video-desktop {
+    display: none;
+  }
+  #landing-video-mobile {
+    display: block;
+  }
+}
+
+/* 페이드아웃 애니메이션 */
 .fade-out {
   opacity: 0;
   pointer-events: none;
 }
-
