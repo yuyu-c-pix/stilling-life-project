@@ -1,20 +1,39 @@
-/* 랜딩 페이지 전용 스타일 */
 body, html {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: transparent; 
+  background-color: transparent;
 }
 
-#landing-video {
+/* 공통 video 스타일 */
+#landing-video-desktop,
+#landing-video-mobile {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
   transition: opacity 1s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
+/* 모바일용 영상은 기본적으로 숨김 */
+#landing-video-mobile {
+  display: none;
+}
+
+/* 뷰포트가 작아질 경우 모바일 영상만 보임 */
+@media screen and (max-width: 768px) {
+  #landing-video-desktop {
+    display: none;
+  }
+  #landing-video-mobile {
+    display: block;
+  }
+}
+
+/* 페이드아웃 공통 효과 */
 .fade-out {
   opacity: 0;
   pointer-events: none;
 }
-
