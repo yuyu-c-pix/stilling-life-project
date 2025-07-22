@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const video =
-    window.innerWidth <= 768
-      ? document.getElementById("landing-video-mobile")
-      : document.getElementById("landing-video-desktop");
+  const video = document.getElementById("landing-video");
 
   if (!video) {
     console.warn("비디오 태그를 찾을 수 없음");
@@ -20,14 +17,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   video.addEventListener("canplay", tryPlay);
   window.addEventListener("touchstart", tryPlay, { once: true });
-
-  const fadeAndRedirect = () => {
+  document.addEventListener("click", () => {
     video.classList.add("fade-out");
     setTimeout(() => {
       window.location.href = "project-archive/index.html";
     }, 1000);
-  };
+  });
 
-  document.addEventListener("click", fadeAndRedirect);
-  video.addEventListener("ended", fadeAndRedirect);
+  video.addEventListener("ended", () => {
+    video.classList.add("fade-out");
+    setTimeout(() => {
+      window.location.href = "project-archive/index.html";
+    }, 1000);
+  });
 });
