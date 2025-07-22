@@ -13,8 +13,7 @@ body, html {
   object-fit: cover;
   transition: opacity 1s ease;
   position: absolute;
-  top: 0;
-  left: 0;
+  
 }
 
 /* 모바일용 영상은 기본적으로 숨김 */
